@@ -1,0 +1,1 @@
+字符串构造  'The %s says "%s"' % (self.name, self.sound)
