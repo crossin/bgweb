@@ -7,6 +7,10 @@ BODY
 TABLE,TH,TD,P,INPUT,SELECT {FONT-FAMILY: Tahoma; FONT-SIZE: 9pt; }
 HR{COLOR: 000000}
 
+TABLE{
+	width: 100%
+}
+
 TD.counter{width: 5%}
 TD.board{width: 15%}
 TD.title{width: 60%}
