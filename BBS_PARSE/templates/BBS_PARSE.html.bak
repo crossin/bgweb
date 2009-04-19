@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<script type="text/javascript" src="jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="bbsparse.js"></script>
+        
+        
+
+		
+
+		<title>BBS TOP 10</title>
+	</head>
+	<body>
+		
+		
+		<div id="sjtu">
+			{{ sjtutable }}
+		</div>
+		<div id="smth">
+			{{ smthtable }}
+		</div>
+		
+		<div id="smth">
+			{{ lilitable }}
+		</div>
+		
+		<div id="smth">
+			{{ fudantalbe }}
+		</div>
+		
+		<div id="smth">
+			{{ xjtutable }}
+		</div>
+		
+		<div id="smth">
+			{{ ustcbbstable }}
+		</div>
+	</body>
+</html>

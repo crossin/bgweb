@@ -1,0 +1,6 @@
+cron:
+- description: refresh content
+  url: /testcron/
+  schedule: every 2 minutes
+
+

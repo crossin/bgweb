@@ -1,0 +1,58 @@
+<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<link href="/page/bbs0.css" type="text/css" rel="stylesheet" />
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+		     		
+
+		<title>BBS TOP 10</title>
+	</head>
+	<body>
+    {% for table in context %}
+        <div id="sjtubbs">
+            <table align=center border=0 cellpadding=0 cellspacing=0>
+                <tr height=6>
+                    <td width=6><img border=0 src='/page/images/lt.gif'></td>
+                    <td background='/page/images/t.gif' width=100%></td>
+                    <td width=6><img border=0 src='/page/images/rt.gif'></td>
+                </tr>
+                <tr  height=100%>
+                    <td width=6 background='/page/images/l.gif'></td>
+                    <td width=100% nowrap bgcolor=#ffffff>
+                    <table class="in">
+                        <tr class="pt9h" bgcolor="#cccccc" align="center">
+                            <td nowrap="nowrap" class=counter><b>名次</b></td>
+                            <td nowrap="nowrap" class=board><b>讨论区</b></td>
+                            <td nowrap="nowrap" class=title><b>标题</b></td>
+                            <td nowrap="nowrap" class=author><b>作者</b></td>
+                            <td nowrap="nowrap" class=postcount><b>篇数</b></td>
+                        </tr>
+                        {% for item in table.itemlist %}
+                            {% if forloop.counter|divisibleby:2 %}
+                            <tr class="pt9lc">
+                            {% else %}
+                            <tr class="pt9dc">
+                            {% endif %} 
+                                <td nowrap="nowrap" class=counter><b>{{ forloop.counter }}</b></td>
+                                <td nowrap="nowrap" class=board><a href="{{item.boardlink}}"><b>{{item.board}}</b></a></td>
+                                <td nowrap="nowrap" class=title><a href="{{item.titlelink}}"><b>{{item.title}}</b></a></td>
+                                <td nowrap="nowrap" class=author><a href="{{item.authorlink}}"><b>{{item.author}}</b></a></td>
+                                <td nowrap="nowrap" class=postcount><b>{{item.postcount}}</b></td>
+                            </tr>                                          
+
+                        {% endfor %}
+                    </table>
+                    </td>
+                    <td width=6 background='/page/images/r.gif'></td>
+                </tr>
+                <tr height=6>
+                    <td width=6><img border=0 src='/page/images/lb.gif'></td>
+                    <td background='/page/images/b.gif' width=100%></td>
+                    <td width=6><img border=0 src='/page/images/rb.gif'></td>
+                </tr>
+            </table>
+        </div>
+        
+           {% endfor %}    
+	</body>
+</html>
