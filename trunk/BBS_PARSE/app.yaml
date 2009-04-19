@@ -1,0 +1,10 @@
+application: bbstop10
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /page
+  static_dir: page
+- url: .*
+  script: django_bootstrap.py

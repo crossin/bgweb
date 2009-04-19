@@ -1,0 +1,18 @@
+<div align='center' >
+{%if user %}
+<h1 align='center'> 勇 ~~ 乐 欢迎 欢迎 {{user.name}} 来玩无聊的 {{gamename}} 游戏</h1>
+{%endif%}
+<h1 align='center'> 刷新一次随便选个游戏玩玩，呵呵</h1>
+<h1 align='center'> Game Provided is Really Really Just for fun</h1>
+
+<a align='right' href="mailto:zinking3@gmail.com" >给我推荐好玩的无聊FLASH游戏</a>
+
+
+
+<xn:swf   flashvars="haha=hehe&a=b" width="800" height="800"
+	swfbgcolor="#FFFFFF" waitforclick="false" 
+	swfsrc="{{gamesrc}}" salign="br" loop="false" quality="high" 
+	scale="showall" align="center" wmode="transparent" /> 
+</div>
+<h2 align='center'>游戏来自网络，仅供自己玩乐</h2>
+<h2 align='center'>All Rights Reserved By their own Studios</h2>
