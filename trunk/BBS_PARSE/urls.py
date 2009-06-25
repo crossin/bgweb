@@ -15,10 +15,16 @@
 
 from django.conf.urls.defaults import *
 
+
 urlpatterns = patterns(
     '',
     (r'^$', 'views.getbbs'),
-    (r'^bbs/','views.getbbs'),
-    (r'^testcron/','views.testcron'),
-    (r'^fresh/','views.getFreshBBS'),
-    )
+    (r'^bbs$','views.getbbs'),
+    (r'^namelist/','views.get_bbsnamelist'),
+    (r'^list$','views.getfullbbslist'),
+    (r'^recommended$','views.getRecommended'),
+#    (r'^topmost/','views.getMostTop10'),
+    (r'^fresh/','views.getFreshBBS1'),
+    (r'^fresh2/','views.getFreshBBS2'),
+#    (r'^service/bbs/', 'bbsservice.bbsGateway'),
+)
