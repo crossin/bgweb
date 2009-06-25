@@ -1,0 +1,45 @@
+#containment {
+	HEIGHT: 100%
+}
+BODY {
+	FONT-SIZE: 13px; OVERFLOW: hidden; FONT-FAMILY: "Lucida Sans Unicode","Lucida Grande",Helvetica,Arial,sans-serif; HEIGHT: 100%; BACKGROUND-COLOR: #000
+}
+.navigator {
+	MIN-WIDTH: 360px; Z-INDEX: 10000; LEFT: 10px; BOTTOM: 10px; POSITION: absolute
+}
+.doc {
+	Z-INDEX: 10000; LEFT: 10px; BOTTOM: 300px; POSITION: absolute
+}
+H3 {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; FONT-SIZE: 18px; PADDING-BOTTOM: 0px; MARGIN: 0px; LINE-HEIGHT: 20px; PADDING-TOP: 0px; FONT-FAMILY: "Lucida Sans Unicode","Lucida Grande",Helvetica,Arial,sans-serif
+}
+.n A:hover {
+	TEXT-DECORATION: underline
+}
+.black .c {
+	FONT-SIZE: 13px; COLOR: #ffffff; FONT-FAMILY: "Lucida Sans Unicode","Lucida Grande",Helvetica,Arial,sans-serif
+}
+#copyright {
+	PADDING-RIGHT: 5px; PADDING-LEFT: 5px; FONT-SIZE: 10px; BACKGROUND: url(../elements/black/c.png); PADDING-BOTTOM: 5px; WIDTH: 250px; COLOR: white; MARGIN-RIGHT: 8px; PADDING-TOP: 5px; -moz-border-radius: 4px; -webkit-border-radius: 4px
+}
+A {
+	COLOR: white; TEXT-DECORATION: none
+}
+A:hover {
+	COLOR: white; TEXT-DECORATION: underline
+}
+IMG {
+	-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px
+}
+H2 {
+	FONT-WEIGHT: 200; FONT-SIZE: 16px
+}
+.par {
+	BORDER-BOTTOM: white 1px dotted
+}
+.evidence {
+	PADDING-RIGHT: 10px; PADDING-LEFT: 10px; BACKGROUND: gray; MARGIN-BOTTOM: 10px; PADDING-BOTTOM: 10px; PADDING-TOP: 10px; -moz-border-radius: 4px; -webkit-border-radius: 4px
+}
+.navCardlist {
+	PADDING-RIGHT: 25px; DISPLAY: none; PADDING-LEFT: 25px; BACKGROUND: black; LEFT: -20px; PADDING-BOTTOM: 25px; WIDTH: 80px; CURSOR: pointer; COLOR: white; PADDING-TOP: 25px; POSITION: absolute; TOP: 350px; -moz-border-radius: 20px; -webkit-border-radius: 20px
+}

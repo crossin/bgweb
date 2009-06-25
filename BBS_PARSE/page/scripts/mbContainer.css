@@ -1,0 +1,195 @@
+.containerPlus {
+	FONT-SIZE: 13px; FONT-FAMILY: Verdana
+}
+.containerPlus .spacer {
+	MARGIN-TOP: 10px
+}
+.containerPlus .buttonBar {
+	MARGIN-TOP: -23px; FLOAT: right; MARGIN-RIGHT: 15px; POSITION: relative; TOP: 0px
+}
+.containerPlus .buttonBar IMG {
+	MARGIN-LEFT: 5px
+}
+.containerPlus .content {
+	PADDING-RIGHT: 10px; OVERFLOW: auto; MARGIN-RIGHT: -15px
+}
+.containerPlus .n A {
+	FONT-SIZE: 15px; COLOR: #000; TEXT-DECORATION: none
+}
+.mb-resize {
+	BORDER-RIGHT: transparent 0px solid; BORDER-TOP: transparent 0px solid; DISPLAY: block; BORDER-LEFT: transparent 0px solid; BORDER-BOTTOM: transparent 0px solid; BACKGROUND-COLOR: transparent! important
+}
+.ui-resizable-e.mb-resize {
+	BORDER-RIGHT: transparent 5px solid; BORDER-TOP: transparent 5px solid; RIGHT: -20px; BORDER-LEFT: transparent 5px solid; WIDTH: 50px; CURSOR: e-resize; BORDER-BOTTOM: transparent 5px solid; TOP: 0px; HEIGHT: 100%
+}
+.ui-resizable-s.mb-resize {
+	BORDER-RIGHT: transparent 5px solid; BORDER-TOP: transparent 5px solid; LEFT: 0px; BORDER-LEFT: transparent 5px solid; WIDTH: 100%; CURSOR: s-resize; BORDER-BOTTOM: transparent 5px solid; HEIGHT: 50px
+}
+.ui-resizable-se.mb-resize {
+	BORDER-RIGHT: transparent 5px solid; BORDER-TOP: transparent 5px solid; RIGHT: 0px; BACKGROUND: none transparent scroll repeat 0% 0%; BORDER-LEFT: transparent 5px solid; WIDTH: 50px; CURSOR: se-resize; BOTTOM: 0px; BORDER-BOTTOM: transparent 5px solid; HEIGHT: 30px
+}
+.ui-resizable-se.mb-resize {
+	WIDTH: 20px! important; HEIGHT: 20px! important
+}
+.mbproxy {
+	BORDER-RIGHT: gray 1px dotted; BORDER-TOP: gray 1px dotted; BACKGROUND: url(../elements/proxy.png); BORDER-LEFT: gray 1px dotted; BORDER-BOTTOM: gray 1px dotted
+}
+.transparent.containerPlus .no {
+	BACKGROUND: url(../elements/transparent/no.png) no-repeat left top
+}
+.transparent.containerPlus .ne {
+	BACKGROUND: url(../elements/transparent/ne.png) no-repeat right top; MARGIN-LEFT: 21px
+}
+.transparent.containerPlus .n {
+	BACKGROUND: url(../elements/transparent/n.png) repeat-x center top; MARGIN-RIGHT: 25px; HEIGHT: 26px
+}
+.transparent.containerPlus .n {
+	FONT-SIZE: 15px; COLOR: white; PADDING-TOP: 8px; -moz-user-select: none; -khtml-user-select: none
+}
+.transparent.containerPlus .n A {
+	FONT-SIZE: 15px; OVERFLOW: hidden; COLOR: #fff; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+}
+.transparent.containerPlus .o {
+	BACKGROUND: url(../elements/transparent/o.png) repeat-y left top
+}
+.transparent.containerPlus .e {
+	BACKGROUND: url(../elements/transparent/e.png) repeat-y right top; MARGIN-LEFT: 21px
+}
+.transparent.containerPlus .c {
+	BACKGROUND: url(../elements/transparent/c.png); PADDING-BOTTOM: 1px; MARGIN-RIGHT: 25px; PADDING-TOP: 1px
+}
+.transparent.containerPlus .c .content {
+	COLOR: white
+}
+.transparent.containerPlus .c .content A {
+	COLOR: white
+}
+.transparent.containerPlus .so {
+	BACKGROUND: url(../elements/transparent/so.png) no-repeat left bottom
+}
+.transparent.containerPlus .se {
+	BACKGROUND: url(../elements/transparent/se.png) no-repeat right bottom; MARGIN-LEFT: 21px
+}
+.transparent.containerPlus .s {
+	BACKGROUND: url(../elements/transparent/s.png) repeat-x 50% bottom; MARGIN-RIGHT: 25px; PADDING-TOP: 20px
+}
+.black.containerPlus .no {
+	BACKGROUND: url(../elements/black/no.png) no-repeat left top
+}
+.black.containerPlus .ne {
+	BACKGROUND: url(../elements/black/ne.png) no-repeat right top; MARGIN-LEFT: 21px
+}
+.black.containerPlus .n {
+	BACKGROUND: url(../elements/black/n.png) repeat-x center top; MARGIN-RIGHT: 25px; HEIGHT: 26px
+}
+.black.containerPlus .n {
+	FONT-SIZE: 15px; COLOR: white; PADDING-TOP: 8px; -moz-user-select: none; -khtml-user-select: none
+}
+.black.containerPlus .n A {
+	FONT-SIZE: 15px; OVERFLOW: hidden; COLOR: #fff; WHITE-SPACE: nowrap; TEXT-DECORATION: none
+}
+.black.containerPlus .o {
+	BACKGROUND: url(../elements/black/o.png) repeat-y left top
+}
+.black.containerPlus .e {
+	BACKGROUND: url(../elements/black/e.png) repeat-y right top; MARGIN-LEFT: 21px
+}
+.black.containerPlus .c {
+	BACKGROUND: url(../elements/black/c.png); PADDING-BOTTOM: 1px; MARGIN-RIGHT: 25px; PADDING-TOP: 1px
+}
+.black.containerPlus .c .content {
+	COLOR: white
+}
+.black.containerPlus .c .content A {
+	COLOR: white
+}
+.black.containerPlus .so {
+	BACKGROUND: url(../elements/black/so.png) no-repeat left bottom
+}
+.black.containerPlus .se {
+	BACKGROUND: url(../elements/black/se.png) no-repeat right bottom; MARGIN-LEFT: 21px
+}
+.black.containerPlus .s {
+	BACKGROUND: url(../elements/black/s.png) repeat-x 50% bottom; MARGIN-RIGHT: 25px; PADDING-TOP: 20px
+}
+.white.containerPlus .no {
+	BACKGROUND: url(../elements/white/no.png) no-repeat left top
+}
+.white.containerPlus .ne {
+	BACKGROUND: url(../elements/white/ne.png) no-repeat right top; MARGIN-LEFT: 21px
+}
+.white.containerPlus .n {
+	BACKGROUND: url(../elements/white/n.png) repeat-x center top; MARGIN-RIGHT: 25px; HEIGHT: 26px
+}
+.white.containerPlus .n {
+	FONT-SIZE: 16px; PADDING-TOP: 8px; -moz-user-select: none; -khtml-user-select: none
+}
+.white.containerPlus .o {
+	BACKGROUND: url(../elements/white/o.png) repeat-y left top
+}
+.white.containerPlus .e {
+	BACKGROUND: url(../elements/white/e.png) repeat-y right top; MARGIN-LEFT: 21px
+}
+.white.containerPlus .c {
+	BACKGROUND: url(../elements/white/c.png); PADDING-BOTTOM: 1px; MARGIN-RIGHT: 25px; PADDING-TOP: 1px
+}
+.white.containerPlus .c .content {
+	COLOR: #000
+}
+.white.containerPlus .n A {
+	
+}
+.white.containerPlus .n A:hover {
+	TEXT-DECORATION: underline
+}
+.white.containerPlus .so {
+	BACKGROUND: url(../elements/white/so.png) no-repeat left bottom
+}
+.white.containerPlus .se {
+	BACKGROUND: url(../elements/white/se.png) no-repeat right bottom; MARGIN-LEFT: 21px
+}
+.white.containerPlus .s {
+	BACKGROUND: url(../elements/white/s.png) repeat-x 50% bottom; MARGIN-RIGHT: 25px; PADDING-TOP: 20px
+}
+.blue.containerPlus .no {
+	BACKGROUND: url(../elements/blue/no.png) no-repeat left top
+}
+.blue.containerPlus .ne {
+	BACKGROUND: url(../elements/blue/ne.png) no-repeat right top; MARGIN-LEFT: 21px
+}
+.blue.containerPlus .n {
+	BACKGROUND: url(../elements/blue/n.png) repeat-x center top; MARGIN-RIGHT: 25px; HEIGHT: 26px
+}
+.blue.containerPlus .n {
+	FONT-SIZE: 16px; PADDING-TOP: 8px; -moz-user-select: none; -khtml-user-select: none
+}
+.blue.containerPlus .o {
+	BACKGROUND: url(../elements/blue/o.png) repeat-y left top
+}
+.blue.containerPlus .e {
+	BACKGROUND: url(../elements/blue/e.png) repeat-y right top; MARGIN-LEFT: 21px
+}
+.blue.containerPlus .c {
+	BACKGROUND: url(../elements/blue/c.png); PADDING-BOTTOM: 1px; MARGIN-RIGHT: 25px; PADDING-TOP: 1px
+}
+.blue.containerPlus .c .content {
+	COLOR: white
+}
+.blue.containerPlus .c .content A.special {
+	COLOR: white
+}
+.blue.containerPlus .n A {
+	COLOR: white
+}
+.blue.containerPlus .n A:hover {
+	TEXT-DECORATION: underline
+}
+.blue.containerPlus .so {
+	BACKGROUND: url(../elements/blue/so.png) no-repeat left bottom
+}
+.blue.containerPlus .se {
+	BACKGROUND: url(../elements/blue/se.png) no-repeat right bottom; MARGIN-LEFT: 21px
+}
+.blue.containerPlus .s {
+	BACKGROUND: url(../elements/blue/s.png) repeat-x 50% bottom; MARGIN-RIGHT: 25px; PADDING-TOP: 20px
+}
