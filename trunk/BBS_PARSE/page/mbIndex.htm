@@ -1,0 +1,444 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<HEAD><TITLE>BBS TOP TEN</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=UTF-8">
+<META http-equiv=content-language content=en>
+<META content="BBS Top Ten" name=title>
+<META content="BBS TOP TEN GAE" name=description>
+<META content="NJU-BBS SJTU-BBS SMTH-BBS NANKAI-BBS NUPT-BBS BBS TOP TEN" name=keywords>
+<META content="ZINKING" name=AUTHOR>
+<META content="Copyright 2009,DA-LAB" name=Copyright>
+<META content="DALAB ZINKING" name=owner>
+<META content=ALL name=robots>
+<LINK href="images/favicon.ico"          rel="shortcut icon">
+<LINK href="scripts/mbCss.css"          type=text/css rel=stylesheet>
+<LINK href="scripts/mbContainer.css"    type=text/css rel=stylesheet>
+<LINK href="scripts/buttons.css"        type=text/css rel=stylesheet>
+<link href="scripts/slide.css"          type=text/css rel=stylesheet>
+
+<SCRIPT src="scripts/jquery.js"             type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/jquery.timers.js"      type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/ui.core.min.js"        type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/ui.draggable.min.js"   type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/ui.resizable.min.js"   type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/jquery.cycle.js"       type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/jquery.metadata.js"    type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/jquery.cookie.js"      type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/mbContainer.js"        type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/mb.js"                 type=text/javascript></SCRIPT>
+<SCRIPT src="scripts/slide.js"              type=text/javascript></SCRIPT>
+</HEAD>
+
+<BODY >
+
+<div id="toppanel">
+	<div id="panel" style="z-index: 10852;">
+		<div class="content clearfix">
+			<div  class="left" >
+                <h1>BBS Home</h1>
+                <div id="homesetting">
+                
+                </div>
+                
+                
+
+                <A  class="button special" style="float:right; margin:10px" id="submit_config" >
+                    <SPAN>Submit</SPAN>
+                </A> 
+			</div>
+            
+			<div class="left">
+				<h1>Manual</h1>
+                <p>使用Home设置首选十大站点</p>
+                <p>  导航栏位于左侧，用来控制卡片切换，鼠标悬停可以暂停卡片切换</p>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+			</div>
+			<div class="left right">			
+				
+			</div>
+		</div>
+	</div> <!-- /login -->	
+
+    <!-- The tab on top -->	
+	<div class="tab">
+		<ul class="login">
+	    	<li class="left">&nbsp;</li>
+	        <li>Setting Panel</li>
+			<li class="sep">|</li>
+			<li id="toggle" >
+				<a id="open" class="open" href="#">Open Panel</a>
+				<a id="close" style="display: none;" class="close" href="#">Close Panel</a>			
+			</li>
+	    	<li class="right">&nbsp;</li>
+		</ul> 
+	</div> <!-- / top -->
+	
+</div> <!--panel -->
+
+
+
+
+
+    <DIV style="FLOAT: left">
+        <IMG alt=mb.ideas.repository src="images/bgtext.png"> 
+    </DIV>
+    
+    <DIV style="Z-INDEX: 1000; RIGHT: 25px; BOTTOM: 20px; POSITION: absolute">
+        <A class="button orange" title=mb.ideas.blog style="CLEAR: both" href="http://blog.csdn.net/zinking3/" target=_blank>
+            <SPAN>go to my blog!</SPAN>
+        </A>
+    </DIV>
+    
+    
+    <DIV style="Z-INDEX: 1000; RIGHT: 135px; BOTTOM: 20px; POSITION: absolute">
+        <A class=button title=pupunzi.twitter style="CLEAR: both" href="http://twitter.com/zinking" target=_blank>
+            <SPAN> <IMG alt=twitter src="images/buttons/twitter.png" align=top border=0>follow me on twitter!</SPAN>
+        </A> 
+    </DIV>
+    
+    
+<DIV class=banners style="width:500px; PADDING-RIGHT: 20px; PADDING-LEFT: 20px; RIGHT: 0px; FLOAT: right; PADDING-BOTTOM: 20px; BOTTOM: 0px; PADDING-TOP: 20px; POSITION: absolute">
+    <IMG  alt=webwork       src="images/ol.png"    border=0>
+    <IMG  alt=smallcodes    src="images/tw.png"    border=0> 
+ 
+
+    <DIV style="width:200px" id=copyright>developed & best viewed with: 
+        <A href="http://www.firefox.com/"                   target=_blank>Firefox</A>
+        <BR>©
+        <SCRIPT type=text/javascript>
+                var d = new Date();
+                var year= d.getFullYear();
+                document.write(year);
+        </SCRIPT>
+         wang zhen
+    </DIV>       
+</DIV>
+
+
+
+<DIV class="containerPlus transparent navigator" skin="transparent" height="160" width="450">
+    <DIV class=no>
+    
+    <DIV class=ne>
+    <DIV    class=n 
+            style="BORDER-RIGHT: red 0px solid; BORDER-TOP: red 0px solid; BORDER-LEFT: red 0px solid; WIDTH: 450px; BORDER-BOTTOM: red 0px solid">
+            (beta)
+    </DIV>
+    </DIV>
+    
+    <DIV class=o>
+    <DIV class=e>
+    <DIV class=c>
+    <DIV class=content>
+    <IMG height=38 alt=mbStyle src="images/urltext.png" width=300> 
+    <BR><BR>
+    <DIV id=ribbonbar>
+    
+        <A  class="button special develop" 
+            onclick="this.blur();getCycledCardDeck('/bbs?card=1');" 
+            href="todolink">
+            <SPAN>默认</SPAN>
+        </A> 
+        
+        <A  class="button special creativity" 
+            onclick="this.blur();getCycledCardDeck('/list?card=1');" 
+            href="todolink">
+            <SPAN>全部</SPAN>
+        </A> 
+        
+        <A  class="button special info " 
+            onclick="this.blur();getRecommendedCard();" 
+            href="todolink">
+            <SPAN>推荐</SPAN>
+        </A> 
+
+        <A  class="button special showAll" id="tcycle"
+            onclick="this.blur();toggleCycle();" 
+            href="todolink">
+            <SPAN>toggle Cycle</SPAN>
+        </A> 
+        
+        <SPAN class=spacer></SPAN>
+        
+        <A  class="button orange" 
+            onclick="this.blur();$('body').rndBgnd('images/bgnds/');" 
+            href="todolink">
+            <SPAN>change background</SPAN>
+        </A> 
+    </DIV>
+
+    <!--
+    <DIV id=developbar style="DISPLAY: none">
+        <A  class="button special" 
+            onclick="this.blur();unloadPage();" 
+            href="todolink">
+        <SPAN>back</SPAN>
+        </A> 
+        
+        <SPAN class=spacer></SPAN>  
+        <A  class="button" 
+            onclick="this.blur();$(this).showDoc();"
+            href="todolink">
+        <SPAN>documentation &amp;surce files</SPAN>
+        </A> 
+    </DIV>
+
+    <DIV id=bar style="DISPLAY: none">
+        <A  class="button special" 
+            onclick="this.blur();unloadPage()"
+            href="todolink">
+        <SPAN>back</SPAN>
+        </A> 
+        
+        <A  class="button" id=newWin 
+            onclick="this.blur();unloadPage();" 
+            href="todolink">
+        <SPAN>open site in new window</SPAN>
+        </A> 
+    </DIV>
+    -->
+    </DIV></DIV></DIV></DIV><!--end div oec content-->
+
+    <DIV><DIV class=so><DIV class=se><DIV class=s>
+    </DIV></DIV></DIV></DIV><!--end tail part-->
+    </DIV><!-- end no -->
+</DIV><!-- end container-->
+
+<div  id="prevCard" class="navCardlist" style="opacity: 0.6; left: -100px; display: block; top: 88.4831px;">Prev</div>
+<div  id="nextCard" class="navCardlist" style="opacity: 0.6; left: -100px; display: block; top: 188.4831px;">Next</div>
+
+
+<div id="cardlist" style="margin: 0px;padding:0; left: 260px; width: 600px; height:300px; position: absolute; z-index: 100; display: block; top: 88.4831px;"
+     style="float:none; position:relative;z-index:100" 
+     >
+     
+     
+     <div    id="MistFog3" width="600" height="" skin="blue" 
+            style="margin: 0px; left: 260px; width: 600px; position: absolute; z-index: 10852; height: 400px; display: block; top: 88.4831px;" 
+            class="containerPlus draggable creativity blue ui-draggable card" 
+            inited="false" minimized="false">
+            
+            <div class="no">
+                
+            <div class="ne">
+            <div class="n" unselectable="on" style="padding-left: 0px; cursor: move;">
+                <a onclick="$(this).parents('.containerPlus').find('.minimizeContainer').click();" href="#">
+                    <strong>Mist&Fog</strong>
+                </a>
+            </div>
+            
+            <div class="buttonBar">
+                
+                <img class="minimizeContainer" src="elements/blue/max.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+                <img class="close" src="elements/blue/close.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+            </div>
+            
+            </div>
+            
+            <div class="o" >
+            <div class="e">
+            <div class="c">
+            <div class="content" style="overflow:hidden">
+            
+             <table>
+                <tr  align="center">                           
+                    <td nowrap="nowrap" class=board><b>讨论区</b></td>
+                    <td nowrap="nowrap" class=title><b>标题</b></td>                         
+                </tr>                                  
+                <tr>                                                            
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=NewExpress&amp;gid=10497492" target=_blank><b>水木特快</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=NewExpress&amp;gid=10497492" target=_blank><b>成都九路公交视频</b></a></td>                                
+                </tr>                                                        
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=MyPhoto&amp;gid=1170870" target=_blank><b>个人Show</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=MyPhoto&amp;gid=1170870" target=_blank><b>恋着多喜欢</b></a></td>
+                </tr>                                                     
+                <tr>        
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=WorkLife&amp;gid=3780036" target=_blank><b>职业生涯</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=WorkLife&amp;gid=3780036" target=_blank><b>苦水里泡大的初中同学很喜欢她的工作，每天都很幸福</b></a></td>
+                </tr>                                                   
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Tennis&amp;gid=562637" target=_blank><b>网球</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Tennis&amp;gid=562637" target=_blank><b>狂热烈祝贺罗杰费德勒艰难逆转第四度杀入法网决赛延续伟大梦想</b></a></td>
+                </tr>                                                       
+                <tr>       
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Love&amp;gid=3332764" target=_blank><b>谈情说爱</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Love&amp;gid=3332764" target=_blank><b>bf老是乱说话，我该怎么办啊？</b></a></td>
+                </tr>                                                                    
+                <tr>                 
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Food&amp;gid=401478" target=_blank><b>我爱吃, 我想吃</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Food&amp;gid=401478" target=_blank><b>打听一下北京吃饭消费水平</b></a></td>
+                </tr>                                                                    
+                <tr>                
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=BasketballForum&amp;gid=1680350" target=_blank><b>篮球</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=BasketballForum&amp;gid=1680350" target=_blank><b>本版版友们，你们是从哪年开始看NBA的？</b></a></td>
+                </tr>                                                                      
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Football&amp;gid=1192163" target=_blank><b>绿茵世界</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Football&amp;gid=1192163" target=_blank><b>原形毕露，我们现在真的是亚洲二流了</b></a></td>
+                </tr>                                          
+                <tr>                
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=PocketLife&amp;gid=221470" target=_blank><b>掌上智能</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=PocketLife&amp;gid=221470" target=_blank><b>智能手机讲座第七讲——微软智能系统 Windows Mobile简介</b></a></td>
+                </tr>                                                        
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=History&amp;gid=856160" target=_blank><b>历史</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=History&amp;gid=856160" target=_blank><b>中国哪个皇帝能在崇祯位置做的更好？</b></a></td>
+                </tr>                                                 
+            </table>    
+
+            </div></div></div></div>
+            
+            <div><div class="so"><div class="se"><div class="s"></div></div></div>
+            </div>
+    </div>
+    </div>
+    
+    
+
+
+
+    <div    id="MistFog2" width="600"  skin="blue" 
+            style="margin: 0px; left: 260px; width: 600px; position: absolute; z-index: 10851; height: 400px; display: block; top: 88.4831px;" 
+            class="containerPlus draggable creativity white ui-draggable card" 
+            inited="false" minimized="false">
+            
+            <div class="no">
+                
+            <div class="ne">
+            <div class="n" unselectable="on" style="padding-left: 0px; cursor: move;">
+                <a onclick="$(this).parents('.containerPlus').find('.minimizeContainer').click();" href="#">
+                    <strong>Mist&Fog</strong>
+                </a>
+            </div>
+            
+            <div class="buttonBar">
+                
+                <img class="minimizeContainer" src="elements/blue/max.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+                <img class="close" src="elements/blue/close.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+            </div>
+            
+            </div>
+            
+            <div class="o" >
+            <div class="e">
+            <div class="c">
+            <div class="content" style="overflow:hidden">
+            
+            <<img alt="MistFog3" />
+            <h2>THE MAJOR #3 : Guns</h2>
+            <p>This is the third number of The Major.</p>A short story by Pietro Polsinelli, illustrated by me
+            <p style="float: right;">
+            <a  onclick="loadPage('http://mistandfog.wordpress.com/2009/05/18/the-major-iii-guns-2/')" 
+                href="#" class="button special">
+                <span>give a look!</span>
+            </a>
+            </p>
+
+            </div></div></div></div>
+            
+            <div><div class="so"><div class="se"><div class="s"></div></div></div>
+            </div>
+    </div>  
+    </div>                            
+
+
+    <div    id="MistFog3" width="600" height="" skin="blue" 
+            style="margin: 0px; left: 260px; width: 600px; position: absolute; z-index: 10852; height: 400px; display: block; top: 88.4831px;" 
+            class="containerPlus draggable creativity blue ui-draggable card" 
+            inited="false" minimized="false">
+            
+            <div class="no">
+                
+            <div class="ne">
+            <div class="n" unselectable="on" style="padding-left: 0px; cursor: move;">
+                <a onclick="$(this).parents('.containerPlus').find('.minimizeContainer').click();" href="#">
+                    <strong>Mist&Fog</strong>
+                </a>
+            </div>
+            
+            <div class="buttonBar">
+                
+                <img class="minimizeContainer" src="elements/blue/max.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+                <img class="close" src="elements/blue/close.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+            </div>
+            
+            </div>
+            
+            <div class="o" >
+            <div class="e">
+            <div class="c">
+            <div class="content" style="overflow:hidden">
+            
+             <table>
+                <tr  align="center">                           
+                    <td nowrap="nowrap" class=board><b>讨论区</b></td>
+                    <td nowrap="nowrap" class=title><b>标题</b></td>                         
+                </tr>                                  
+                <tr>                                                            
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=NewExpress&amp;gid=10497492" target=_blank><b>水木特快</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=NewExpress&amp;gid=10497492" target=_blank><b>成都九路公交视频</b></a></td>                                
+                </tr>                                                        
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=MyPhoto&amp;gid=1170870" target=_blank><b>个人Show</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=MyPhoto&amp;gid=1170870" target=_blank><b>恋着多喜欢</b></a></td>
+                </tr>                                                     
+                <tr>        
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=WorkLife&amp;gid=3780036" target=_blank><b>职业生涯</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=WorkLife&amp;gid=3780036" target=_blank><b>苦水里泡大的初中同学很喜欢她的工作，每天都很幸福</b></a></td>
+                </tr>                                                   
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Tennis&amp;gid=562637" target=_blank><b>网球</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Tennis&amp;gid=562637" target=_blank><b>狂热烈祝贺罗杰费德勒艰难逆转第四度杀入法网决赛延续伟大梦想</b></a></td>
+                </tr>                                                       
+                <tr>       
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Love&amp;gid=3332764" target=_blank><b>谈情说爱</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Love&amp;gid=3332764" target=_blank><b>bf老是乱说话，我该怎么办啊？</b></a></td>
+                </tr>                                                                    
+                <tr>                 
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Food&amp;gid=401478" target=_blank><b>我爱吃, 我想吃</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Food&amp;gid=401478" target=_blank><b>打听一下北京吃饭消费水平</b></a></td>
+                </tr>                                                                    
+                <tr>                
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=BasketballForum&amp;gid=1680350" target=_blank><b>篮球</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=BasketballForum&amp;gid=1680350" target=_blank><b>本版版友们，你们是从哪年开始看NBA的？</b></a></td>
+                </tr>                                                                      
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=Football&amp;gid=1192163" target=_blank><b>绿茵世界</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=Football&amp;gid=1192163" target=_blank><b>原形毕露，我们现在真的是亚洲二流了</b></a></td>
+                </tr>                                          
+                <tr>                
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=PocketLife&amp;gid=221470" target=_blank><b>掌上智能</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=PocketLife&amp;gid=221470" target=_blank><b>智能手机讲座第七讲——微软智能系统 Windows Mobile简介</b></a></td>
+                </tr>                                                        
+                <tr>                   
+                    <td nowrap="nowrap" class=board><a href="http://www.newsmth.net/bbstcon.php?board=History&amp;gid=856160" target=_blank><b>历史</b></a></td>
+                    <td nowrap="nowrap" class=title><a href="http://www.newsmth.net/bbstcon.php?board=History&amp;gid=856160" target=_blank><b>中国哪个皇帝能在崇祯位置做的更好？</b></a></td>
+                </tr>                                                 
+            </table>    
+
+            </div></div></div></div>
+            
+            <div><div class="so"><div class="se"><div class="s"></div></div></div>
+            </div>
+    </div>
+    </div>
+    
+    
+    
+
+
+</div>
+
+
+</BODY>
+</HTML>

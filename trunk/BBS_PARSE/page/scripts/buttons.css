@@ -1,0 +1,51 @@
+DIV.ribbonbar {
+	
+}
+.spacer {
+	DISPLAY: inline-block; WIDTH: 5px; CURSOR: default
+}
+A.button {
+	PADDING-RIGHT: 10px; BACKGROUND-POSITION: right top; DISPLAY: inline-block; BACKGROUND-IMAGE: url(../images/buttons/default/btn_right.png); FONT: 13px arial, sans-serif; COLOR: #fff; MARGIN-RIGHT: 0px; BACKGROUND-REPEAT: no-repeat; HEIGHT: 32px; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none
+}
+A.button SPAN {
+	PADDING-RIGHT: 0px; DISPLAY: block; PADDING-LEFT: 10px; BACKGROUND-IMAGE: url(../images/buttons/default/btn.png); PADDING-BOTTOM: 8px; LINE-HEIGHT: 21px; PADDING-TOP: 3px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-COLOR: transparent
+}
+A.button SPAN IMG {
+	PADDING-RIGHT: 5px; MARGIN-TOP: -2px; MARGIN-LEFT: -5px
+}
+A.button:hover {
+	BACKGROUND-IMAGE: url(../images/buttons/default/btn_hover_right.png); COLOR: #fff; outline: none
+}
+A.selected.button {
+	BACKGROUND-IMAGE: url(../images/buttons/default/btn_hover_right.png); COLOR: #fff; outline: none
+}
+A.button:hover SPAN {
+	BACKGROUND-IMAGE: url(../images/buttons/default/btn_hover.png)
+}
+A.selected.button SPAN {
+	BACKGROUND-IMAGE: url(../images/buttons/default/btn_hover.png)
+}
+A.special {
+	BACKGROUND-IMAGE: url(../images/buttons/special/btn_right.png)
+}
+A.special SPAN {
+	BACKGROUND-IMAGE: url(../images/buttons/special/btn.png)
+}
+A.special:hover {
+	BACKGROUND-IMAGE: url(../images/buttons/special/btn_hover_right.png)
+}
+A.special:hover SPAN {
+	BACKGROUND-IMAGE: url(../images/buttons/special/btn_hover.png)
+}
+A.orange {
+	BACKGROUND-IMAGE: url(../images/buttons/orange/btn_right.png)
+}
+A.orange SPAN {
+	BACKGROUND-IMAGE: url(../images/buttons/orange/btn.png)
+}
+A.orange:hover {
+	BACKGROUND-IMAGE: url(../images/buttons/orange/btn_hover_right.png)
+}
+A.orange:hover SPAN {
+	BACKGROUND-IMAGE: url(../images/buttons/orange/btn_hover.png)
+}
