@@ -1,6 +1,10 @@
 cron:
-- description: refresh content
-  url: /testcron/
-  schedule: every 2 minutes
+- description: refresh content part1
+  url: /fresh/
+  schedule: every 1 hours
+  
+- description: refresh content part2
+  url: /fresh2/
+  schedule: every 1 hours
 
 

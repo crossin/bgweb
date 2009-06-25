@@ -2,18 +2,34 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <link href="/page/bbs0.css" type="text/css" rel="stylesheet" />
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+		
+        <LINK href="../page/images/favicon.ico"          rel="shortcut icon">
+        <meta http-equiv="Content-Type" content="text/html; charset=gbk">
 		     		
 
 		<title>BBS TOP 10</title>
+        <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script>
+            <script type="text/javascript">
+            try {
+            var pageTracker = _gat._getTracker("UA-3272874-2");
+            pageTracker._trackPageview();
+            } catch(err) {}
+        </script>
 	</head>
 	<body>
     <div align=center><img src="/page/images/top10.gif" /></div>
+    <h1  color="red">
+        <a href="/page/mbIndex.htm" target=_blank ><font color='red' size='large'>推荐-》全新版 上线！！</font></a>
+    </h1>
     <hr color=green>
     {% for table in context %}
     <br />
         <div>
-            <img src="/page/images/logo_{{ table.name }}.jpg"/>
+            <img src="/page/images/logo/logo_{{ table.name }}.jpg"/>
+            <b>{{ table.chinesename }}</b>
             <table align=center border=0 cellpadding=0 cellspacing=0>
                 <tr height=6>
                     <td width=6><img border=0 src='/page/images/lt.gif'></td>
@@ -38,9 +54,9 @@
                             <tr class="pt9dc">
                             {% endif %} 
                                 <td nowrap="nowrap" class=counter><b>{{ forloop.counter }}</b></td>
-                                <td nowrap="nowrap" class=board><a href="{{item.boardlink}}"><b>{{item.board}}</b></a></td>
-                                <td nowrap="nowrap" class=title><a href="{{item.titlelink}}"><b>{{item.title}}</b></a></td>
-                                <td nowrap="nowrap" class=author><a href="{{item.authorlink}}"><b>{{item.author}}</b></a></td>
+                                <td nowrap="nowrap" class=board><a href="{{item.boardlink}}" target=_blank><b>{{item.board}}</b></a></td>
+                                <td nowrap="nowrap" class=title><a href="{{item.titlelink}}" target=_blank><b>{{item.title}}</b></a></td>
+                                <td nowrap="nowrap" class=author><a href="{{item.authorlink}}" target=_blank><b>{{item.author}}</b></a></td>
                                 <td nowrap="nowrap" class=postcount><b>{{item.postcount}}</b></td>
                             </tr>                                          
 
@@ -56,7 +72,7 @@
                 </tr>
             </table>
         </div>
-        <br />
+       
         
            {% endfor %}    
 	</body>
