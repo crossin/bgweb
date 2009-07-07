@@ -1,0 +1,18 @@
+
+<div style="display:block; float:left;width:90px" >
+
+{% for bbs in namelist1 %}
+    <label><input name="rdconfig"  type="radio" checked="" value="{{bbs.schoolname}}" /> &nbsp;{{bbs.chinesename}}</label>
+{% endfor %}        
+</div>
+<div style="display:block; float:left;width:90px" >
+{% for bbs in namelist2 %}
+    <label><input name="rdconfig"  type="radio" checked="" value="{{bbs.schoolname}}" /> &nbsp;{{bbs.chinesename}}</label>
+{% endfor %}
+</div>
+<div style="display:block; float:left;width:90px" >
+{% for bbs in namelist3 %}
+    <label><input name="rdconfig"  type="radio" checked="" value="{{bbs.schoolname}}" /> &nbsp;{{bbs.chinesename}}</label>
+{% endfor %}
+    
+</div>

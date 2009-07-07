@@ -1,0 +1,43 @@
+{% for card in context %}
+
+<div   width="600" height="" skin="blue" 
+            style="margin: 0px; left: 260px; width: 600px; position: absolute; z-index: 10852; height: 400px; display: block; top: 88.4831px;" 
+            class="containerPlus draggable creativity blue ui-draggable card" 
+            inited="false" minimized="false">        
+            <div class="no">
+                
+            <div class="ne">
+                <div class="n" unselectable="on" style="padding-left: 0px; cursor: move;">
+                    <a onclick="$(this).parents('.containerPlus').find('.minimizeContainer').click();" href="#">
+                        <strong>{{ card.chinesename }}</strong>
+                    </a>
+                </div>         
+                <div class="buttonBar">                
+                    <img class="minimizeContainer" src="elements/blue/max.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+                    <img class="close" src="elements/blue/close.png" style="opacity: 0.5; cursor: pointer;" unselectable="on"/>
+                </div>
+            </div>          
+            <div class="o" >
+            <div class="e">
+            <div class="c">
+            <div class="content" style="overflow:hidden">
+            
+            <table>
+                <tr  align="center">                           
+                    <td nowrap="nowrap" class=board><b>Board</b></td>
+                    <td nowrap="nowrap" class=title><b>Title</b></td>                         
+                </tr>   
+                        {% for item in card.itemlist %}
+                            <tr>
+                                <td nowrap="nowrap" class=board><a href="{{item.boardlink}}" target=_blank><b>{{item.board}}</b></a></td>
+                                <td nowrap="nowrap" class=title><a href="{{item.titlelink}}" target=_blank><b>{{item.title}}</b></a></td>                              
+                            </tr>                                          
+                        {% endfor %}                                                                              
+            </table>             
+            </div></div></div></div>       
+            <div><div class="so"><div class="se"><div class="s"></div></div></div>
+            </div>
+    </div>
+    </div> 
+    
+{% endfor %}   
