@@ -18,16 +18,37 @@
             pageTracker._trackPageview();
             } catch(err) {}
         </script>
-
+		<script language="javascript"> window.open("http://127.0.0.1:8080/page/mbIndex.htm") </script> 
 
 	</head>
 	<body>
     <div align=center><img src="/page/images/top10.gif" /></div>
     <h1  color="red">
         <a href="/page/mbIndex.htm" target=_blank ><font color='red' size='large'>推荐-》全新版 上线！！</font></a>
+        <a href="/list" target=_blank ><font color='red' size='large'>详细列表</font></a>
     </h1>
     <hr color=green />
-    
+    <div class="" align="center">
+	<ul>
+	
+		<li>
+        <div class="bbs_block" >
+		<b>十大推荐文章</b>
+		<table>
+		{% for recoinfo in recommend %}
+			<tr>
+				<td>
+				<a>【<b>{{recoinfo.board}}</b>】</a>
+				<a href="{{recoinfo.titlelink}}"><b>{{recoinfo.title}}</b></a>
+				</td>
+			</tr>
+		{% endfor %}
+		</table>
+		</div>
+		</li>
+	
+	</ul>
+	</div>
     <div class="grid" align="center" >
     <ul>
     {% for table in context %}
