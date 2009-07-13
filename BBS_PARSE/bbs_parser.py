@@ -8,7 +8,7 @@ from BeautifulSoup      import BeautifulSoup;
 from bsoupxpath         import Path;
 from customized_soup    import CustomizedSoup;
 from scraper            import Scraper;
-
+from model.models       import *
 
 import urllib2;
 import re;
@@ -92,6 +92,9 @@ class BBSParser(object):
             htmlstring = urllib2.urlopen(config['locate']).read();
         except Exception, e: 
             logging.debug("failed to open following url %s", config['locate']);
+            qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
+            if(qSchool.count() > 0):
+                qSchool[0].delete();
             return 'error';
         if ('encoding' in config.keys()):
             if config['encoding'] == 'utf8':
@@ -112,6 +115,10 @@ class BBSParser(object):
         blockstring = self.convertdom2string(domblock) ;
 #        logging.info(blockstring);
         if blockstring is  None :
+            logging.debug("failed to parse bbs by xpath ;schoolname= %s", config['name']);
+            qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
+            if(qSchool.count() > 0):
+                qSchool[0].delete();
             return;
         return self.parsebbsDomDetail(blockstring, config);
     
@@ -120,11 +127,18 @@ class BBSParser(object):
         if htmlstring == 'error':
             return;
 #        logging.info(htmlstring);
-        re_block = config['re_block'];
-        blockstring = re_block.search(htmlstring).group();
+        try:
+            re_block = config['re_block'];
+            blockstring = re_block.search(htmlstring).group();
 #        logging.info(blockstring);
-        if blockstring is  None :
-            return;#error occured
+#        if blockstring is  None :
+#            return;#error occured
+        except Exception, e: 
+            logging.debug("failed to parse bbs by RE ;schoolname= %s", config['locate']);
+            qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
+            if(qSchool.count() > 0):
+                qSchool[0].delete();
+            return;
         return self.parsebbsDomDetail(blockstring, config);
     
     def fixitem(self, item , config):
@@ -150,25 +164,31 @@ class BBSParser(object):
             
     
     def parsebbsDomDetail(self, dom_block_str , config):     
-        dom_row_pattern = config['dom_row_pattern'];
-        doc = CustomizedSoup(dom_block_str);
-        scraper = Scraper(dom_row_pattern);
-        ret = scraper.match(doc);
-        #values = scraper.extract(ret[0]);
-        parsed_result = []; 
-        index = 1;
-        for item in ret:
-            value = scraper.extract(item); 
-            self.fixitem(value, config);
-            value['boardlink'] = config['root'] + value['boardlink'];
-            value['titlelink'] = config['root'] + value['titlelink'];
-            value['authorlink'] = config['root'] + value['authorlink'];
-            self
-            parsed_result.append(value);
-            index = index + 1;
-            if index >= 11:
-                break;
-        
+        try:
+            dom_row_pattern = config['dom_row_pattern'];
+            doc = CustomizedSoup(dom_block_str);
+            scraper = Scraper(dom_row_pattern);
+            ret = scraper.match(doc);
+            #values = scraper.extract(ret[0]);
+            parsed_result = []; 
+            index = 1;
+            for item in ret:
+                value = scraper.extract(item); 
+                self.fixitem(value, config);
+                value['boardlink'] = config['root'] + value['boardlink'];
+                value['titlelink'] = config['root'] + value['titlelink'];
+                value['authorlink'] = config['root'] + value['authorlink'];
+                self
+                parsed_result.append(value);
+                index = index + 1;
+                if index >= 11:
+                    break;
+        except Exception, e: 
+            logging.debug("failed to parse bbs in Domdetail ;schoolname= %s", config['locate']);
+            qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
+            if(qSchool.count() > 0):
+                qSchool[0].delete();
+            return;
                     
         return{
                'itemlist':parsed_result,
