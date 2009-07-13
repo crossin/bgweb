@@ -15,23 +15,7 @@ sjtubbs = {
         'chinesename':u'饮水思源',
         'rank':1,
     };
-    
-smthbbs = {
-        'locate':'http://bbs.tsinghua.edu.cn/mainpage.php',
-        'root':'http://bbs.tsinghua.edu.cn',
-        'xpath':'/html/body/table[3]/tr/td/table[2]/tr[3]/td',
-        'name':'smth',
-        'chinesename':u'水木清华',
-        'dom_row_pattern' : """
-            <li>
-            <a href="$boardlink">$board</a>*
-            <a href="$titlelink">$title</a>*
-            <a href="$authorlink">$author</a>
-            </li>
-        """,
-        're_block':re.compile(r'<ul id="toptenlist">.*?</ul>', re.DOTALL),
-        'rank':2,
-    };
+
      
 newsmth = {
         'locate':'http://www.newsmth.net/rssi.php?h=1',
@@ -136,27 +120,7 @@ fudanbbs = {
         'rank':6,
     };
     
-nankaibbs = {
-        'locate':'http://bbs.nankai.edu.cn/hottopic10.htm',
-        'root':'http://bbs.nankai.edu.cn/',
-        'xpath':'/html/center/table/tr[2]/td[2]/table',
-        'name':'nankai',
-        'chinesename':u'我爱南开',
-        'dom_row_pattern' : """
-             <tr>
-             <td>
-             <a href="$titlelink">$title</a>
-             <a href="$authorlink">$author</a>
-             </td>
-             <td>
-             <a href="$boardlink">$board</a>
-             </td>
-             <td>*</td>
-             </tr>
-        """,
-        're_block':re.compile(r'<table .*?>.*?</table>', re.DOTALL | re.I),
-        'rank':15,
-    };
+
     
     
 xjtubbs = {
@@ -246,18 +210,27 @@ ustcbbs = {
         
     };
     
-zsubbs = {
-        'locate':'http://bbs.zsu.edu.cn/',
-        'root':'http://bbs.zsu.edu.cn',
-        'name':'zsu',
+sysubbs = {
+        'locate':'http://bbs.sysu.edu.cn/bbstop10',
+        'root':'http://bbs.sysu.edu.cn/',
+        'name':'sysu',
         'chinesename':u'逸仙时空',
         'dom_row_pattern' : """
-            <li>
-            <span><a href="$titlelink">$title</a> 
-            [<a href="$boardlink" >$board</a>]</span>
-            </li>
+        <tr> 
+        <td>*</td>
+        <td>
+        <a href="$boardlink">$board</a>
+        </td>
+        <td>
+        <a href='$titlelink'>$title</a>
+        </td>     
+        <td>
+        <a href="$authorlink">$author</a>
+        </td>
+        <td>$postcount</td>
+        </tr>
         """,
-        're_block':re.compile(r'<div id="topten">.*?</div>', re.DOTALL),
+        're_block':re.compile(r'<table width="100%" border="0" cellspacing="0" cellpadding="0" height="">.*?</table>', re.DOTALL),
         'rank':8,
         
     };
@@ -297,7 +270,7 @@ njuptbbs = {
             <td>$postcount
         """,
         're_block':re.compile(r'<table border=1 width=610>.*?</table>', re.DOTALL),
-        'rank':20,
+        'rank':12,
         
     };
     
@@ -352,7 +325,7 @@ bjtubbs = {
             <br> """,
         're_block':re.compile(r'<thead><tr><th height="25"=100%>.{18}</td></tr></thead>.*?</table>', re.DOTALL),
         're_board1':re.compile(r'board.*?=(?P<board>.*?)&', re.DOTALL),
-        'rank':20,
+        'rank':13,
 
     };
 
@@ -388,19 +361,7 @@ seubbs = {
         're_board1':re.compile(r'board.*?=(?P<board>.*?)&', re.DOTALL),
         'rank':20,
            }  ;
-ecnubbs = {
-        'locate':'http://bbs.iecnu.com/',
-        'root':'http://bbs.iecnu.com/',
-        'name':'ecnu',
-        'chinesename':u'爱在华师大',
-        'xpath':'/html/body/div[8]/table/tr[2]/td[3]/table/tr/td[2]',
-        'dom_row_pattern' : """
-        <div>
-        <a href="$titlelink">$title</a>
-        </div>
-        """,
-        'rank':30,
-           }  ;
+
 scubbs = {
         'locate':'http://bbs.scu.edu.cn/rssi.php?h=1',
         'root':'',
@@ -461,20 +422,7 @@ sdubbs = {
         """,
         'rank':16,
            }  ;
-bnubbs = {
-        'locate':'http://bbs.bnulife.com/index.php',
-        'root':'http://bbs.bnulife.com/',
-        'name':'bnu',
-        'chinesename':u'紫金香',
-        'dom_row_pattern' : """
-        <div>
-        <img/> 
-        <a href="$titlelink">$title</a>
-        </div>
-        """,
-        're_block':re.compile(r'<div id="weeks2">.*?</div></div>', re.DOTALL),
-        'rank':17,
-    }; 
+
 
 tjubbs = {
         'locate':'http://bbs.tju.edu.cn/TJUBBSFPKEHPUMNSALVFGWTYHVMRLBXCBIYPKFA_A/bbstop10',
@@ -516,26 +464,7 @@ buaabbs = {
         'rank':22,
            }  ;
 
-scutbbs = {
-        'locate':'http://bbs.scut.edu.cn/rss/ListTopTen.jsp',
-        'root':'',
-        'name':'scut',
-        'chinesename':u'木棉',
-        'dom_row_pattern' : """
-            <item>
-            <title>$title</title>
-            <link>$titlelink</link>
-            <author>$author</author>
-            <guid>$boardlink</guid>
-            <description>*</description>
-            <pubDate>*</pubDate>
-            <category>*</category>
-            </item>
-        """,
-        're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
-        'encoding':'utf8',
-        'rank':26,
-    }; 
+ 
 
 lzubbs = {
         'locate':'http://bbs.lzu.edu.cn/mainpage.php',
@@ -582,20 +511,7 @@ caubbs = {
         'rank':32,
            }  ;
 
-shubbs = {
-        'locate':'http://bbs.lehu.shu.edu.cn/',
-        'root':'',
-        'name':'shu',
-        'chinesename':u'乐乎论坛',
-        'xpath':'/html/body/div[2]/div[3]/div[5]/div[2]',
-        'dom_row_pattern' : """
-        <li>
-        <a href="$titlelink">$title</a>
-        </li>
-        """,
-        'encoding':'utf8',
-        'rank':41,
-           }  ;
+
 
 ustbbbs = {
         'locate':'http://bbs.ustb.edu.cn/mainpage.php',
