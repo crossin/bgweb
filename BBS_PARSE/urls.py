@@ -19,7 +19,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns(
     '',
     (r'^$', 'views.getbbs'),
-    (r'^bbs$','views.getbbs'),
+    (r'^bbs/','views.getbbs4xn'),
     (r'^namelist/','views.get_bbsnamelist'),
     (r'^list$','views.getfullbbslist'),
     (r'^recommended$','views.getRecommended'),

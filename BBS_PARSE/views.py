@@ -144,6 +144,32 @@ def getbbs(request):
     bbstoplist = bbslist[0:10];
     recolist = MostTopTenItem.all();
     return render_to_response('BBS_PARSE.html', {'context':bbstoplist, 'recommend':recolist});
+    
+def getbbs4xn(request):
+#    bbsnamelist = ['sjtu', 'smth2', 'zju', 'lily', 'fudan', 'ustc', 'zsu', 'whu', 'jlu', 'xjtu', 'scu', 'hit', 'sdu', 'tongji', 'csu', 'seu', 'ruc', 'buaa', 'xmu', 'dlut' ];
+    bbsnamelist = [];
+    highschoollist = HighSchoolBbs.all();
+    count = highschoollist.count();
+    highschoollist.order('rank');
+    for item in highschoollist:
+        bbsnamelist.append(item.schoolname);
+    if 'selectedtop1' in request.COOKIES and request.COOKIES['selectedtop1']:
+        favbbs = request.COOKIES['selectedtop1'];
+        try:
+            i = bbsnamelist.index(favbbs)
+            bbsnamelist.remove(favbbs)
+            bbsnamelist.insert(0, favbbs);
+        except ValueError:
+            bbsnamelist.insert(0, favbbs);
+            bbsnamelist.pop();
+    bbslist = [];
+    
+    for name in  bbsnamelist:
+        bbslist.append(getbbsitemlist(name));
+
+    bbstoplist = bbslist[0:10];
+    recolist = MostTopTenItem.all();
+    return render_to_response('BBS_PARSE_4xn.html', {'context':bbstoplist, 'recommend':recolist});
 
 def getMostTop10(request):
     return redirect(' / page / BbsRender.html')

@@ -10,7 +10,7 @@
 		<title>BBS TOP 10</title>
         <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' 						      type='text/javascript'%3E%3C/script%3E"));
             </script>
             <script type="text/javascript">
             try {
@@ -18,21 +18,19 @@
             pageTracker._trackPageview();
             } catch(err) {}
         </script>
-		<script language="javascript"> window.open("http://127.0.0.1:8080/page/mbIndex.htm") </script> 
+		<!--<script language="javascript"> window.open("http://127.0.0.1:8080/page/mbIndex.htm") </script> -->
 
 	</head>
-	<body>
+	<body style="overflow-x:hidden;">
     <div align=center><img src="/page/images/top10.gif" /></div>
     <h1  color="red">
         <a href="/page/mbIndex.htm" target=_blank ><font color='red' size='large'>推荐-》全新版 上线！！</font></a>
         <a href="/list" target=_blank ><font color='red' size='large'>详细列表</font></a>
     </h1>
     <hr color=green />
-    <div class="" align="center">
-	<ul>
-	
-		<li>
-        <div class="bbs_block" >
+    <div >
+
+        <div >
 		<b>十大推荐文章</b>
 		<table>
 		{% for recoinfo in recommend %}
@@ -45,10 +43,10 @@
 		{% endfor %}
 		</table>
 		</div>
-		</li>
-	
-	</ul>
+
 	</div>
+	
+	
     <div class="grid" align="center" >
     <ul>
     {% for table in context %}
@@ -56,23 +54,11 @@
         <li>
         <div class="bbs_block" >
             <!-- <img style="width:130;height:60;" src="/page/images/logo/logo_{{ table.name }}.jpg"/> -->
+			<br />
             <b>{{ table.chinesename }}</b>
-             <table >
-                <tr height=6>
-                    <td width=6><!-- <img border=0 src='/page/images/lt.gif'> --></td>
-                    <td  width=100%></td>
-                    <td width=6><!-- <img border=0 src='/page/images/rt.gif'> --></td>
-                </tr>
-                <tr  height=100%>
-                    <td width=6 background='/page/images/l.gif'></td>
-                    <td width=100% nowrap bgcolor=#ffffff> 
+
                     <table >
-                        <tr class="pt9h" bgcolor="#cccccc" align="center">
-                            
-                            <td nowrap="nowrap" class=board style="width:20%"><b>讨论区</b></td>
-                            <td nowrap="nowrap" class=title style="width:80%"><b>标题</b></td>
-                            
-                        </tr>
+
                         {% for item in table.itemlist %}
                             {% if forloop.counter|divisibleby:2 %}
                             <tr class="pt9lc">
@@ -80,22 +66,16 @@
                             <tr class="pt9dc">
                             {% endif %} 
                                 
-                                <td nowrap="nowrap" style="width:20%" class=board><a href="{{item.boardlink}}" target=_blank><b>{{item.board}}</b></a></td>
-                                <td nowrap="nowrap" style="width:80%" class=title><a href="{{item.titlelink}}" target=_blank><b>{{item.title}}</b></a></td>
+                                <td nowrap="nowrap" style="width:20%" class=board>
+								<a href="{{item.boardlink}}" target=_blank><b>{{item.board}}</b></a></td>
+                                <td nowrap="nowrap" style="width:80%" class=title>
+								<a href="{{item.titlelink}}" target=_blank><b>{{item.title}}</b></a></td>
                                 
                             </tr>                                          
 
                         {% endfor %}
                     </table>
-                     </td>
-                    <td width=6 background='/page/images/r.gif'></td>
-                </tr>
-                <tr height=6>
-                    <td width=6><!-- <img border=0 src='/page/images/lb.gif'> --></td>
-                    <td width=100%></td>
-                    <td width=6><!-- <img border=0 src='/page/images/rb.gif'> --></td>
-                </tr>
-            </table> 
+                     
         </div>
         </li>
        
