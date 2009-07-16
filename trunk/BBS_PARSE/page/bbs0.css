@@ -81,42 +81,35 @@ FONT.c37 {COLOR: 000000;}
 
 
     .grid{
-        margin:auto;
+        padding:0;
         overflow:hidden;
-        position:relative;
+        width:100%;
     }
     
     .grid ul{
       list-style-type:none;
-      margin:-1px 0 0 -1px;
-      padding:0;
       width:100%;
-      border-width:0px 1px 0 0;  
-      position:relative;
+	  overflow:hidden;
+	  display:block;
+	  margin-left:0px;
     }
 
     .grid li{
-         zoom:1;
-        list-style-type:none;
-        margin:0;
-        padding:0;
+        list-style-type:none;   
         vertical-align:middle;
-        width:50%;
-        padding:0 0 30px 0;
-
+        width:49%;
         text-align:center;
-        position:relative;
-        border:solid 1px #dedede;
-        border-top-color:#CCCCCC;
-        margin:-1px -1px 0 0;
-        border-width:1px 0 0px 1px;
         float:left;
         display:inline;
-        *padding:0;
-
-
+		margin:3px; 
+		position:relative;
+		overflow:auto;
     }
-    table{
+    .grid li table{
+	 	margin-left:15px;
+		width:95%;
+		position:relative;
+		
         
     }
 
