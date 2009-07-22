@@ -19,9 +19,9 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns(
     '',
     (r'^$', 'views.getbbs'),
-    (r'^bbs/','views.getbbs4xn'),
+    (r'^xn/','views.getbbs4xn'),
     (r'^namelist/','views.get_bbsnamelist'),
-    (r'^list$','views.getfullbbslist'),
+    (r'^listall$','views.getfullbbslist'),
     (r'^recommended$','views.getRecommended'),
 #    (r'^topmost/','views.getMostTop10'),
     (r'^fresh/','views.getFreshBBS1'),

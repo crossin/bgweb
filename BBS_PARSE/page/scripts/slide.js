@@ -54,7 +54,7 @@ $(document).ready(function() {
 		$("#toggle a").toggle();
 	});	
     
-    getCycledCardDeck('/bbs?card=1');
+    getCycledCardDeck('/list?card=1');
     
     
 
