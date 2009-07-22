@@ -171,8 +171,8 @@ def getbbs4xn(request):
     recolist = MostTopTenItem.all();
     return render_to_response('BBS_PARSE_4xn.html', {'context':bbstoplist, 'recommend':recolist});
 
-def getMostTop10(request):
-    return redirect(' / page / BbsRender.html')
+#def getMostTop10(request):
+#    return redirect(' /page/BbsRender.html')
     
     
 def getRecommended(request):
@@ -195,9 +195,9 @@ def getfullbbslist(request):
                     'itemlist':toptenlist,
                     }
         bbslist.append(bbsinfo);
-#    
-#    if  ('card' in request.GET) : 
-#        return render_to_response('list_card.html', {'context':bbslist});
+    
+    if  ('card' in request.GET) : 
+       return render_to_response('list_card.html', {'context':bbslist});
     
     return render_to_response('BBS_PARSE_LIST.html', {'context':bbslist});
     
