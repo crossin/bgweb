@@ -169,9 +169,12 @@ FONT.c37 {COLOR: 000000;}
 }
 
 .ad{
-	width:100%;
+text-align:center;
+	width:720px;
 	height:90px;
 	overflow:hidden;
 	display:block;
+	margin-right:auto;
+	margin-left:auto; 
 }
 
