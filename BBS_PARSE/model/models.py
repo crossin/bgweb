@@ -69,6 +69,7 @@ class MostTopTenItem(db.Model):
     title = db.StringProperty(multiline=True);
     titlelink = db.StringProperty();
     board = db.StringProperty();
+    boardlink = db.StringProperty();
     author = db.StringProperty();
     postcount = db.IntegerProperty();
     
@@ -85,6 +86,7 @@ class MostTopTenItem(db.Model):
                         title=item.title,
                         titlelink=item.titlelink,
                         board=item.board,
+                        boardlink=item.boardlink,
                         author=item.author,
                         postcount=item.postcount);                        
             n_result.put();
