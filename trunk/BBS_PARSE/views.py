@@ -80,7 +80,8 @@ def freshbbs():
 
 def freshbbs2():  
     b = BBSParser();
-    needRegularExpressionList2 = [newsmth, zjubbs, lilybbs, fudanbbs, ustcbbs, sysubbs, whubbs, xjtubbs, scubbs, hitbbs, tjubbs, csubbs, buaabbs, dlutbbs, njuptbbs, bjtubbs, tjbbs];
+    needRegularExpressionList2 = [newsmth, zjubbs, lilybbs, fudanbbs, ustcbbs, sysubbs, whubbs, xjtubbs, scubbs, hitbbs];
+    #needRegularExpressionList2 = [newsmth, zjubbs, lilybbs, fudanbbs, ustcbbs, sysubbs, whubbs, xjtubbs, scubbs, hitbbs, tjubbs, csubbs, buaabbs, dlutbbs, njuptbbs, bjtubbs, tjbbs];
     context = [];
     for bbs in needRegularExpressionList2:
         context.append(b.parsebbsbyRegularExpression(bbs));
@@ -91,6 +92,41 @@ def freshbbs2():
     freshMostTopTen();
     return context;
 
+def freshbbs():  
+    b = BBSParser();
+    needXpathBBSList = [ sjtubbs , jlubbs, xmubbs , sdubbs, seubbs, rucbbs, lzubbs, caubbs ];
+    #needXpathBBSList = [ sjtubbs , jlubbs, xmubbs , sdubbs, seubbs, rucbbs, lzubbs, caubbs, ustbbbs, uestcbbs ];
+    needRegularExpressionList1 = []; 
+#    needRegularExpressionList2 = [ustcbbs, zsubbs, whubbs, xjtubbs, scubbs, hitbbs, tjubbs, csubbs, buaabbs, dlutbbs, njuptbbs, bjtubbs, tjbbs];
+
+    context = [];
+
+    for bbs in needRegularExpressionList1:
+        context.append(b.parsebbsbyRegularExpression(bbs));
+    for bbs in needXpathBBSList:
+        context.append(b.parsebbsbyXpath(bbs));
+  
+    for bbsinfoitem in context:
+        HighSchoolBbs.PutBbsInfo(bbsinfoitem);
+    
+    return context;
+
+def freshbbs3():  
+    b = BBSParser();
+    needRegularExpressionList3 = [ tjubbs, csubbs, buaabbs, dlutbbs, njuptbbs, bjtubbs, tjbbs];
+    needXpathBBSList = [ ustbbbs, uestcbbs];
+    context = [];
+    for bbs in needRegularExpressionList3:
+        context.append(b.parsebbsbyRegularExpression(bbs));
+    for bbs in needXpathBBSList:
+        context.append(b.parsebbsbyXpath(bbs));
+
+    for bbsinfoitem in context:
+        HighSchoolBbs.PutBbsInfo(bbsinfoitem);
+    
+    freshMostTopTen();
+    return context; 
+
 def getFreshBBS2(request): 
     freshbbs2();
     return HttpResponse("Part2 Updated Successfully")   
@@ -98,6 +134,10 @@ def getFreshBBS2(request):
 def getFreshBBS1(request):
     freshbbs();
     return HttpResponse("Part1 Updated Successfully")
+    
+def getFreshBBS3(request):
+    freshbbs3();
+    return HttpResponse("Part3 Updated Successfully")
     
 
 def getbbsitemlist(bbsname):

@@ -16,7 +16,7 @@
 
 import os
 
-DEBUG = True
+DEBUG = False
 
 
 ADMINS = ()
