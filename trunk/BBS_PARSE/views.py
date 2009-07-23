@@ -43,6 +43,7 @@ def freshMostTopTen():
 
         bbsinfo = {
                     'name': unicode(school.schoolname),
+                    'schoolchinesename':unicode(school.schoolchinesename),
                     'chinesename':unicode(school.chinesename),
                     'itemlist':toptenlist,
                     }
@@ -60,23 +61,6 @@ def freshMostTopTen():
     MostTopTenItem.putStaticalResult(recolist);
     return  recolist;
     
-def freshbbs():  
-    b = BBSParser();
-    needXpathBBSList = [ sjtubbs , jlubbs, xmubbs , sdubbs, seubbs, rucbbs, lzubbs, caubbs, ustbbbs, uestcbbs ];
-    needRegularExpressionList1 = []; 
-#    needRegularExpressionList2 = [ustcbbs, zsubbs, whubbs, xjtubbs, scubbs, hitbbs, tjubbs, csubbs, buaabbs, dlutbbs, njuptbbs, bjtubbs, tjbbs];
-
-    context = [];
-
-    for bbs in needRegularExpressionList1:
-        context.append(b.parsebbsbyRegularExpression(bbs));
-    for bbs in needXpathBBSList:
-        context.append(b.parsebbsbyXpath(bbs));
-  
-    for bbsinfoitem in context:
-        HighSchoolBbs.PutBbsInfo(bbsinfoitem);
-    
-    return context;
 
 def freshbbs2():  
     b = BBSParser();
@@ -89,7 +73,7 @@ def freshbbs2():
     for bbsinfoitem in context:
         HighSchoolBbs.PutBbsInfo(bbsinfoitem);
     
-    freshMostTopTen();
+
     return context;
 
 def freshbbs():  
@@ -148,6 +132,7 @@ def getbbsitemlist(bbsname):
     toptenlist = TopTenItem.gql('where school = :1', school);
     bbsinfo = {
                 'name': unicode(school.schoolname),
+                'schoolchinesename':unicode(school.schoolchinesename),
                 'chinesename':unicode(school.chinesename),
                 'itemlist':toptenlist,
     }
@@ -231,6 +216,7 @@ def getfullbbslist(request):
 
         bbsinfo = {
                     'name': unicode(school.schoolname),
+                    'schoolchinesename':unicode(school.schoolchinesename),
                     'chinesename':unicode(school.chinesename),
                     'itemlist':toptenlist,
                     }
