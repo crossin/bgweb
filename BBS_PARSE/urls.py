@@ -25,7 +25,8 @@ urlpatterns = patterns(
     (r'^recommended$', 'views.getRecommended'),
     (r'^list$', 'views.getbbs'),
 #    (r'^topmost/','views.getMostTop10'),
-    (r'^fresh/', 'views.getFreshBBS1'),
+    (r'^fresh1/', 'views.getFreshBBS1'),
     (r'^fresh2/', 'views.getFreshBBS2'),
+    (r'^fresh3/', 'views.getFreshBBS3'),
 #    (r'^service/bbs/', 'bbsservice.bbsGateway'),
 )
