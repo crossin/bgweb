@@ -10,6 +10,7 @@ from django import shortcuts
 
 class HighSchoolBbs(db.Model):
     schoolname = db.StringProperty(required=True)
+    schoolchinesename = db.StringProperty()
     chinesename = db.StringProperty()
     rank = db.IntegerProperty()
     @staticmethod
@@ -27,6 +28,7 @@ class HighSchoolBbs(db.Model):
         else:
             nschool = HighSchoolBbs(
                     schoolname=unicode(config['name']),
+                    schoolchinesename=unicode(config['shoolname']),
                     chinesename=unicode(config['chinesename']),
                     rank=config['rank']);
             nschool.put();
@@ -65,6 +67,7 @@ class TopTenItem(db.Model):
     order = db.IntegerProperty();
     
 class MostTopTenItem(db.Model):
+    schoolchinesename = db.StringProperty();
     chinesename = db.StringProperty();
     title = db.StringProperty(multiline=True);
     titlelink = db.StringProperty();
@@ -82,6 +85,7 @@ class MostTopTenItem(db.Model):
             item.delete();
         for item in itemlist:
             n_result = MostTopTenItem(
+                        schoolchinesename=unicode(item.school.schoolchinesename),
                         chinesename=unicode(item.school.chinesename),
                         title=item.title,
                         titlelink=item.titlelink,
