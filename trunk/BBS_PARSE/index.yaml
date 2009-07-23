@@ -10,7 +10,7 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-# Used 1667 times in query history.
+# Used 1735 times in query history.
 - kind: TopTenItem
   properties:
   - name: school
