@@ -80,13 +80,13 @@ def freshbbs():
     b = BBSParser();
     needXpathBBSList = [ sjtubbs , jlubbs, xmubbs , sdubbs, seubbs, rucbbs, lzubbs, caubbs ];
     #needXpathBBSList = [ sjtubbs , jlubbs, xmubbs , sdubbs, seubbs, rucbbs, lzubbs, caubbs, ustbbbs, uestcbbs ];
-    needRegularExpressionList1 = []; 
+#    needRegularExpressionList1 = []; 
 #    needRegularExpressionList2 = [ustcbbs, zsubbs, whubbs, xjtubbs, scubbs, hitbbs, tjubbs, csubbs, buaabbs, dlutbbs, njuptbbs, bjtubbs, tjbbs];
 
     context = [];
 
-    for bbs in needRegularExpressionList1:
-        context.append(b.parsebbsbyRegularExpression(bbs));
+#    for bbs in needRegularExpressionList1:
+#        context.append(b.parsebbsbyRegularExpression(bbs));
     for bbs in needXpathBBSList:
         context.append(b.parsebbsbyXpath(bbs));
   
