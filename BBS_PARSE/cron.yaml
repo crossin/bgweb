@@ -1,14 +1,14 @@
 cron:
-- description: refresh content part1
-  url: /fresh1/
+- description: refresh content part3
+  url: /fresh3/
   schedule: every 1 hours
   
 - description: refresh content part2
   url: /fresh2/
-  schedule: every 1 hours
+  schedule: every 59 minutes
   
-- description: refresh content part3
-  url: /fresh3/
-  schedule: every 1 hours
+- description: refresh content part1
+  url: /fresh1/
+  schedule: every 58 minutes
 
 
