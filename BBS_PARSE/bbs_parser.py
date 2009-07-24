@@ -95,7 +95,7 @@ class BBSParser(object):
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
                 nschool = qSchool[0];
-                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                qTopTenItem = TopTenItem.gql('where school = :1 ORDER BY order ASC', nschool);
                 if(qTopTenItem.count() > 0):
                     for item in qTopTenItem :
                         item.delete();
@@ -124,7 +124,7 @@ class BBSParser(object):
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
                 nschool = qSchool[0];
-                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                qTopTenItem = TopTenItem.gql('where school = :1 ORDER BY order ASC', nschool);
                 if(qTopTenItem.count() > 0):
                     for item in qTopTenItem :
                         item.delete();
@@ -148,7 +148,7 @@ class BBSParser(object):
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
                 nschool = qSchool[0];
-                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                qTopTenItem = TopTenItem.gql('where school = :1 ORDER BY order ASC', nschool);
                 if(qTopTenItem.count() > 0):
                     for item in qTopTenItem :
                         item.delete();
@@ -203,7 +203,7 @@ class BBSParser(object):
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
                 nschool = qSchool[0];
-                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                qTopTenItem = TopTenItem.gql('where school = :1 ORDER BY order ASC', nschool);
                 if(qTopTenItem.count() > 0):
                     for item in qTopTenItem :
                         item.delete();
