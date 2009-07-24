@@ -129,7 +129,7 @@ def getbbsitemlist(bbsname):
     if slist.count() == 0 :
         return;
     school = slist[0];
-    toptenlist = TopTenItem.gql('where school = :1', school);
+    toptenlist = TopTenItem.gql('where school = :1 ORDER BY order ASC', school);
     bbsinfo = {
                 'name': unicode(school.schoolname),
                 'schoolchinesename':unicode(school.schoolchinesename),
