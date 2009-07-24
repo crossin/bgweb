@@ -94,6 +94,11 @@ class BBSParser(object):
             logging.debug("failed to open following url %s", config['locate']);
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
+                nschool = qSchool[0];
+                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                if(qTopTenItem.count() > 0):
+                    for item in qTopTenItem :
+                        item.delete();
                 qSchool[0].delete();
             return 'error';
         if ('encoding' in config.keys()):
@@ -118,6 +123,11 @@ class BBSParser(object):
             logging.debug("failed to parse bbs by xpath ;schoolname= %s", config['name']);
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
+                nschool = qSchool[0];
+                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                if(qTopTenItem.count() > 0):
+                    for item in qTopTenItem :
+                        item.delete();
                 qSchool[0].delete();
             return;
         return self.parsebbsDomDetail(blockstring, config);
@@ -137,6 +147,11 @@ class BBSParser(object):
             logging.debug("failed to parse bbs by RE ;schoolname= %s", config['locate']);
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
+                nschool = qSchool[0];
+                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                if(qTopTenItem.count() > 0):
+                    for item in qTopTenItem :
+                        item.delete();
                 qSchool[0].delete();
             return;
         return self.parsebbsDomDetail(blockstring, config);
@@ -187,6 +202,11 @@ class BBSParser(object):
             logging.debug("failed to parse bbs in Domdetail ;schoolname= %s", config['locate']);
             qSchool = HighSchoolBbs.gql("WHERE schoolname = :1", config['name']);
             if(qSchool.count() > 0):
+                nschool = qSchool[0];
+                qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+                if(qTopTenItem.count() > 0):
+                    for item in qTopTenItem :
+                        item.delete();
                 qSchool[0].delete();
             return;
                     
