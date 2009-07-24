@@ -10,8 +10,16 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
-# Used 1752 times in query history.
+# Used 104 times in query history.
+- kind: HighSchoolBbs
+  properties:
+  - name: schoolname
+  - name: rank
+    direction: asc
+  
 - kind: TopTenItem
+  ancestor: yes
   properties:
   - name: school
   - name: order
+    direction: asc
