@@ -187,6 +187,8 @@ class BBSParser(object):
             #values = scraper.extract(ret[0]);
             parsed_result = []; 
             index = 1;
+            if(len(ret) <= 7):
+                raise Exception;
             for item in ret:
                 value = scraper.extract(item); 
                 self.fixitem(value, config);
