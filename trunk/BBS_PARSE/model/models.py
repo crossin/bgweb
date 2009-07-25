@@ -33,7 +33,7 @@ class HighSchoolBbs(db.Model):
                     rank=config['rank']);
             nschool.put();
     
-        qTopTenItem = TopTenItem.gql('where school = :1', nschool);
+        qTopTenItem = TopTenItem.gql('where school = :1 ORDER BY order ASC', nschool);
         
         for item in qTopTenItem :
             item.delete();
