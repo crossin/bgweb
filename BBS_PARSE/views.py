@@ -210,6 +210,7 @@ def getfullbbslist(request):
     highschoollist = HighSchoolBbs.all();
     count = highschoollist.count();
     highschoollist.order('rank');
+    count = iseven(count);
     highschoollist1 = highschoollist[10:count];
     for school in  highschoollist1:
         toptenlist = TopTenItem.gql('where school = :1 ORDER BY order ASC', school);
@@ -248,7 +249,11 @@ def get_bbsnamelist(request):
                                         'namelist3':namelist3,
                                         });
     
-    
+def iseven(count):
+    if count % 2 == 0:
+        return count;
+    else :
+        return count - 1;
         
     
                     
