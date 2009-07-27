@@ -1,0 +1,280 @@
+/*    HTTP Host:  b.static.ak.fbcdn.net                                        */
+/*    Generated:  July 21st 2009 9:51:22 AM PDT                                */
+/*      Machine:  10.16.140.108                                                */
+/*       Source:  Global Cache                                                 */
+/*     Location:  css/d5z6dxibja8kwggw.pkg.css h:bdsd2epi                      */
+/*       Locale:  zh_CN                                                        */
+/*         Path:  css/d5z6dxibja8kwggw.pkg.css                                 */
+
+body{background:#fff;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:12px;margin:0;padding:0;text-align:left;direction:ltr;unicode-bidi:embed}
+.auto_resize_iframe{height:auto}
+h1, h2, h3, h4, h5{font-size:14px;color:#333;margin:0;padding:0}
+h1{font-size:15px}
+h4, h5{font-size:12px}
+p{font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:12px;text-align:left}
+a{cursor:pointer;color:#3b5998;-moz-outline-style:none;text-decoration:none}
+a:hover{text-decoration:underline}
+img{border:0}
+select{border:1px solid #bdc7d8;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-size:12px;padding:2px}
+td,
+td.label{font-size:12px;text-align:left}
+.standard_message{padding:10px}
+.standard_message.no_padding{padding:0}
+.standard_message.shorten{padding-bottom:0}
+.standard_message.has_padding{padding:10px}
+.standard_message .error,
+.standard_message .status,
+.standard_message .explanation_note{margin:0}
+.standard_message .explanation_note .message{font-size:12px}
+.error,
+.status,
+.explanation_note{margin:0 0 10px 0;padding:10px;border:solid 1px #dd3c10;background:#ffebe8}
+.created{margin:0 20px 20px}
+.error p,
+.status p,
+.explanation_note p{margin:4px 0 0;line-height:14px;font-weight:normal}
+.status a{color:#3b5998}
+.explanation_note a{color:#dd3c10}
+.status{border-color:#e2c822;background:#fff9d7}
+.page_top_notice{color:#444;border-bottom:solid 1px #e2c822;padding:5px 20px 4px;background:#fff9d7}
+.explanation_note{border-color:#bdc7d8;background:#fff}
+.pipe{color:#808080;padding:0 3px}
+.column{float:left}
+.center{margin-left:auto;margin-right:auto}
+.editor_title{background:#f7f7f7;padding-bottom:5px}
+.page_title{border-bottom:1px solid #ccc;padding:10px 10px 5px;margin:0 10px}
+#facebook .hidden_elem{display:none}
+#facebook .invisible_elem{visibility:hidden}
+#facebook .aural{width:0;height:0;display:block;margin-left:-5000px;overflow:hidden}
+#content{width:auto;padding:0;margin:0}
+.UIPage_LoggedOut .UIFullPage_Container{padding-top:26px}
+.UIPage_LoggedOut .UIStandardFrame_Container{padding-top:26px}
+.UIStandardFrame_Container{width:960px;padding:50px 0 0 20px;margin:0 auto}
+.UIStandardFrame_Content{width:760px;float:left;margin:0;padding:0}
+.UIStandardFrame_SidebarAds{width:200px;padding:0;margin:0;float:right}
+.UIStandardFrame_FooterAds{clear:both;overflow:hidden;text-align:center}
+.UINarrowFrame_Container{width:560px;padding:0;overflow:hidden}
+.UINarrowFrame_FullWidth{width:600px}
+.UINarrowFrame_CenterPage{margin:0 auto}
+.UIFullPage_Container{width:940px;padding:50px 12px 0 12px;margin:0 auto}
+.UIOneOff_Container{padding:0;margin:0}
+.UIInterstitialContainer{margin:0 auto 0 auto;padding:50px 150px 50px 150px}
+.UIPage_LoggedOut .UIInterstitialContainer{padding:34px 150px 50px 150px}
+#pagefooter{border-top:solid 1px #ddd;margin:20px auto;padding-bottom:5px;width:964px}
+#pagefooter .copyright_and_location{float:left;width:326px}
+#pagefooter .copyright{float:left;width:95px;color:#777;margin:0;padding:5px 8px 6px 0}
+#pagefooter .copyright_and_location .app_copyright{color:#777;padding:0 8px 0 0;float:none;width:auto}
+#pagefooter .app_copyright .brand{background-position:center left;background-repeat:no-repeat;padding:5px 10px 6px 22px}
+#pagefooter .app_copyright .brand .page_built_by{padding-right:5px}
+#pagefooter .app_copyright .footer_report_link{background:transparent  no-repeat 0 60%;padding-left:8px;padding-right:4px}
+#pagefooter .app_copyright .ip{position:absolute}
+#pagefooter .locale_footer_selector{/* @noflip */
+direction:ltr;float:left;width:185px;padding:5px 5px 0 0}
+#pagefooter_links{float:right;padding:5px 0 6px 0;text-align:right;width:636px}
+#pagefooter_links .pagefooter_ul{display:inline;margin:0;padding:0;text-decoration:none}
+#pagefooter_links .pagefooter_li{display:inline;padding:0 0 0 10px}
+.ff3 #pagefooter_links .pagefooter_li{display:inline-block}
+#pagefooter_left_links .li_bullet{margin:0 3px 2px 0}
+.empty_message{color:#333;font-size:14px;line-height:17px;padding:20px 20px 50px 20px;text-align:center;background:#f7f7f7}
+.clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;line-height:0;visibility:hidden}
+.clearfix{display:block}
+.ie6 .clearfix,
+.ie7 .clearfix,
+.ie8 .clearfix{zoom:1}
+.resetstyles{padding:0;border:0;margin:0;overflow:visible;background:none;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;text-align:left;text-decoration:none;text-indent:0;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+form{margin:0;padding:0}
+label{cursor:pointer;color:#666;font-weight:bold;vertical-align:middle}
+label input{font-weight:normal}
+.formtable{margin:0}
+.formtable td{border:none;margin:0;padding:3px 1px}
+.formtable td.label{color:#666;font-weight:bold;padding-right:10px}
+.formtable .tallrow{vertical-align:top}
+.formbuttons{text-align:center;margin:10px 10px}
+.formbuttons .inputsubmit, .formbuttons .inputbutton{margin:2px 4px}
+.inputtext,
+.inputpassword{border:1px solid #bdc7d8;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:12px;padding:3px}
+textarea{border:1px solid #bdc7d8;padding:3px;font-size:12px;font-family:"lucida grande", tahoma, verdana, arial, sans-serif}
+.inputradio{padding:0;margin:0 5px 0 0;vertical-align:middle}
+.inputcheckbox{border:0;vertical-align:middle}
+.inputbutton,
+.inputsubmit{padding:2px 15px 3px 15px;border-style:solid;border-top-width:1px;border-left-width:1px;border-bottom-width:1px;border-right-width:1px;border-top-color:#d9dfea;border-left-color:#d9dfea;border-bottom-color:#0e1f5b;border-right-color:#0e1f5b;background-color:#3b5998;color:#fff;font-size:12px;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.inputsubmit_disabled{background-color:#999;border-bottom:1px solid #000;border-right:1px solid #666;color:#fff}
+.inputaux{background:#f0f0f0;color:#000;border-top-color:#e7e7e7;border-right-color:#666;border-bottom-color:#666;border-left-color:#e7e7e7}
+.inputaux_disabled{color:#999}
+.inputsearch{background:transparent url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvc3ByaXRlL01lZ2FTcHJpdGVfNTAwNV9sdHIucG5n&b=5) no-repeat left 4px;padding-left:17px}
+.summary_bar{border-bottom:1px solid #d8dfea;clear:both;padding:11px 20px 0;color:#000;font-weight:normal;line-height:normal}
+.summary_bar h1, .summary_bar h2, .summary_bar h3, .summary_bar h4, .summary_bar h5{font-weight:normal}
+.summary_bar .summary{color:#333;float:left;padding-top:3px;padding-bottom:4px}
+.tab_bar{padding:3px 20px 0 10px;border-bottom:solid 1px #3b5998}
+.tab_bar #tabs{margin:0 10px;display:inline;float:left;border-bottom:none}
+.tab_bar .back_links{padding:4px 0;float:right}
+.footer_bar{border-top:1px solid #ccc;padding:0 20px}
+.footer_bar .post_editor{padding-bottom:13px;padding-top:13px}
+.action_bar{padding:6px 20px 5px;background:#f7f7f7;border-top:solid 1px #b7b7b7;border-bottom:solid 1px #ccc}
+.action_bar label{color:#444}
+ul.square_bullets{list-style:square;padding-left:20px;color:#3b5998}
+ul.square_bullets li{padding:1px 0}
+ul.square_bullets span{color:#000}
+.datawrap{word-wrap:break-word}
+.word_break{display:block;float:left;margin-left:-10px;padding:0}
+.img_loading{position:absolute;left:-100000px;top:-100000px}
+.two_column .right,
+.two_column .left{float:left}
+.no_padding{padding:0}
+.see_all{text-align:right}
+.standard_status_element{visibility:hidden}
+.standard_status_element.async_saving{visibility:visible}
+.note_dialog{background:#FFFFFF none repeat scroll 0;border:1px solid #bdc7d8;color:#444;margin:0 10px 10px;padding:10px}
+.findfriends_block{text-align:left;margin:auto}
+.findfriends_block .findfriends_block_li{line-height:18px;list-style-image:none;list-style-position:outside;list-style-type:none}
+.clickable{cursor:pointer}
+input.request_form_submit{background:#3B5998  no-repeat 8px 6px;padding:3px 6px 3px 26px;overflow:visible}
+#ssponsor .seeall{margin:5px 0;text-align:right}
+img.tracking_pixel{height:1px;position:absolute;width:1px}
+.fbsmid{display:none}
+.DOMControl_placeholder{color:#777}
+.DOMControl_shadow{position:absolute;left:-10000px;top:-10000px}
+.DOMControl_autogrow{overflow:hidden}
+.diagnostics{position:absolute;top:40px;left:10px;z-index:101;padding:10px;width:200px;border:1px solid #008;background:#dfdfff}
+#dropmenu_container{display:block;height:0;margin:0 auto;padding:0;position:relative;width:964px;z-index:105}
+#locale_selector_dialog_onclick{/* @noflip */
+direction:ltr;float:left;width:185px;padding:5px 5px 0 0}
+#locale_selector_dialog_onclick .intl_selector_dialog_a{/* @noflip */
+direction:ltr}
+.direction_ltr{/* @noflip */ direction:ltr}
+.direction_rtl{/* @noflip */ direction:rtl}
+.text_align_ltr{/* @noflip */ text-align:left}
+.text_align_rtl{/* @noflip */ text-align:right}
+#captcha fieldset{border-top:1px solid #c0c0c0;border-bottom:1px solid #c0c0c0;margin:0;padding:10px}
+#captcha legend{color:gray}
+#captcha .captcha_challenge{color:gray}
+#captcha .divider{display:none}
+#captcha .captcha_refresh{font-size:10px;color:gray}
+#captcha .captcha_other_options{padding-top:5px;font-size:10px}
+#captcha .recaptcha_text{font-size:12px;line-height:16px;color:#333}
+#captcha .captcha_optout{font-size:12px;color:#333;padding:10px 0 5px}
+#captcha #recaptcha_image{color:#666;font-weight:bold;margin:10px 0 0 0}
+#captcha #recaptcha_image a.recaptcha_audio_cant_hear_link{font-size:10px;font-weight:normal}
+#captcha .captcha_challenge img{border:1px solid #c0c0c0}
+#captcha .captcha_input input{/* @noflip */
+direction:ltr;margin-top:4px;width:137px}
+#captcha .captcha_input label{margin-right:4px}
+.register #captcha .captcha_input label{color:666666;font-weight:bold}
+#generic_dialog.captcha table.pop_dialog_table{width:340px}
+#generic_dialog.captcha #generic_dialog_popup{border:0 solid white;margin:auto}
+#generic_dialog.captcha #generic_dialog_popup legend{display:none}
+.audiocaptcha{overflow:hidden;display:block;margin:0;padding:0}
+.audiocaptcha a{display:block}
+.recaptcha_is_showing_audio .recaptcha_only_if_image{display:none !important}
+.recaptcha_isnot_showing_audio .recaptcha_only_if_audio{display:none !important}
+.recaptcha_had_incorrect_sol .recaptcha_only_if_no_incorrect_sol{display:none !important}
+.recaptcha_nothad_incorrec_sol .recaptcha_only_if_incorrect_sol{display:none !important}
+#menubar_container{width:964px;line-height:0;font-size:2px;display:block;padding:0;margin:0 auto;position:relative;z-index:1}
+#menubar_container.fb_menubar_show_register{background:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9zaWdudXBfY2FsbG91dC5wbmc%3D&b=5) no-repeat left bottom}
+#fb_menubar{background:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvc3ByaXRlL01lZ2FTcHJpdGVfNTAwNV9sdHIucG5n&b=5) no-repeat left bottom;position:absolute;left:0;top:0;width:964px;z-index:1;font-size:11px;line-height:normal}
+#fb_menubar .fb_menu_list{list-style:none;margin-left:0;padding-left:0;display:inline}
+#fb_menubar.fb_menubar_logged_out{position:relative}
+#fb_menubar .fb_menu_list li{display:inline;float:left}
+#fb_menubar #fb_menubar_aux .fb_menu_list li{float:right}
+.ff2 #fb_menubar #fb_menubar_aux{float:none}
+#fb_menubar #fb_menubar_logo{width:101px}
+#fb_menubar #fb_menubar_logo a{display:block;padding:.475em 0 7px 10px}
+#fb_menubar.fb_menubar_logged_out #fb_menubar_logo a{padding:2.9em 0 16px 18px}
+#fb_menubar #fb_menubar_logo a:hover{text-decoration:none}
+#fb_menubar #fb_menubar_logo a span{background:transparent url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvc3ByaXRlL01lZ2FTcHJpdGVfNTAwNV9sdHIucG5n&b=5) no-repeat -480px -66px;display:block;height:17px;width:90px}
+#fb_menubar.fb_menubar_logged_out #fb_menubar_logo a span{background:transparent url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9mYl9tZW51YmFyX2xvZ29fYmlnLmdpZg%3D%3D&b=5) no-repeat top left;height:36px;width:170px}
+#fb_menubar #fb_menubar_logo a:hover span{background-position:-480px -83px}
+#fb_menubar.fb_menubar_logged_out #fb_menubar_logo a:hover span{background-position:top left}
+#menubar_container .signup_box{clear:left;color:#203360;display:block;font-size:14px;font-weight:bold;line-height:normal;padding:14px 22px}
+#menubar_container .signup_box_content{display:block;float:left;font-size:14px;font-weight:bold;padding:6px 14px}
+#menubar_container .signup_box_submessage{clear:left;display:block;font-size:14px;font-weight:normal;padding:3px 0 0 0}
+.no_reg_banner #menubar_container .signup_box{display:none}
+.profile #menubar_container{background:none}
+.profile #menubar_container .signup_box{background:#FFF9D7 none repeat scroll 0 0;border:1px solid #e2c822;color:#333;margin:9px 12px 0 12px;padding:12px 16px 13px}
+.profile #menubar_container .signup_box_content{font-size:16px;padding:0 14px}
+.fb_menu_dropdown{background:white;border:1px solid #3b5998;margin:-2px 0 0 -1px;padding:5px 0;position:absolute;width:auto;z-index:1;font-size:12px;line-height:normal}
+.fb_menu_dropdown .fb_menu_item a{border:1px solid white;border-width:1px 0;display:block;padding:3px 35px 3px 19px;font-size:12px;line-height:normal}
+.fb_menu_dropdown .fb_menu_item a:hover{display:block;background-color:#6d84b4;border-top-color:#617aad;border-bottom-color:#3b5998;color:#fff;text-decoration:none;font-size:12px;line-height:normal}
+.fb_menu_dropdown .fb_menu_item small{background-position:-16px 0;background-repeat:no-repeat;float:left;font-size:12px;height:16px;margin:-1px 6px 0 0;width:16px}
+.fb_menu_dropdown .fb_menu_item a:hover small{background-position:left top}
+.fb_menu_dropdown .account small{background:transparent url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvc3ByaXRlL01lZ2FTcHJpdGVfNTAwNV9sdHIucG5n&b=5) no-repeat -606px -66px}
+.fb_menu_dropdown .apps small{background:transparent url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvc3ByaXRlL01lZ2FTcHJpdGVfNTAwNV9sdHIucG5n&b=5) no-repeat -670px -66px}
+.fb_menu_dropdown .privacy small{background:transparent url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvc3ByaXRlL01lZ2FTcHJpdGVfNTAwNV9sdHIucG5n&b=5) no-repeat -638px -66px}
+.fb_menu_dropdown .account a:hover small{background-position:-590px -66px}
+.fb_menu_dropdown .apps a:hover small{background-position:-654px -66px}
+.fb_menu_dropdown .privacy a:hover small{background-position:-622px -66px}
+.fb_menu_dropdown .fb_menu_item_disabled span{color:#808080;cursor:default;display:block;padding:4px 35px 4px 20px}
+.fb_menu_dropdown .fb_menu_separator{margin:6px 4px 5px 4px;border-bottom:1px solid #e0e0e0}
+#fb_menubar_core{font-size:1.1em}
+#fb_menubar_core .fb_menu{margin:0 4px 0 0}
+#fb_menubar .fb_menu .fb_menu_title a{color:#fff;display:block;font-weight:bold;padding:7px 7px 7px 8px}
+#fb_menubar_aux .fb_menu .fb_menu_title .fb_menu_dropdown_title,
+#fb_menubar_core .fb_menu .fb_menu_title .fb_menu_dropdown_title{background-image:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhcl9jaGV2cm9uLmdpZg%3D%3D&b=5);background-repeat:no-repeat;background-position:right 13px;padding-right:17px}
+#fb_menubar_core .fb_menu .fb_menu_title .hover,
+#fb_menubar_core .fb_menu .fb_menu_title a:hover{background-color:#5c75aa;text-decoration:none}
+#fb_menubar_core .fb_menu_count_holder span{display:inline-block;background-image:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9mYl9tZW51YmFyX2luYm94X3VucmVhZF9jb3VudF9sdHIuZ2lm&b=5)}
+#fb_menubar_core .fb_menu_count_holder{display:inline-block;background-image:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9mYl9tZW51YmFyX2luYm94X3VucmVhZF9jb3VudF9ob3Zlcl9sdHIuZ2lm&b=5);margin-left:5px;margin-bottom:-1px}
+#fb_menubar_core .hover .fb_menu_count_holder span,
+#fb_menubar_core a:hover .fb_menu_count_holder span{background-image:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9mYl9tZW51YmFyX2luYm94X3VucmVhZF9jb3VudF9ob3Zlcl9sdHIuZ2lm&b=5)}
+#fb_menubar_core .fb_menu_count_holder .tl{background-position:left top}
+#fb_menubar_core .fb_menu_count_holder .tr{background-position:right top}
+#fb_menubar_core .fb_menu_count_holder .br{background-position:right bottom}
+.ff2 #fb_menubar_core .fb_menu_count_holder .br{padding-bottom:1px}
+#fb_menubar_core .fb_menu_count_holder .bl{background-position:left bottom;padding:0 6px 1px}
+#fb_menu_inbox_dropdown .nav_inbox_message_unread{background:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9mYl9tZW51YmFyX2JsdWVfYnVsbGV0LmdpZg%3D%3D&b=5) no-repeat 7px 7px}
+#fb_menu_inbox_dropdown .nav_inbox_message_unread .nav_inbox_message_author{font-weight:bold}
+#fb_menu_inbox_dropdown .nav_inbox_message_content{color:#8d9ccf;font-weight:normal;margin-left:5px}
+#fb_menu_inbox_dropdown .nav_inbox_message_unread a:hover{background-image:url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvbWVudWJhci9mYl9tZW51YmFyX3doaXRlX2J1bGxldC5naWY%3D&b=5);background-position:7px 6px;background-repeat:no-repeat}
+#fb_menu_inbox_dropdown a:hover .nav_inbox_message_content,
+#fb_menu_inbox_dropdown a.hover .nav_inbox_message_content{color:#fff}
+#fb_menubar_aux{float:right;font-size:1.1em}
+#fb_menubar.fb_menubar_logged_out #fb_menubar_aux{float:none}
+#fb_menubar_aux .fb_menu{margin:0 5px 0 0}
+#fb_menubar_aux .fb_menu_list .fbm_last{margin:0}
+#fb_menubar_aux .fb_menu .fb_menu_title a{padding:7px 5px;font-weight:normal}
+#fb_menubar_aux .fb_menu .fb_menu_title .hover,
+#fb_menubar_aux .fb_menu .fb_menu_title a:hover{background-color:#5c75aa;text-decoration:none}
+#fb_menubar_aux .fb_menu .fb_menu_title .hover .menu_icon,
+#fb_menubar_aux .fb_menu .fb_menu_title a:hover .menu_icon{background-position:100% 0}
+.menu_login_container{position:absolute;bottom:14px;right:18px;width:500px}
+.menu_login_container table{float:right}
+.menu_login_container table tr td{padding:0 0 0 16px}
+.menu_login_container table tr td.login_form_last_field{padding-right:0}
+.menu_login_container table tr td.login_form_last_field .inner{padding-top:1px;padding-right:2px}
+.menu_login_container .inputtext,
+.menu_login_container .inputpassword{margin-left:0;border-color:#1d2a5b;width:142px;margin-top:2px}
+.menu_login_container label{color:#98a9ca;padding:0;margin:0;font-weight:normal}
+.menu_login_container a,
+.menu_login_container a:hover{color:#98a9ca}
+.menu_login_container .login_form_label_field{padding-bottom:3px;text-align:right}
+.menu_login_container .login_form_label_field input{margin:0 5px 0 0;vertical-align:top;padding:0}
+.ie6 .menu_login_container .login_form_label_field input,
+.ie7 .menu_login_container .login_form_label_field input{vertical-align:middle}
+.menu_login_container .login_form_label_remember{padding-top:1px}
+.ff2 .menu_login_container .UILinkButton,
+.ie6 .menu_login_container .UILinkButton{margin-top:1px}
+.tabs{padding:0;border-bottom:1px solid #898989}
+.ff2 .tabs{padding:3px 0}
+.tabs.top{background:#f7f7f7}
+.tabs .left_tabs{padding-left:10px;float:left}
+.tabs .right_tabs{padding-right:10px;float:right}
+.tabs .back_links{padding-right:20px;float:right}
+.toggle_tabs{margin:0;padding:0;list-style:none;text-align:center;margin-bottom:-1px}
+.ff2 .toggle_tabs{margin-bottom:0}
+.toggle_tabs li{display:inline;padding:2px 0 3px;background:#f1f1f1 url(http://freeonlineproxy.info/browse.php?u=Oi8vc3RhdGljLmFrLmZiY2RuLm5ldC9pbWFnZXMvY29tcG9uZW50cy90b2dnbGVfdGFiX2dsb3NzLmdpZg%3D%3D&b=5) top left repeat-x}
+.ie6 .toggle_tabs li,
+.ie7 .toggle_tabs li{background-position:left 3px}
+.toggle_tabs li a{border:1px solid #898989;border-left:0;color:#333;font-weight:bold;padding:2px 8px 3px 9px;display:inline-block}
+.toggle_tabs li a small{font-size:12px;font-weight:normal}
+.toggle_tabs li a:focus{outline:0}
+.toggle_tabs li.first a{border:1px solid #898989}
+.toggle_tabs li a.selected{margin-left:-1px;background:#6d84b4;border:1px solid #3b5998;border-left:1px solid #5973a9;border-right:1px solid #5973a9;color:#fff}
+.toggle_tabs li.last a.selected{margin-left:-1px;border-left:1px solid #5973a9;border-right:1px solid #36538f}
+.toggle_tabs li.first a.selected{margin:0;border-left:1px solid #36538f;border-right:1px solid #5973a9}
+.toggle_tabs li.first.last a.selected{border:1px solid #36538f}
+.toggle_tabs li a.selected:hover{text-decoration:none}
+.toggle_tabs li a.disabled{color:#999;cursor:default}
+.toggle_tabs li a.disabled:hover{text-decoration:none}
+.toggle_tabs .hidden{display:none}
+
+#bootloader_css_d5z6dxibja8kwggw_pkg_css { height: 42px; }
