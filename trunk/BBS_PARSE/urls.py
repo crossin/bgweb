@@ -14,6 +14,13 @@
 
 
 from django.conf.urls.defaults import *
+from feeds import RssSiteContentFeed, AtomSiteContentFeed  
+
+
+feeds = {  
+    'content': RssSiteContentFeed,
+    'content': AtomSiteContentFeed,
+}  
 
 
 urlpatterns = patterns(
@@ -28,5 +35,8 @@ urlpatterns = patterns(
     (r'^fresh1/', 'views.getFreshBBS1'),
     (r'^fresh2/', 'views.getFreshBBS2'),
     (r'^fresh3/', 'views.getFreshBBS3'),
+    (r'^rss/', 'feeds.rss201'),
+    (r'^rss/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',{'feed_dict': feeds}),
+    (r'^atom/(?P<url>.*)/$', 'django.contrib.syndication.views.feed',{'feed_dict': feeds}),
 #    (r'^service/bbs/', 'bbsservice.bbsGateway'),
 )
