@@ -41,8 +41,8 @@ SECRET_KEY = '#truih*7f&38%kdjfail2'
 # Profile only datastore calls
 #PROFILE_PATTERN = 'ext.db..+\((?:get|get_by_key_name|fetch|count|put)\)'
 
-#LANGUAGE_CODE = 'zh-CN'
-#DEFAULT_CHARSET = 'utf-8'
+LANGUAGE_CODE = 'zh-CN'
+DEFAULT_CHARSET = 'gbk'
 
 # Enable I18N and set default language to 'en'
 USE_I18N = False
