@@ -55,13 +55,13 @@ class BBSParser(object):
         return htmlstring;
     """
         
-    def save_parsed_links(self, linklist , config ):
+    def save_parsed_links(self, linklist , config):
         #now         = datetime.now();
-        schoolbbs   = get_object( Schoolbbs, 'schoolname =',config['schoolname'] );
+        schoolbbs = get_object(Schoolbbs, 'schoolname =', config['schoolname']);
         if schoolbbs:
             for link in linklist:
                 
-                linkobject = get_object( Bbslinks,'titlelink=',link['titlelink'] );
+                linkobject = get_object(Bbslinks, 'titlelink=', link['titlelink']);
                 if  linkobject:
                     linkobject.updatetime = datetime.now();
                 else:
@@ -73,39 +73,41 @@ class BBSParser(object):
                     #print type( schoolbbs )
                     now = datetime.now();
                     schoolbbs.lastfresh = now;
-                    db_create( Bbslinks, school=schoolbbs, createtime=now, updatetime=now, 
-                        board = unicode(link['board']), title = unicode( link['title'] ) , author=unicode(link['author']), titlelink=unicode(link['titlelink'])
+                    db_create(Bbslinks, school=schoolbbs, createtime=now, updatetime=now,
+                        board=unicode(link['board']), title=unicode(link['title']) , author=unicode(link['author']), titlelink=unicode(link['titlelink'])
                     );
                     schoolbbs.put();
             #schoolbbs['lastfresh'] = datetime.now();
-            config['lastfresh']    = schoolbbs.lastfresh;
+            config['lastfresh'] = schoolbbs.lastfresh;
         else:
             raise;
         
         
         
 
-    def parsebbs(self,config):
+    def parsebbs(self, config):
         t1 = time.time();
         try: 
-            htmlstring = urllib2.urlopen(config['locate'] ).read();
+            htmlstring = urllib2.urlopen(config['locate']).read();
         except Exception, e: 
-            logging.error("Failed to open following url %s of school: %s" %( config['locate'],config['bbsname'] ) );
+            logging.error("Failed to open following url %s of school: %s" % (config['locate'], config['bbsname']));
             return 0;
             
         if ('encoding' in config.keys()):
             if config['encoding'] != 'utf8':
-                #return htmlstring; there are conversion exceptions
-                htmlstring = unicode(htmlstring, 'GBK', 'ignore').encode('UTF-8');
+                htmlstring = htmlstring;
+            #return htmlstring; there are conversion exceptions
+        else:
+            htmlstring = unicode(htmlstring, 'GBK', 'ignore').encode('UTF-8');
 
         try:
 
-            if( 'needXpath' in config.keys()  ):
-                    linklist = self.parsebbsbyXpath( config , htmlstring);           
+            if('needXpath' in config.keys()):
+                    linklist = self.parsebbsbyXpath(config , htmlstring);           
             else:
-                    linklist = self.parsebbsbyRegularExpression( config , htmlstring );
+                    linklist = self.parsebbsbyRegularExpression(config , htmlstring);
         
-        except Exception,e:
+        except Exception, e:
             print type(e);
             logging.error("failed to parse required content; schoolname= %s", config['bbsname']);
             return 0;
@@ -113,8 +115,8 @@ class BBSParser(object):
             
         t2 = time.time();
             
-        self.save_parsed_links( linklist, config );
-        logging.debug("Successfully parsing school:%s costing %d milliseconds;" %( config['bbsname'], (t2-t1)*1000 ));
+        self.save_parsed_links(linklist, config);
+        logging.debug("Successfully parsing school:%s costing %d milliseconds;" % (config['bbsname'], (t2 - t1) * 1000));
         return t2 - t1;
 
 
@@ -129,9 +131,9 @@ class BBSParser(object):
             #return;
             
 
-        contentpath     = Path(config['xpath']);
-        domblock        = contentpath.apply(dom);
-        blockstring     = self.convertdom2string(domblock) ;
+        contentpath = Path(config['xpath']);
+        domblock = contentpath.apply(dom);
+        blockstring = self.convertdom2string(domblock) ;
 
         if blockstring is  None :
             logging.error("failed to parse bbs by xpath parser; schoolname= %s", config['bbsname']);
@@ -160,15 +162,15 @@ class BBSParser(object):
         """
         #item['postcount'] = 0;
         if ('re_board' in config.keys()):
-            re_board        = config[ 're_board' ];
-            titlegroup      = re_board.search(item['title']);
-            item['board' ]  = titlegroup.group('board');
-            item['title' ]  = titlegroup.group('title');
+            re_board = config[ 're_board' ];
+            titlegroup = re_board.search(item['title']);
+            item['board' ] = titlegroup.group('board');
+            item['title' ] = titlegroup.group('title');
             
         if ('re_board1' in config.keys()):
-            re_board        = config[ 're_board1' ];
-            titlegroup      = re_board.search(item['titlelink']);
-            item['board' ]  = titlegroup.group('board');
+            re_board = config[ 're_board1' ];
+            titlegroup = re_board.search(item['titlelink']);
+            item['board' ] = titlegroup.group('board');
             
     #return links list
     def parsebbsDomDetail(self, dom_block_str , config):     
@@ -176,9 +178,9 @@ class BBSParser(object):
             dom_row_pattern = config['dom_row_pattern']; 
             #make dom block string become dom again, 
             #Unreasonable for: string->dom->blockdom->blockstring->blockdom->rowdom->rowstring need to be revised
-            doc             = CustomizedSoup(dom_block_str);        
-            scraper         = Scraper(dom_row_pattern);         #setup scraper to scrape row string
-            ret             = scraper.match(doc);
+            doc = CustomizedSoup(dom_block_str);        
+            scraper = Scraper(dom_row_pattern);         #setup scraper to scrape row string
+            ret = scraper.match(doc);
             #values = scraper.extract(ret[0]);
             parsed_result = []; 
             index = 1;
@@ -187,7 +189,7 @@ class BBSParser(object):
                 value = scraper.extract(item); 
                 self.fixitem(value, config);
                 #value['boardlink']  = config['root'] + value['boardlink'];
-                value['titlelink']  = config['root'] + value['titlelink'];
+                value['titlelink'] = config['root'] + value['titlelink'];
                 
                 #value['authorlink'] = config['root'] + value['authorlink'];
 
