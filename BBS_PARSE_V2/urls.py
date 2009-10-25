@@ -11,6 +11,7 @@ handler500 = 'ragendja.views.server_error'
 
 urlpatterns = auth_patterns + patterns(
     '',
+    # url(r'^$', direct_to_template, {'template': 'main.html'}, name='index'),
     (r'^admin/(.*)', admin.site.root),
     (r'^content/', include('content.urls')),
 

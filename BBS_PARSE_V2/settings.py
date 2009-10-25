@@ -17,12 +17,15 @@ COMBINE_MEDIA = {
         # See documentation why site_data can be useful:
         # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
         '.site_data.js',
+        'content/jquery.min.js',
+        'master.js',
+        'quant.js'
         
     ),
     'combined-%(LANGUAGE_DIR)s.css': (
         #'global/look.css',
-        'global/scripts/base.css',
-        'global/scripts/tiku.css',
+
+        'content/scripts/all.css',
     ),
 }
 
