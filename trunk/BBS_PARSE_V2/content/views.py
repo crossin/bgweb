@@ -20,7 +20,7 @@ from ragendja.dbutils import *;
 
 def list(request, 
             pagenumber=1,
-            template_name='content/object-list-template.htm',
+            template_name='content/index-content-list.htm',
             extra_context=None):
              
     if extra_context is None:

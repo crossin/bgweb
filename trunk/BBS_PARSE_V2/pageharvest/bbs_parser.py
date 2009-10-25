@@ -66,15 +66,16 @@ class BBSParser(object):
                     linkobject.updatetime = datetime.now();
                 else:
                     #print link;
-                    #resultlink = {};#converting the fucking unicode map into str
-                    #for pair in link.items():
-                        #resultlink[ str( pair[0] ) ] =  pair[1] ;
-                    #resultlink['school'] = schoolbbs;
+                    resultlink = {};#converting the fucking unicode map into str
+                    for pair in link.items():
+                        resultlink[ str( pair[0] ) ] =  unicode( pair[1] ) ;
+                    resultlink['school'] = schoolbbs;
                     #print type( schoolbbs )
                     now = datetime.now();
                     schoolbbs.lastfresh = now;
-                    db_create(Bbslinks, school=schoolbbs, createtime=now, updatetime=now,
-                        board=unicode(link['board']), title=unicode(link['title']) , author=unicode(link['author']), titlelink=unicode(link['titlelink'])
+                    db_create(Bbslinks,  createtime=now, updatetime=now,
+                        #board=unicode(link['board']), title=unicode(link['title']) , author=unicode(link['author']), titlelink=unicode(link['titlelink'])
+                        **resultlink
                     );
                     schoolbbs.put();
             #schoolbbs['lastfresh'] = datetime.now();
