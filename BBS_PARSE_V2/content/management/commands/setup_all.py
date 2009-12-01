@@ -26,5 +26,7 @@ class Command(NoArgsCommand):
                 now = datetime.datetime.now();
                 db_create( Schoolbbs, lastfresh = now, **bbs_config );
                 bbs_config['lastfresh'] = now;
+        
+        print 'All School data setup successfully';
            
         
