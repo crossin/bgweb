@@ -20,15 +20,15 @@ various steps of the user-signup process.
 """
 
 
-from django.conf.urls.defaults import *
-from django.views.generic.simple import direct_to_template
-from django.contrib.auth import views as auth_views
+from django.conf.urls.defaults import *;
+from django.views.generic.simple import direct_to_template;
+from django.contrib.auth import views as auth_views;
 
-from content.views import list
+from content.views import *;
 
 urlpatterns = patterns('',
-                       url(r'^list/(?P<pagenumber>\d+)/$',
-                           list,
-                           name='content_list'),
-
-                       )
+    url(r'^list/(?P<pagenumber>\d+)/$', viewbylinks, name='content_list'),
+    url(r'^home/$', viewbyschool, 
+        {'template': 'content_by_school.html'}, name='content_home'),
+    
+)

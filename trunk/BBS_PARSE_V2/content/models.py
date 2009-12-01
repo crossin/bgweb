@@ -4,6 +4,8 @@ from google.appengine.ext import db
 from django.db.models import signals
 from ragendja.dbutils import cleanup_relations
 
+from content import  modelutil;
+
 
 class Schoolbbs(db.Model):
     bbsname     = db.StringProperty(    default="" );
@@ -17,7 +19,11 @@ class Schoolbbs(db.Model):
 
 
 
-class Bbslinks(search.SearchableModel):
+class Bbslinks(modelutil.SearchableModel):
+    
+    unsearchable_properties = ['board','titlelink','school']
+    json_does_not_include   = ['school']
+    
     board           = db.StringProperty( default="" )
     title           = db.StringProperty( multiline=True , default="" )
     titlelink       = db.StringProperty( default="" )
@@ -42,7 +48,7 @@ class Bbslinks(search.SearchableModel):
         return Bbslinks.school.get_value_for_datastore(self).bbsname;
     """
     
-class Tag(models.MemcachedModel):
+class Tag(modelutil.MemcachedModel):
     # Inserts these values into aggregate list returned by Tag.list()
     list_includes = ['counter.count', 'name']
 
@@ -67,7 +73,7 @@ class Tag(models.MemcachedModel):
         return self.key().name()
     name = property(get_name)
     
-class Comment(models.SerializableModel):
+class Comment(modelutil.SerializableModel):
     """Stores comments and their position in comment threads.
 
     Thread string describes the tree using 3 digit numbers.

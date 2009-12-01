@@ -12,20 +12,19 @@ MEDIA_VERSION = 1
 #    MEDIA_URL = 'http://media.mydomain.com/media/%d/'
 
 # Add base media (jquery can be easily added via INSTALLED_APPS)
+
+LANGUAGE_CODE = 'en'
+DEFAULT_CHARSET = 'gbk'
 COMBINE_MEDIA = {
     'combined-%(LANGUAGE_CODE)s.js': (
         # See documentation why site_data can be useful:
         # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
         '.site_data.js',
-        'content/jquery.min.js',
-        'master.js',
-        'quant.js'
-        
+        'jquery.min.js', 
     ),
     'combined-%(LANGUAGE_DIR)s.css': (
         #'global/look.css',
-
-        'content/scripts/all.css',
+        
     ),
 }
 
@@ -44,8 +43,7 @@ SECRET_KEY = '#truih*7f&38%kdjfail2'
 # Profile only datastore calls
 #PROFILE_PATTERN = 'ext.db..+\((?:get|get_by_key_name|fetch|count|put)\)'
 
-LANGUAGE_CODE = 'zh-CN'
-DEFAULT_CHARSET = 'gbk'
+
 
 # Enable I18N and set default language to 'en'
 USE_I18N = False
@@ -55,6 +53,12 @@ USE_I18N = False
 LANGUAGES = (
     ('cn', 'Chinese'),
     ('en', 'English'),
+)
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'ragendja.template.app_prefixed_loader',
+    'django.template.loaders.app_directories.load_template_source',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -99,7 +103,7 @@ INSTALLED_APPS = (
     'jquery',
 
     # Add blueprint CSS (http://blueprintcss.org/)
-    'blueprintcss',
+    #'blueprintcss',
 
     'django.contrib.auth',
     'django.contrib.sessions',
@@ -114,7 +118,7 @@ INSTALLED_APPS = (
     #'registration',
     'mediautils',
     'content',
-    'pageharvest',
+    #'pageharvest',
 )
 
 # List apps which should be left out from app settings and urlsauto loading
