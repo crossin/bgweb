@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh" lang="zh" >
+ <head> 
+  <title>查看内容/十大-校园里没有新鲜事</title>
+  
+  <link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}combined-frame-style.css" />
+  <script type="text/javascript" src="{{ MEDIA_URL }}combined-jquery-toolkit.js"></script>
+ 
+  <script type="text/javascript">
+  var display_comment = false;
+  var comment_loaded  = false;
+  $( document ).ready( function() {
+        $("a[rel]").overlay(); 
+        $('#toggle_comment_button').click( function(){
+           $(this).disabled = true;
+            display_comment = !display_comment;
+            if( display_comment ){
+            
+                if( comment_loaded ) {
+                    $('#toggle_comment_button span').html( " <span class='toolbar_button_icon' ></span>隐藏评论</span>" );
+                    $('#comment_block').css('display','block');
+                    return;
+                }
+                pdata = {};
+                pdata['linkid']  = '{{link.id}}';
+                
+                
+                 $.ajax({
+                    url: '{% url getcomments %}',
+                    type: 'POST',
+                    data: pdata,
+                    dataType: 'json',
+                    timeout: 3000,
+                    error: function( xhr, ajaxOptions, thrownErrors ){
+                        alert("出现网络错误，请重试。");
+                        display_comment = false;
+                    },
+                    success: function(msg){
+                        if( msg.error ) {
+                            alert( '获取评论出错--'+msg.info);
+                            return;
+                        }
+                        else{
+                            $('#cmtbody').html( msg.html );
+                            $('#toggle_comment_button span').html( " <span class='toolbar_button_icon' ></span>隐藏评论</span>" );
+                            $('#comment_block').css('display','block');
+                            comment_loaded = true;
+                            if( msg.cmtcount > 5 ){
+                                $("#scroll_div").scrollable();
+                            }
+                            else{
+                                $(".scroolbtn").css('display','none');
+                            }
+                            	
+                        }
+                        $(this).disabled = false;
+                    }
+                 }); 
+               
+            }
+            else{
+                $('#toggle_comment_button span').html( " <span class='toolbar_button_icon' ></span>显示评论</span>" );
+                $('#comment_block').css('display','none');
+            } 
+        });
+        
+        $('#comment_button').click( function(){
+            var cmtbody = $('#comment').val();
+            pdata = {};
+            pdata['comment'] = cmtbody;
+            pdata['linkid']  = '{{link.id}}';
+            $.ajax({
+                url: '{% url commentlink %}',
+                type: 'POST',
+                data: pdata,
+                dataType: 'json',
+                timeout: 5000,
+                error: function(){
+                    alert("出现网络错误，请重试。");
+                },
+                success: function(msg){
+                    if( msg.result == 0){
+                        alert('评论失败');
+                    } 
+                    else if ( msg.result == 1 ){
+                        alert('评论成功');
+                    }
+                }
+             }); 
+        });
+        
+         {% if is_user %}
+        $( '#tag_select' ).change( function(){
+            if ( $( '#tag_select' ).val() == "default" ){
+                return;              
+            }
+            var tagname = $('#tag_select').val();
+            pdata = {};
+            pdata['tagname'] = tagname;
+            pdata['linkid']  = '{{link.id}}';
+            $.ajax({
+                url: '{% url tagginglinks %}',
+                type: 'POST',
+                data: pdata,
+                dataType: 'json',
+                timeout: 5000,
+                error: function(){
+                    alert("出现网络错误，请重试。");
+                },
+                success: function(msg){
+                    if( msg.result == 0){
+                        alert('鉴定失败');
+                    } 
+                    else if ( msg.result == 1 ){
+                        alert('鉴定完毕');
+                    }
+                }
+             }); 
+        });
+        {% endif %}
+        
+        
+  })
+  
+  function ratinglinks( type ){
+            pdata ={'opid':type,'linkid':'{{link.id}}'};
+            $.ajax({
+                        url: '{% url ratinglinks %}',
+                        type: 'POST',
+                        data: pdata,
+                        dataType: 'json',
+                        timeout: 5000,
+                        error: function(){
+                            alert("出现网络错误，请重试。");
+                        },
+                        success: function(msg){
+                            if( msg.result == 0){
+                                alert('....失败');
+                            } 
+                            else if ( msg.result == 1 ){
+                                $('a.rating').css('display','none');
+                            }
+                        }
+                     }); 
+        }
+  </script>
+
+ </head>
+ 
+ 
+ <body class="UIFramedPage safari4 Locale_zh_CN">
+
+  <div style="text-align:center;">
+   <div>
+    <a  style="font-size:14px;font-weight:bold;">    </a>   </div>
+  </div>
+
+  <!--<input type="hidden" id="post_form_id" name="post_form_id"  />-->
+  {% load timeagofilter  %}
+  <table id="page_table" class="page_table" cellpadding="0" cellspacing="0">
+   <tr>
+    <td class="header_cell" id="header_cell">
+     <div class="header_content clearfix">
+      <div class="UIOneOff_Container">
+       <div id="header_info" class="header_info">
+        <a class="header_thumb_link">
+         <!-- <img  alt="" class="header_thumb_img" style="height:30px;width:30px;" />   -->      
+        </a>
+        <div class="header_info_text">
+         <div class="header_title_text">
+          <a  class="owner">{{link.author}}</a>
+          发布了一篇新帖
+          <span class="header_info_timestamp">{{ link.createtime|timeago }} ago</span>         
+         </div>
+         <div class="header_comment" id="elink_comment_wrapper">
+          <span>{{link.title}}</span>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    
+    
+     
+    <div class="header_actions" style="margin-left:15">
+      <a    href="/" class="toolbar_button has_icon" ><span class="toolbar_button_label"><span class="toolbar_button_icon" ></span>Home</span></a>
+      <a    href="{% url content_list_home %}" class="toolbar_button has_icon" ><span class="toolbar_button_label"><span class="toolbar_button_icon" >&nbsp;</span>ListView</span></a>
+      <a    class="toolbar_button has_icon" ><span class="toolbar_button_label"><span class="toolbar_button_icon" >&nbsp;</span>评论</span></a>
+      <a    class="toolbar_button has_icon rating"><span class="toolbar_button_label" onclick="ratinglinks(1)"><span class="toolbar_button_icon" >&nbsp;</span>赞</span></a> 
+      <a    class="toolbar_button has_icon rating"><span class="toolbar_button_label" onclick="ratinglinks(2)"><span class="toolbar_button_icon" >&nbsp;</span>踩</span></a> 
+      <a    id="toggle_comment_button" class="toolbar_button has_icon"><span class="toolbar_button_label"><span class="toolbar_button_icon" >&nbsp;</span>显示评论</span></a>       
+    </div>
+    
+    {% if is_user %}
+    <div class="header_actions" style="margin-left:5px;">
+        <span   class="toolbar_button has_icon"><span class="toolbar_button_label"><span class="toolbar_button_icon" >&nbsp;</span>标记</span></span>
+        <select id="tag_select">
+            <option value="default">我来鉴定</option>
+            {% for tag in all_tags %}
+            <option value="{{tag.name}}">{{tag.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    {% endif %}
+    
+     <div class="url_bar known_url" >
+      <a title="" class="remove_link" >&nbsp;</a>
+      来源：
+      <a title="" class="url_fragment" href="{{link.titlelink}}" >
+       {{link.source}}</a>
+     </div>
+     
+     <div class="url_bar unknown_url">
+      <a title="删除框架" class="remove_link" >&nbsp;</a>
+      返回
+      <a title="移除框架并访问该网址。" class="url_fragment" >
+       {{link.titlelink}}</a>
+     </div>    
+     
+     </td>
+   </tr>
+   
+  <tr>
+    <td class="content_cell" id="content_cell">
+     <div class="content_cell_inner_shadow">
+&nbsp;     </div>
+     <iframe id="content_iframe" style="background-color:white"
+        class="content_iframe" name="content_iframe" 
+        src="{{link.titlelink}}" frameborder="0" scrolling="Auto">     </iframe>  
+
+
+    <div class="overlay" id="overlay"> 
+        <h2 style="margin:10px 0"></h2> 
+        <p style="float: left; margin:0px 20px 0 0; height:100%"> 
+            <img src="{{ MEDIA_URL }}content/images/eye192.png" /> 
+        </p>
+        <form action="" method="post">
+            <br /><br />
+        
+            <label for="comment" class="toolbar_button_label"></label>
+            <textarea id="comment" style="width:300px; height:300px;overflow-y:hidden;"  name="comment">
+            </textarea>
+            <br />
+        
+            <a     class="toolbar_button has_icon" rel="#overlay" >
+                <span id="comment_button" class="toolbar_button_label">
+                <span  class="toolbar_button_icon" ></span>评论该页面</span>&nbsp;
+            </a>
+        </form>
+
+    </div>
+
+   </td>
+   </tr>
+  </table>
+  
+  <div class="comment_show_cell" id="comment_block" style="display:none">
+    <div class="content_cell_inner_shadow">
+&nbsp;         </div>
+<div class="scrollcontainer">
+<a class="prev"></a>
+      <div class="scrollable" id="scroll_div">
+        <div id="cmtbody" class="items">
+                
+                
+         </div>
+        </div>
+<a class="next"></a>
+</div>
+
+<br clear="all" />
+
+
+
+
+
+
+     
+<script>
+
+</script>
+   </div>
+ </body>
+</html>
