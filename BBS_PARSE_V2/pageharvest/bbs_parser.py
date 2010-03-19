@@ -102,13 +102,14 @@ class BBSParser(object):
     def parsebbs(self, config, configitem ):
         t1 = time.time();
         try: 
-            htmlstring = urllib2.urlopen(config['locate'], timeout=3).read();
+            htmlstring = urllib2.urlopen(config['locate']).read();
             configitem.totalparse = configitem.totalparse + 1;
             configitem.rank = configitem.rank - 1;
         except Exception, e: 
             configitem.failedparse = configitem.failedparse + 1;
             #configitem.rank = configitem.rank + 2;
             #configitem.status = STATUS_UNREACHABLE;
+            print e;
             error_msg = "Failed to open following url %s of school: %s" % (config['locate'], config['bbsname']);
             logging.error( error_msg );
             #report_parse_exceptions( error_msg );

@@ -357,7 +357,7 @@ jlubbs = {
         'chinesename':u'牡丹园',
         'dom_row_pattern' : """
             <tr>
-            <td>◆<a href="$titlelink">$title</a>
+            <td>*<a href="$titlelink">$title</a>
             </td>
             </tr>   
         """,
