@@ -2,6 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from google.appengine.ext import db
 from ragendja.auth.google_models import GoogleUserTraits
 
+
 class User(GoogleUserTraits):
     """User class that provides support for Django and Google Accounts."""
     user = db.UserProperty()

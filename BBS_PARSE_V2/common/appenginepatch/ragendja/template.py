@@ -55,8 +55,14 @@ app_prefixed_loader.is_usable = True
 def render_to_string(request, template_name, data=None):
     return loader.render_to_string(template_name, data,
         context_instance=RequestContext(request))
-
-def render_to_response(request, template_name, data=None, mimetype=None):
+    
+def render_to_response( template_name , data, extradata=None, mimetype=None):
+    from django.shortcuts import render_to_response as rtr
+    return rtr( template_name, data, extradata );
+"""
+"
+def render_to_response( template_name , data, extradata=None, mimetype=None):
+    request = data;
     if mimetype is None:
         mimetype = settings.DEFAULT_CONTENT_TYPE
     original_mimetype = mimetype
@@ -75,6 +81,7 @@ def render_to_response(request, template_name, data=None, mimetype=None):
         patch_vary_headers(response, ['User-Agent'])
 
     return response
+"""
 
 def JSONResponse(pyobj):
     from ragendja.json import JSONResponse as real_class

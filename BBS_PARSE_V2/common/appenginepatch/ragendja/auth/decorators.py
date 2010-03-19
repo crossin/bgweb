@@ -4,6 +4,7 @@ from functools import wraps
 from ragendja.auth.views import google_redirect_to_login
 from ragendja.template import render_to_response
 
+
 def staff_only(view):
     """
     Decorator that requires user.is_staff. Otherwise renders no_access.html.
