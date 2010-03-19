@@ -37,7 +37,7 @@ class AnnouncementForm(forms.ModelForm):
         q = Announcement.all();
         if( q.count() == 0 ):
             announce = Announcement( content = self.cleaned_data['ann'] );
-            self.instance = ann;
+            self.instance = announce;
         else:
             announce = q.fetch(1)[0];
             announce.content = self.cleaned_data['ann'];

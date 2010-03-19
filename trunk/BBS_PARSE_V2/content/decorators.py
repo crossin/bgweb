@@ -3,7 +3,8 @@ from functools import wraps;
 from ragendja.auth.decorators import *;
 from google.appengine.api import users;
 from content.models import UserAccount;
-from django.template import RequestContext
+from django.template import RequestContext;
+from django.shortcuts import render_to_response as rtr;
 
 def bt_user_only(view):
     """
@@ -13,10 +14,10 @@ def bt_user_only(view):
     def wrapped(request, *args, **kwargs):
         uea = request.META['USER_EMAIL'];
         q = UserAccount.all().filter('email =',uea );
-        if q.count() > 0 :
+        if q.count() > 0 or users.is_current_user_admin():
             return view(request, *args, **kwargs)
         context = RequestContext(request);
-        return render_to_response( 'access_limited.html', context,context)
+        return rtr( 'access_limited.html', context,None )
     return wraps(view)(wrapped)
 
 
@@ -29,7 +30,7 @@ def admin_user_only(view):
         if users.is_current_user_admin():
             return view(request, *args, **kwargs)
         context = RequestContext(request);
-        return render_to_response( 'access_limited.html', context,context)
+        return rtr( 'access_limited.html', context,None )
     return wraps(view)(wrapped)
 
 def is_bt_user( request ):
