@@ -1,5 +1,9 @@
 # coding=utf-8
 import re;
+
+PARSE_USE_XPATH = 1;
+PARSE_USE_REGEX = 2;
+
 sjtubbs = {
         'locate':'http://bbs.sjtu.edu.cn/php/bbsindex.html',
         'root':'http://bbs.sjtu.edu.cn/',
@@ -16,7 +20,17 @@ sjtubbs = {
         'chinesename':u'饮水思源',
         'rank':1,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     };
+
+recommend = {
+        'bbsname':'recommend',
+        'schoolname':u'推荐的配置',
+        'chinesename':u'DALAB',
+        'rank':100,
+        'status':3,
+    };
+
 
      
 newsmth = {
@@ -37,8 +51,11 @@ newsmth = {
         """,
         're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
         're_board':re.compile(r'\[(?P<board>.*?)\] (?P<title>.*)', re.DOTALL),
+        're_block_t':r'<rss version="2.0">.*?</rss>',
+        're_board_t':r'\[(?P<board>.*?)\] (?P<title>.*)',
         'encoding':'utf8',
         'rank':2,
+        'parsetype':PARSE_USE_REGEX,
     }; 
 
 tjbbs = {
@@ -59,8 +76,11 @@ tjbbs = {
         """,
         're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
         're_board':re.compile(r'\[(?P<board>.*?)\] (?P<title>.*)', re.DOTALL),
+        're_block_t':r'<rss version="2.0">.*?</rss>',
+        're_board_t':r'\[(?P<board>.*?)\] (?P<title>.*)',
         'encoding':'utf8',
         'rank':25,
+        'parsetype':PARSE_USE_REGEX,
     }; 
     
 lilybbs = {
@@ -79,7 +99,9 @@ lilybbs = {
             <td>$postcount
         """,
         're_block':re.compile(r'<table width=640>.*?</table>', re.DOTALL),
+        're_block_t':r'<table width=640>.*?</table>',
         'rank':5,
+        'parsetype':PARSE_USE_REGEX,
     };
     
 zjubbs = {
@@ -103,28 +125,26 @@ zjubbs = {
             </tr>
         """,
         're_block':re.compile(r'<table .*?>.*?</table>', re.DOTALL),
-        'rank':4,
-        
+        're_block_t':r'<table .*?>.*?</table>',
+        'rank':24,
+        'parsetype':PARSE_USE_REGEX,  
     };
     
 fudanbbs = {
-        'locate':'http://bbs.fudan.edu.cn/cgi-bin/bbs/bbstop10',
-        'root':'http://bbs.fudan.edu.cn/cgi-bin/bbs/',
-        'xpath':'/html/center/table/tr[2]/td[2]/table',
+        'locate':'http://bbs.fudan.edu.cn/bbs/top10',
+        'root':'http://bbs.fudan.edu.cn/bbs/tcon?board=%s&f=%s',
+        'xpath':'/bbstop10 ',
         'bbsname':'fudan',
         'schoolname':u'复旦大学',
         'chinesename':u'日月光华',
         'dom_row_pattern' : """
-            <tr>
-            <td>*</td>
-            <td><a href="$boardlink"><b>$board</b></a></td>
-            <td><a href="$titlelink">$title</a></td>
-            <td><a href="$authorlink"><b>$author</b></a></td>
-            <td>$postcount</td>
-            </tr>
+            <top board='$board' owner='$author' count='$postcount' gid='$titlelink'>$title</top>
         """,
-        're_block':re.compile(r'<table border=0 width=100%>.*?</table>', re.DOTALL),
-        'rank':6,
+        're_block':re.compile(r"<bbstop10 s='    ;;'>.*?</bbstop10>", re.DOTALL),
+        're_block_t':r"<bbstop10 s='    ;;'>.*?</bbstop10>",
+        'rank':3,
+        'parsetype':PARSE_USE_REGEX,
+        'additional':'special',
     };
     
 
@@ -146,7 +166,9 @@ xjtubbs = {
             </tr>
         """,
         're_block':re.compile(r'<table border=1>.*?</table>', re.DOTALL),
+        're_block_t':r'<table border=1>.*?</table>',
         'rank':12,
+        'parsetype':PARSE_USE_REGEX,
 
     };
 whubbs = {
@@ -168,8 +190,11 @@ whubbs = {
         """,
         're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
         're_board':re.compile(r'\[(?P<board>.*?)\] (?P<title>.*)', re.DOTALL),
+        're_block_t':r'<rss version="2.0">.*?</rss>',
+        're_board_t':r'\[(?P<board>.*?)\] (?P<title>.*)',  
         'encoding':'utf8',
         'rank':10,
+        'parsetype':PARSE_USE_REGEX,
 
     };
     
@@ -199,6 +224,7 @@ xmubbs = {
 #        'encoding':'utf8',
         'rank':23,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     }; 
     
     
@@ -218,7 +244,9 @@ ustcbbs = {
             <td>$postcount
         """,
         're_block':re.compile(r'<table border=0 width=90%>.*?</table>', re.DOTALL),
+        're_block_t':r'<table border=0 width=90%>.*?</table>',
         'rank':7,
+        'parsetype':PARSE_USE_REGEX,
         
     };
     
@@ -244,7 +272,9 @@ sysubbs = {
         </tr>
         """,
         're_block':re.compile(r'<table width="100%" border="0" cellspacing="0" cellpadding="0" height="">.*?</table>', re.DOTALL),
+        're_block_t':r'<table width="100%" border="0" cellspacing="0" cellpadding="0" height="">.*?</table>', 
         'rank':8,
+        'parsetype':PARSE_USE_REGEX,
         
     };
     
@@ -266,8 +296,11 @@ dlutbbs = {
         """,
         're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
         're_board':re.compile(r'\[(?P<board>.*?)\] (?P<title>.*)', re.DOTALL),
+        're_block_t':r'<rss version="2.0">.*?</rss>',
+        're_board_t':r'\[(?P<board>.*?)\] (?P<title>.*)', 
         'encoding':'utf8',
         'rank':24,
+        'parsetype':PARSE_USE_REGEX,
     }; 
 
 njuptbbs = {
@@ -285,7 +318,9 @@ njuptbbs = {
             <td>$postcount
         """,
         're_block':re.compile(r'<table border=1 width=610>.*?</table>', re.DOTALL),
+        're_block_t':r'<table border=1 width=610>.*?</table>', 
         'rank':13,
+        'parsetype':PARSE_USE_REGEX,
         
     };
     
@@ -307,7 +342,10 @@ csubbs = {
         """,
         're_block':re.compile(r'<rdf:RDF.*?>.*?</rdf:RDF>', re.DOTALL),
         're_board1':re.compile(r'board=(?P<board>.*?)&', re.DOTALL),
+        're_block_t':'<rdf:RDF.*?>.*?</rdf:RDF>', 
+        're_board1_t':r'board=(?P<board>.*?)&', 
         'rank':19,
+        'parsetype':PARSE_USE_REGEX,
     }; 
 
 jlubbs = {
@@ -325,8 +363,10 @@ jlubbs = {
         """,
         #'re_block':re.compile(r'<legend>今日推荐精彩话题</legend><ul>.*?</ul>',re.DOTALL),
         're_board1':re.compile(r'board=(?P<board>.*?)&', re.DOTALL),
+        're_board1_t':r'board=(?P<board>.*?)&', 
         'rank':11,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
 
     };
     
@@ -345,6 +385,7 @@ bjtubbs = {
         're_block':re.compile(r'<thead><tr><th height="25"=100%>.{18}</td></tr></thead>.*?</table>', re.DOTALL),
         're_board1':re.compile(r'board.*?=(?P<board>.*?)&', re.DOTALL),
         'rank':13,
+        'parsetype':PARSE_USE_REGEX,
 
     };
 
@@ -367,6 +408,7 @@ rucbbs = {
         #'re_block':re.compile(r'<thead><tr><th height="25"=100%>.{18}</td></tr></thead>.*?</table>', re.DOTALL),
         'rank':21,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     }  ; 
 seubbs = {
         'locate':'http://bbs.seu.edu.cn/mainpage.php',
@@ -381,12 +423,14 @@ seubbs = {
         </li>
         """,
         're_board1':re.compile(r'board.*?=(?P<board>.*?)&', re.DOTALL),
+        're_board1_t':r'board.*?=(?P<board>.*?)&', 
         'rank':20,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     }  ;
 
 scubbs = {
-        'locate':'http://bbs.scu.edu.cn/rssi.php?h=1',
+        'locate':'http://www.lsxk.org/rssi.php?h=1',
         'root':'',
         'bbsname':'scu',
         'schoolname':u'四川大学',
@@ -403,8 +447,11 @@ scubbs = {
         """,
         're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
         're_board':re.compile(r'\[(?P<board>.*?)\] (?P<title>.*)', re.DOTALL),
+        're_block_t':r'<rss version="2.0">.*?</rss>', 
+        're_board_t':r'\[(?P<board>.*?)\] (?P<title>.*)', 
         'encoding':'utf8',
         'rank':12,
+        'parsetype':PARSE_USE_REGEX,
     }; 
 
 hitbbs = {
@@ -425,8 +472,11 @@ hitbbs = {
         """,
         're_block':re.compile(r'<rss version="2.0">.*?</rss>', re.DOTALL),
         're_board':re.compile(r'\[(?P<board>.*?)\] (?P<title>.*)', re.DOTALL),
+        're_block_t':r'<rss version="2.0">.*?</rss>', 
+        're_board_t':r'\[(?P<board>.*?)\] (?P<title>.*)', 
         'encoding':'utf8',
         'rank':14,
+        'parsetype':PARSE_USE_REGEX,
     }; 
 
 sdubbs = {
@@ -448,6 +498,7 @@ sdubbs = {
         """,
         'rank':16,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     }  ;
 
 
@@ -470,8 +521,10 @@ tjubbs = {
         </tr>
         """,
         're_block':re.compile(r'<table class=tb3>.*?</table>', re.DOTALL),
+        're_block_t':r'<table class=tb3>.*?</table>', 
         'rank':18,
-           }  ;
+        'parsetype':PARSE_USE_REGEX,
+    }  ;
 
 buaabbs = {
         'locate':'http://bbs.buaa.edu.cn/mainpage.php',
@@ -490,8 +543,10 @@ buaabbs = {
         </li>
         """,
         're_block':re.compile(r'<td class="MainContentText">.*?</td>', re.DOTALL),
+        're_block_t':r'<td class="MainContentText">.*?</td>', 
         'rank':22,
-           }  ;
+        'parsetype':PARSE_USE_REGEX,
+    }  ;
 
  
 
@@ -513,6 +568,7 @@ lzubbs = {
         """,
         'rank':28,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     }  ;
 
 caubbs = {
@@ -542,6 +598,7 @@ caubbs = {
         """,
         'rank':32,
         'needXpath':True,
+        'parsetype':PARSE_USE_XPATH,
     }  ;
 
 
@@ -568,7 +625,9 @@ ustbbbs = {
         </tr>
         """,
         'rank':42,
-           }  ;
+        're_block':re.compile(r'<table border="0" cellpadding="0" cellspacing="0" class="HotTable" align="center">.*?</table>', re.DOTALL),
+        'parsetype':PARSE_USE_XPATH,
+    }  ;#RE PARSER SEEMS NOT WORK
            
 uestcbbs = {
         'locate':'http://bbs.uestc.edu.cn/cgi-bin/bbstop10',
@@ -593,4 +652,5 @@ uestcbbs = {
         </tr>
         """,
         'rank':43,
-           }  ;
+        'parsetype':PARSE_USE_XPATH,
+    }  ;
