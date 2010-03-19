@@ -15,12 +15,22 @@ from ragendja.dbutils       import *;
 from content.models         import *;
 from datetime import *;
 
+from google.appengine.api import mail;
+
 import urllib2;
 import re;
 import copy;
 import string;
 import logging;
 import time;
+
+def report_parse_exceptions( content ):
+    logging.info("Reporting parse problems to administrators" );
+    mail.send_mail(sender="BBS TOP 10<bbstop10@appspot.com>",
+              to="Albert <zinking3@gmail.com>",
+              subject="Parsing Problem Report - BBSTOP10",
+              body=content)
+
 
 class BBSParser(object):
     def __init__(self):       
@@ -61,23 +71,26 @@ class BBSParser(object):
         if schoolbbs:
             for link in linklist:
                 
-                linkobject = get_object(Bbslinks, 'titlelink=', link['titlelink']);
+                linkobject = get_object(Bbslinks, 'titlelink =', link['titlelink']);
                 if  linkobject:
                     linkobject.updatetime = datetime.now();
+                    #print "update link %s at time %s"%(link['titlelink'], datetime.now() ) 
                 else:
                     #print link;
                     resultlink = {};#converting the fucking unicode map into str
                     for pair in link.items():
                         resultlink[ str( pair[0] ) ] =  unicode( pair[1] ) ;
                     resultlink['school'] = schoolbbs;
-                    #print type( schoolbbs )
+                    #print 'this is link ->' + link;
                     now = datetime.now();
                     schoolbbs.lastfresh = now;
                     db_create(Bbslinks,  createtime=now, updatetime=now,
                         #board=unicode(link['board']), title=unicode(link['title']) , author=unicode(link['author']), titlelink=unicode(link['titlelink'])
                         **resultlink
                     );
+                    #print 'this is result link ->' + resultlink;
                     schoolbbs.put();
+                    #print "put new link%s into database"%(link['titlelink']);
             #schoolbbs['lastfresh'] = datetime.now();
             config['lastfresh'] = schoolbbs.lastfresh;
         else:
@@ -86,39 +99,55 @@ class BBSParser(object):
         
         
 
-    def parsebbs(self, config):
+    def parsebbs(self, config, configitem ):
         t1 = time.time();
         try: 
-            htmlstring = urllib2.urlopen(config['locate']).read();
+            htmlstring = urllib2.urlopen(config['locate'], timeout=3).read();
+            configitem.totalparse = configitem.totalparse + 1;
+            configitem.rank = configitem.rank - 1;
         except Exception, e: 
-            logging.error("Failed to open following url %s of school: %s" % (config['locate'], config['bbsname']));
+            configitem.failedparse = configitem.failedparse + 1;
+            #configitem.rank = configitem.rank + 2;
+            #configitem.status = STATUS_UNREACHABLE;
+            error_msg = "Failed to open following url %s of school: %s" % (config['locate'], config['bbsname']);
+            logging.error( error_msg );
+            #report_parse_exceptions( error_msg );
+            configitem.put();
             return 0;
             
-        if ('encoding' in config.keys()):
-            if config['encoding'] != 'utf8':
-                htmlstring = htmlstring;
+        if (config['encoding'] == 'utf8' ):
+            #if config['encoding'] != 'utf8':
+            htmlstring = htmlstring;
             #return htmlstring; there are conversion exceptions
         else:
             htmlstring = unicode(htmlstring, 'GBK', 'ignore').encode('UTF-8');
 
         try:
 
-            if('needXpath' in config.keys()):
+            if( config['needXpath'] ):
                     linklist = self.parsebbsbyXpath(config , htmlstring);           
             else:
                     linklist = self.parsebbsbyRegularExpression(config , htmlstring);
         
         except Exception, e:
             print type(e);
-            logging.error("failed to parse required content; schoolname= %s", config['bbsname']);
+            logging.error("failed to parse required content SITE structure changed; schoolname= %s", config['bbsname']);
+            configitem.status = STATUS_EXCEPTION;
+            configitem.put();
             return 0;
         
             
         t2 = time.time();
             
         self.save_parsed_links(linklist, config);
-        logging.debug("Successfully parsing school:%s costing %d milliseconds;" % (config['bbsname'], (t2 - t1) * 1000));
-        return t2 - t1;
+        delta = (t2-t1)*1000;
+        configitem.totalparsetime = configitem.totalparsetime + delta;
+        logging.debug("Successfully parsing school:%s costing %d milliseconds;" % (config['bbsname'], delta ));
+        #logging.debug("Parsing school:%s Average cost %d milliseconds;" % (config['bbsname'], configitem.getAverageParseTime() ));
+        configitem.lastfresh = datetime.now();
+        configitem.status = STATUS_NORMAL;
+        configitem.put();
+        return delta;
 
 
     def parsebbsbyXpath(self, config, htmlstring):
@@ -162,6 +191,10 @@ class BBSParser(object):
             item['postcount'] = 0;
         """
         #item['postcount'] = 0;
+        orginal_link = item['titlelink'];
+        item['titlelink'] = config['root'] + item['titlelink'];
+        if ( 'additional' in config.keys() and config['additional'] == 'special' ):
+            item['titlelink'] = config['root'] %( item['board'],orginal_link);
         if ('re_board' in config.keys()):
             re_board = config[ 're_board' ];
             titlegroup = re_board.search(item['title']);
@@ -190,16 +223,17 @@ class BBSParser(object):
                 value = scraper.extract(item); 
                 self.fixitem(value, config);
                 #value['boardlink']  = config['root'] + value['boardlink'];
-                value['titlelink'] = config['root'] + value['titlelink'];
+                #value['titlelink'] = config['root'] + value['titlelink'];
+                #print value['titlelink']
                 
                 #value['authorlink'] = config['root'] + value['authorlink'];
 
                 parsed_result.append(value);
                 index = index + 1;
-                if index >= 11:
-                    break;
+                if index > 10:break;
         except Exception, e: 
             logging.error("failed to parse bbs in Domdetail ;schoolname= %s", config['locate']);
+            print e;
             raise;
                     
         return  parsed_result;
