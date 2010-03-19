@@ -151,8 +151,10 @@ def viewbyschool(request, template='content_by_school.html', extra_context=None)
     
     recommendlist = Bbslinks.all().filter( 'source =', 'recommend' ).order('-updatetime').fetch(10);
     context['recommend'] = recommendlist;
-    ann           = Announcement.all().fetch(1)[0];
-    context['announcement'] = ann;
+    qann  = Announcement.all();
+    if( qann.count() == 0 ): context['announcement'] = "Currently No Announcement";
+    else:context['announcement'] = qann.fetch(1)[0];
+    #context['announcement'] = ann;
     context_instance=RequestContext(request)
     context_instance.autoescape=False;
     return rtr(template, context,context_instance);
@@ -282,7 +284,7 @@ def addtag(request, template='tagging.json', extra_context=None):
 def addlink(request, template='result.json', extra_context=None):
     return ajax_operation( LinkForm, request, template, extra_context );
 
-@bt_user_only
+
 def addaccount(request, template='result.json', extra_context=None):
     return ajax_operation( AccountForm, request, template, extra_context );
     

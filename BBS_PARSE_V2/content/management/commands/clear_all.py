@@ -10,7 +10,7 @@ contains the actual logic for determining which accounts are deleted.
 from django.core.management.base import NoArgsCommand
 from ragendja.dbutils            import *;
 
-from content.models         import Schoolbbs;
+from content.models         import *;
 from pageharvest.settings   import *;
 
 import datetime;
@@ -20,8 +20,16 @@ class Command(NoArgsCommand):
     help = "Clear all the schools in the db"
 
     def handle_noargs(self, **options):
-        school_list = get_object_list( Schoolbbs );
-        for school in school_list :
-            school.delete();
+        def deleteallclassobjects( cls ):
+            list = get_object_list( cls );
+            for item in list:
+                item.delete();
+             
+        modellist = [Schoolbbs,Bbslinks,ParseConfig,MTags,LinkTags ];
+        for model in modellist:
+            deleteallclassobjects( model );
+        
+        print 'All data cleared';
+            
            
         

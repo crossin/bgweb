@@ -24,6 +24,7 @@ class Command(NoArgsCommand):
             item = get_object(Schoolbbs,  'schoolname =',  bc['schoolname'] );
             if not item :
                 now = datetime.datetime.now();
+                print 'setup bbsconfig data and school data for %s'%bc['bbsname'];
                 school = db_create( Schoolbbs, lastfresh = now, **bc );
                 if( bc['bbsname'] != 'recommend' ):
                     config = db_create( ParseConfig,  school = school, **bc );
