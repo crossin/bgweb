@@ -13,18 +13,28 @@ MEDIA_VERSION = 1
 
 # Add base media (jquery can be easily added via INSTALLED_APPS)
 
+DEBUG = False;
+
 LANGUAGE_CODE = 'en'
-DEFAULT_CHARSET = 'gbk'
+DEFAULT_CHARSET = 'utf-8'
 COMBINE_MEDIA = {
-    'combined-%(LANGUAGE_CODE)s.js': (
+    'combined-%(LANGUAGE_DIR)s.js': (
         # See documentation why site_data can be useful:
         # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
-        '.site_data.js',
-        'jquery.min.js', 
+        #'.site_data.js',
+        #'jquery.min.js', 
     ),
     'combined-%(LANGUAGE_DIR)s.css': (
         #'global/look.css',
-        
+    ),
+    'combined-jquery-toolkit.js': (
+        'global/scripts/jquery.js',
+        'global/scripts/jquery.tools.min.js',
+        'global/scripts/jquery.mousewheel.js',
+    ),
+    'combined-frame-style.css': (
+        'content/scripts/fb3.css',
+        'content/scripts/scrollable-navig.css',
     ),
 }
 
@@ -72,9 +82,9 @@ MIDDLEWARE_CLASSES = (
     'ragendja.middleware.ErrorMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     # Django authentication
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    #'django.contrib.auth.middleware.AuthenticationMiddleware',
     # Google authentication
-    #'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
+    'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
     # Hybrid Django/Google authentication
     #'ragendja.auth.middleware.HybridAuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -85,13 +95,13 @@ MIDDLEWARE_CLASSES = (
 )
 
 # Google authentication
-#AUTH_USER_MODULE = 'ragendja.auth.google_models'
-#AUTH_ADMIN_MODULE = 'ragendja.auth.google_admin'
+AUTH_USER_MODULE = 'ragendja.auth.google_models'
+AUTH_ADMIN_MODULE = 'ragendja.auth.google_admin'
 # Hybrid Django/Google authentication
 #AUTH_USER_MODULE = 'ragendja.auth.hybrid_models'
 
-LOGIN_URL = '/account/login/'
-LOGOUT_URL = '/account/logout/'
+#LOGIN_URL = '/account/login/'
+#LOGOUT_URL = '/account/logout/'
 LOGIN_REDIRECT_URL = '/'
 
 INSTALLED_APPS = (
@@ -105,20 +115,21 @@ INSTALLED_APPS = (
     # Add blueprint CSS (http://blueprintcss.org/)
     #'blueprintcss',
 
-    'django.contrib.auth',
+    #'django.contrib.auth',
     'django.contrib.sessions',
-    'django.contrib.admin',
-    'django.contrib.webdesign',
-    'django.contrib.flatpages',
-    'django.contrib.redirects',
-    'django.contrib.sites',
+    #'django.contrib.admin',
+    #'django.contrib.webdesign',
+    #'django.contrib.flatpages',
+    #'django.contrib.redirects',
+    #'django.contrib.sites',
     'appenginepatcher',
     'ragendja',
     #'myapp',
     #'registration',
     'mediautils',
     'content',
-    #'pageharvest',
+    'pageharvest',
+    'gaebar',
 )
 
 # List apps which should be left out from app settings and urlsauto loading
@@ -134,7 +145,7 @@ DATABASE_OPTIONS = {
     # Override remoteapi handler's path (default: '/remote_api').
     # This is a good idea, so you make it not too easy for hackers. ;)
     # Don't forget to also update your app.yaml!
-    #'remote_url': '/remote-secret-url',
+    'remote_url': '/remote_api_zinking',
 
     # !!!Normally, the following settings should not be used!!!
 
@@ -143,10 +154,29 @@ DATABASE_OPTIONS = {
 
     # Change appid for remote connection (by default it's the same as in
     # your app.yaml)
-    #'remote_id': 'otherappid',
+    #'remote_id': 'bbstop10',
 
     # Change domain (default: <remoteid>.appspot.com)
     #'remote_host': 'bla.com',
 }
+
+GAEBAR_LOCAL_URL = 'http://localhost:8000'
+
+GAEBAR_SECRET_KEY = '@#d$kdjifik*&32jkjf'
+
+GAEBAR_SERVERS = {
+    u'Deployment': u'bbstop10.appspot.com', 
+    u'Staging': u'http://bbstop10.appspot.com', 
+    u'Local Test': u'http://localhost:8000',
+}
+
+GAEBAR_MODELS = (
+     (
+          'content.models', 
+          (u'Schoolbbs', u'ParseConfig', u'Bbslinks', u'MTags', u'LinkTags', u'Comment'),
+     ),
+
+)
+
 
 from ragendja.settings_post import *

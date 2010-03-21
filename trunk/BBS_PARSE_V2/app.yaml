@@ -1,5 +1,5 @@
 ﻿application: bbstop10
-version: 1
+version: 2
 runtime: python
 api_version: 1
 
@@ -30,7 +30,11 @@ skip_files: |
   (LICENSE)|
   (scripts\/.*)|
   (docs\/.*)|
-  (kay\/management\/.*)|
+  (content\/management\/.*)|
+  (content\/media\/.*)|
+  (media\/.*)|
+  (Ad\/.*)|
+  (gaegene\/.*)|
   (kay\/tests\/.*)|
   )$
 
@@ -44,6 +48,17 @@ handlers:
 - url: /media
   static_dir: _generated_media
   secure: optional
+  
+- url: /favicon\.ico
+  static_files: _generated_media/1/global/favicon.ico
+  upload: _generated_media/favicon.ico
+
+- url: /robots\.txt 
+  static_files: _generated_media/1/global/robots.txt
+  upload: _generated_media/robots.txt
+  
+- url: /gaebar/static
+  static_dir: gaebar/static
 
 - url: /.*
   script: common/appenginepatch/main.py
