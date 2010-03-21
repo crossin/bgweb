@@ -33,9 +33,8 @@ def report_parse_exceptions( content ):
 
 
 class BBSParser(object):
-    def __init__(self):       
+    def __init__(self): 
         pass;
-    
     
     def convertdom2string(self, domlist):
         list_str = u'';
@@ -74,6 +73,7 @@ class BBSParser(object):
                 linkobject = get_object(Bbslinks, 'titlelink =', link['titlelink']);
                 if  linkobject:
                     linkobject.updatetime = datetime.now();
+                    linkobject.put();
                     #print "update link %s at time %s"%(link['titlelink'], datetime.now() ) 
                 else:
                     #print link;

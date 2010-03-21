@@ -386,6 +386,7 @@ bjtubbs = {
         're_board1':re.compile(r'board.*?=(?P<board>.*?)&', re.DOTALL),
         'rank':13,
         'parsetype':PARSE_USE_REGEX,
+        'status':3,
 
     };
 
