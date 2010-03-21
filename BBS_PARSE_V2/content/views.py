@@ -1,31 +1,32 @@
 # -*- coding: utf-8 -*-
+from datetime import *;
+import time;
+import random;
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import *
 from django.template import RequestContext
 from django.template.loader import render_to_string
-
 from django.utils.translation import ugettext as _
 from django.utils import simplejson
+from django.shortcuts import render_to_response as rtr;
 
 from google.appengine.ext import db
 from google.appengine.api import users
-from ragendja.dbutils import *;
-from django.shortcuts import render_to_response as rtr;
-from ragendja.mrender import render_to_response as rtrg;
-from content.models import *;
 
-from form import *;
-from decorators import *;
+from ragendja.dbutils import *;
+from ragendja.mrender import render_to_response as rtrg;
 
 from pageharvest.settings import *;
 from pageharvest.bbs_parser import BBSParser;
-from datetime import *;
-import time;
+
+from models import *;
+from decorators import *;
+from form import *;
 
 
-from pageharvest.settings   import *;
-from content.decorators import *;
+
+
 
 
 
@@ -45,13 +46,15 @@ def searchlinksbytag( request, tagname="", pagenumber=0, template='search-templa
     context = RequestContext(request);
 
     if( tagname =="" ):
-        context['has_error'] = True;
-        context['info'] = u'空白关键字搜索 ';
-        return rtr( template, context, context_instance=extra_context);
+        #context['has_error'] = True;
+        #context['info'] = u'空白关键字搜索 ';
+        #return rtr( template, context, context_instance=extra_context);
+        raise;
     elif( tagname == u"十大收录" ):
-        context['has_error'] = True;
-        context['info'] = u'大部分帖子都有这个标签,直接按列表查看 ';
-        return rtr( template, context, context_instance=extra_context);
+        #context['has_error'] = True;
+        #context['info'] = u'大部分帖子都有这个标签,直接按列表查看 ';
+        #return rtr( template, context, context_instance=extra_context);
+        return HttpResponseRedirect(reverse('content_list_home'))
     q = LinkTags.all().filter('name =', tagname );
     if( q.count() == 0 ):
         context['has_error'] = True;
@@ -59,12 +62,13 @@ def searchlinksbytag( request, tagname="", pagenumber=0, template='search-templa
         return rtr( template, context, context_instance=extra_context);
         
     try:
-        q = paginate(q,int(pagenumber),context);
+        global PAGE_SIZE;
+        q = paginate(q,int(pagenumber),context, PAGE_SIZE, 'name' );
     except Exception, e:
-        pass;
+        raise;
 
     link_keys  = [LinkTags.link.get_value_for_datastore(Link) for Link in q]
-    links      = db.get(link_keys)
+    links      = db.get(link_keys);
     schoolkeys  = [Bbslinks.school.get_value_for_datastore(Link) for Link in links]
     schools     = db.get(schoolkeys)
     for link,school in zip(links,schools):
@@ -77,35 +81,54 @@ def viewbylinks( request, pagenumber=0, template='bbs-template.html', extra_cont
              
     context = RequestContext(request);
     
-    object_query = Bbslinks.all()
-    #object_query = get_object_list(Bbslinks);
+    object_query = Bbslinks.all();
     try:
         object_list = paginate(object_query,int(pagenumber),context);
     except Exception, e:
-        pass;
+        raise;
     
     schoolkeys  = [Bbslinks.school.get_value_for_datastore(Link) for Link in object_list]
-    schools     = db.get(schoolkeys)
+    try:
+        schools = db.get(schoolkeys)
+    except:
+        raise;
+    
     for link,school in zip(object_list,schools):
         link.pschool = school;
     context['linklist'] = object_list;
 
     return rtr( template, context, context_instance=extra_context)
+
+def processlinktag( link ):
+    tagcount = len(link.tags);
+    link.hasxntag = True;
+    if ( tagcount < 2 ):
+        link.ptags = [];
+        link.hasxntag = False;
+        return;
+    elif ( tagcount == 2 ):
+        link.ptags = [ link.tags[1]];
+    else:#tag count >=3
+        rindex = random.randrange(2,tagcount);
+        link.ptags = [ link.tags[1], link.tags[rindex] ];
     
-def getBbsListBySchool(bbsname):
+    
+def getBbsListBySchool( bbsname, modification=False):
     try:
         school = get_object(Schoolbbs, 'bbsname =' , bbsname);
     except Exception,e:
-        #print 'no school with bbsname:', bbsname;
-        return;
+        raise
 
-    #toptenlist = Bbslinks.gql('where school = :1 ORDER BY order ASC', school);
     toptenlist = get_object_list( Bbslinks, 'school =', school );
-    #print school.schoolname;
+    itemlist   = toptenlist.order( '-updatetime' ).fetch(10);
+    if( modification ):#THIS FUNCTION IS REVISED FOR TAGGING IN XN PAGE
+        for link in itemlist:
+            processlinktag( link );
+
     bbsinfo = {
-                'schoolname':         (school.schoolname),
-                'chinesename':  (school.chinesename),
-                'itemlist':     toptenlist.order( '-updatetime' ).fetch(10),
+                'schoolname': (school.schoolname),
+                'chinesename':(school.chinesename),
+                'itemlist':   itemlist,  
     }
     return bbsinfo;
 
@@ -117,14 +140,14 @@ def viewxnhome(request, pagenumber=0, template='content_by_school.html', extra_c
     try:
         pclist = paginateschoolconfig(pclist,int(pagenumber),context,5);
     except Exception, e:
-        pass;
+        raise;
     
     for item in pclist:
         bbsnamelist.append(item.school.bbsname);
         
     bbslist = [];
     for name in  bbsnamelist:
-        bbslist.append(getBbsListBySchool(name));
+        bbslist.append(getBbsListBySchool(name,True));
         
     context['list'] = bbslist;
         
@@ -133,7 +156,6 @@ def viewxnhome(request, pagenumber=0, template='content_by_school.html', extra_c
 def viewbyschool(request, template='content_by_school.html', extra_context=None):
     context = RequestContext(request); 
     bbsnamelist = [];
-
     pclist = ParseConfig.all().filter( 'status = ', STATUS_NORMAL ).order( 'rank' );
     
     for item in pclist:
@@ -163,7 +185,10 @@ def viewframedcontent(request, template='framed_link_content.html', extra_contex
     context = RequestContext(request);
    
     linkid = request.GET.get('linkid', '');#TODO:EXCEPTION HANDLING
-    linkitem = db.get( linkid );
+    try:
+        linkitem = db.get( linkid );
+    except Exception,e:
+        raise;
     context['link'] = linkitem;
     #print linkitem.titlelink;
     linkitem.visitcount = linkitem.visitcount + 1;
@@ -197,8 +222,11 @@ def tagginglinks(request, template='tagging.json', extra_context=None):
     if( not valid_link  ):
         context['result'] = 0;
         return rtr(template, context,extra_context);
+    try:
+        linkitem = db.get(linkid);
+    except:
+        raise;
     
-    linkitem = db.get(linkid);
     try:
         linkitem.tags.index( tag_name );
     except Exception, e:
@@ -223,7 +251,11 @@ def ratinglinks(request, template='tagging.json', extra_context=None):
         context['info']   =u'链接并不正确';
         return HttpResponse( simplejson.dumps(context,ensure_ascii = False) );
     
-    linkitem = db.get(linkid);
+    try:
+        linkitem = db.get(linkid);
+    except:
+        raise;
+    
     if (    operate_id == SUPPORT ):
         linkitem.supportcount = linkitem.supportcount+1;
     elif (  operate_id == DOWN ):
@@ -269,7 +301,11 @@ def commentlink(request, template='tagging.json', extra_context=None):
     if( len(cmtbody) >= 100 ):
         cmtbody = cmtbody[0:50];
     
-    linkitem = db.get(linkid);
+    try:
+        linkitem = db.get(linkid);
+    except:
+        raise;
+    
     Comment( body = cmtbody , link = linkitem ).put();
     linkitem.commentcount = linkitem.commentcount + 1;
     linkitem.put();
@@ -303,48 +339,48 @@ def manangement(request, template='admin_interface.html', extra_context=None):
 
 
 parser = BBSParser();
-@admin_user_only 
 def gae_cron_job_parse( request , template='cron_result.html',extra_context=None):
     context=RequestContext(request);
-    now         = datetime.now()
+    #now         = datetime.now()
     delta       = timedelta( minutes = -40 );
-    criteria    = now + delta;
+    criteria    = datetime.datetime.now() + delta;
 
-    not_updated_list = get_object_list(ParseConfig, 'lastfresh < ', criteria, ' status =  ', STATUS_NORMAL );
+    not_updated_list = get_object_list(ParseConfig, 'lastfresh < ', criteria, ' status =  ', STATUS_NORMAL ).order('lastfresh').order('failedparse');
     context['not_updated_count'] = len( not_updated_list );
     finished_name_list = [];
     duration = 0;
     for bbs_config in not_updated_list:
         #t1 = time.time();
+        if( bbs_config.totalparse == 0 ): expected_parse_time = bbs_config.totalparsetime;
+        else: expected_parse_time = bbs_config.totalparsetime / bbs_config.totalparse;
+        if duration + expected_parse_time > parse_time_limit: break;
         parsetime = parser.parsebbs( bbs_config.toDict(), bbs_config );
         #t2 = time.time();
         finished_name_list.append( bbs_config.school.chinesename );
         duration += parsetime;
-        if duration > parse_time_limit:
-            break;
-    context['updated_count'] = len( finished_name_list );
-    context['finished_names'] = finished_name_list;
-    context['duration'] = duration;
+        if duration > parse_time_limit: break;
+    context['updated_count']    = len( finished_name_list );
+    context['finished_names']   = finished_name_list;
+    context['duration']         = duration;
     context_instance=RequestContext(request);
     return render_to_response(template, context,context_instance);
 
 
 @admin_user_only 
 def gae_setup_initial_data( request , template='cron_result.html',extra_context=None):
-    from content.models         import *;
-    from pageharvest.settings   import *;
+
     for bc in bbs_setting_list :
             item = get_object(Schoolbbs,  'schoolname =',  bc['schoolname'] );
             if not item :
-                now = datetime.now();
-                school = db_create( Schoolbbs, lastfresh = now, **bc );
+                
+                school = db_create( Schoolbbs, lastfresh = datetime.datetime.now(), **bc );
                 if( bc['bbsname'] != 'recommend' ):
                     config = db_create( ParseConfig,  school = school, **bc );
                 
     return HttpResponse('All School data setup successfully');
 
 #Util method defined to help with pagination links
-def paginate( query, page_number , context, pagesize = PAGE_SIZE ):
+def paginate( query, page_number , context, pagesize = PAGE_SIZE, orderby="-updatetime" ):
     global  PAGES_TO_LIST;
     total_items = query.count();
     total_pages = total_items / pagesize;
@@ -375,7 +411,7 @@ def paginate( query, page_number , context, pagesize = PAGE_SIZE ):
     context['page_range'] = range( start_index, end_index+1 );
     
     
-    result_link_page = query.order('-updatetime').fetch( (page_number+1)*pagesize, page_number*pagesize );
+    result_link_page = query.order( orderby ).fetch( (page_number+1)*pagesize, page_number*pagesize );
     if( len(result_link_page) > pagesize ):
         result_link_page = result_link_page[0:pagesize];
     return result_link_page;
