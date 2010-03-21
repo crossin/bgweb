@@ -22,7 +22,45 @@ indexes:
 # automatically uploaded to the admin console when you next deploy
 # your application using appcfg.py.
 
+- kind: GaebarCodeShard
+  properties:
+  - name: backup
+  - name: created_at
+
 - kind: content_bbslinks
   properties:
   - name: school
   - name: order
+
+- kind: content_bbslinks
+  properties:
+  - name: school
+  - name: updatetime
+
+- kind: content_bbslinks
+  properties:
+  - name: school
+  - name: updatetime
+    direction: desc
+
+- kind: content_bbslinks
+  properties:
+  - name: source
+  - name: updatetime
+    direction: desc
+
+- kind: content_parseconfig
+  properties:
+  - name: status
+  - name: lastfresh
+
+- kind: content_parseconfig
+  properties:
+  - name: status
+  - name: lastfresh
+  - name: failedparse
+
+- kind: content_parseconfig
+  properties:
+  - name: status
+  - name: rank
