@@ -26,13 +26,13 @@ def timeago(timestamp = None):
     str = ""
     tStr = ""
     if days > 0:
-        if days == 1:   tStr = "day"
-        else:           tStr = "days"
+        if days == 1:   tStr = "d"
+        else:           tStr = "ds"
         str = str + "%s %s" %(days, tStr)
         return str
     elif hours > 0:
-        if hours == 1:  tStr = "hour"
-        else:           tStr = "hours"
+        if hours == 1:  tStr = "hr"
+        else:           tStr = "hrs"
         str = str + "%s %s" %(hours, tStr)
         return str
     elif minutes > 0:
