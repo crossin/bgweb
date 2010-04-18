@@ -83,7 +83,7 @@ def viewbylinks( request, pagenumber=0, template='bbs-template.html', extra_cont
     
     object_query = Bbslinks.all();
     try:
-        object_list = paginate(object_query,int(pagenumber),context);
+        object_list = paginate(object_query,int(pagenumber),context,PAGE_SIZE,"-visitcount" );
     except Exception, e:
         raise;
     
@@ -169,7 +169,7 @@ def viewbyschool(request, template='content_by_school.html', extra_context=None)
    
     length = len( bbslist );
     context['col1'] = bbslist[0:length/2];
-    context['col2'] = bbslist[length/2 + 1 : length ];
+    context['col2'] = bbslist[length/2  : length ];
     
     recommendlist = Bbslinks.all().filter( 'source =', 'recommend' ).order('-updatetime').fetch(10);
     context['recommend'] = recommendlist;
@@ -212,7 +212,6 @@ def viewaccount( request, template='account_interface.html', extra_context=None)
 
 
 # OPERATION VIEWS THROUGH AJAX CALLS
-@bt_user_only
 def tagginglinks(request, template='tagging.json', extra_context=None):
     context = {};
     tag_name = request.POST['tagname'];

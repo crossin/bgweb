@@ -2,7 +2,7 @@ from ragendja.settings_post import settings
 
 settings.add_app_media('combined-content.js',
     #'content/ga.js',
-    #'content/bundle.js', 
+    'content/bundle.js', 
     #'content/scripts/jquery.timeago.js',              
     
     # ...

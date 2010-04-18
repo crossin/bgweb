@@ -21,6 +21,12 @@
             pageTracker._trackPageview();
             } catch(err) {}
         </script>
+        
+    <script type="text/javascript">
+		$(document).ready(function() {
+			
+		});
+	</script>
     
 	<noscript>
 		<style type="text/css">
@@ -70,15 +76,11 @@
 						<ul>
 							<li><a href="http://bbstop10.appspot.com/" target=_blank>Home</a></li>
 							<li class="has-dropdown">
-								<a href="http://bbstop10.appspot.com/content/list/" target=_blank>List View<small style="color:red;" >new!</small></a> 
-								<ul style="">
-									<li><a href="">By School</a> </li>
+								<a href="{%url content_list_home%}" target=_blank>List View<small style="color:red;" >new!</small></a> 
+								<ul style="">								
 									<li class="header-nav-repo-button-new">
-											<a href="/">By Links</a>
-									</li>
-									<li class="header-nav-repo-segmenter-theirs">
-											By Recommend
-									</li>	
+											<a href="{%url content_list_home%}">By Visit</a>
+									</li>										
 								</ul>
 							</li>
 							<li><a href="http://bbstop10.appspot.com/{% url viewaccount %}" target=_blank>Account</a></li>
@@ -149,7 +151,7 @@
                         {% endif %} 
                             <td nowrap="nowrap" style="width:20%" class=board>
                             <a href="{{item.boardlink}}" target=_blank><b>{{item.board}}</b></a></td>
-                            <td nowrap="nowrap" style="width:60%" class=title>
+                            <td nowrap="nowrap" style="width:55%" class=title>
                             <!--<a href="{{item.titlelink}}" target=_blank><b>{{item.title}}</b></a></td>-->
                             <a href="{% url content_framed_detail %}?linkid={{item.id}}" target=_blank><b>{{item.title}}</b></a>
                             {% if item.hasxntag %}-->                         
@@ -159,8 +161,11 @@
                             {% endif %}
                             
                             </td>
-                            
-                            <td nowrap="nowrap" style="width:20%" class=timeago>{{ item.createtime|timeago }} ago</td>
+                            <td nowrap="nowrap" style="width:10%" align="center">
+                                {{item.supportcount}}<IMG alt=featured src="{{MEDIA_URL}}content/images/arrow_up.gif" /> | 
+                                {{item.objectcount}}<IMG alt=featured src="{{MEDIA_URL}}content/images/arrow_down.gif" />                                
+                            </td>
+                            <td nowrap="nowrap" style="width:15%" class=timeago>{{ item.createtime|timeago }} ago</td>
                             <td nowrap="nowrap" style="width:10%" class=visit>{{item.visitcount}} Visit</td>
                             <td nowrap="nowrap" style="width:10%" class=comment>{{item.commentcount}} Cmt</td>
                         </tr>                                          
