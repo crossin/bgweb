@@ -417,7 +417,7 @@ seubbs = {
         'bbsname':'seu',
         'schoolname':u'东南大学',
         'chinesename':u'虎踞龙蟠',
-        'xpath':'/html/body/div[4]/div[2]/div[3]',
+        'xpath':'/html/body/div[5]/div[2]/div[4]/ul',
         'dom_row_pattern' : """
         <li>
         <a href="$titlelink">$title</a>
@@ -429,7 +429,7 @@ seubbs = {
         'needXpath':True,
         'parsetype':PARSE_USE_XPATH,
     }  ;
-
+#/html/body/div[5]/div[2]/div[4]/ul
 scubbs = {
         'locate':'http://www.lsxk.org/rssi.php?h=1',
         'root':'',
