@@ -1,0 +1,134 @@
+# coding=utf-8
+import logging
+import cgi
+import urllib2
+import string
+
+from google.appengine.ext import webapp
+from google.appengine.api import urlfetch
+from django.shortcuts import *
+
+
+from django.http import *
+
+from BeautifulSoup import BeautifulSoup;
+from bsoupxpath    import Path;
+
+
+def respond(request,  template, params=None):
+  if params is None:
+    params = {}
+    
+  if not template.endswith('.html'):
+    template += '.html'
+  return shortcuts.render_to_response(template, params)
+  
+
+def index(request):
+    sjtubbs = 'http://bbs.sjtu.edu.cn/php/bbsindex.html';
+    result = urllib2.urlopen(sjtubbs);
+    return HttpResponse(result.read());
+    
+def getstandard(request):
+    return HttpResponse('hello world ajax succeeded');
+    
+    
+def fixurl( domstring, bbsroot, codec = False ):
+    subdom = BeautifulSoup( domstring );
+    ahreflist = subdom.findAll('a');
+    for i in range( len(ahreflist)):
+        ahref = ahreflist[i];
+        new_href = bbsroot + ahref['href'];
+
+        ahref['href'] = new_href;
+    
+    result = unicode( subdom ).encode('gbk');
+    return result;
+
+def convertdom2string( domlist ):
+    list_str = u'';
+    
+    for i in range( len(domlist) ):
+        list_str += unicode(domlist[i]);
+        
+    return list_str;
+    
+    
+    
+def parsebbs( bbsurl, bbsroot, xpath, codec = False ):
+    htmlstring = urllib2.urlopen(bbsurl).read();
+    htmlstring = unicode(htmlstring,'GBK','ignore').encode('UTF-8') ;
+    dom = BeautifulSoup(htmlstring);
+    contentpath = Path( xpath );
+    result = contentpath.apply(dom);
+    list_str = convertdom2string( result );
+    
+
+    
+    return fixurl( list_str,bbsroot,codec );
+
+def parsebbsbyid( bbsurl, bbsroot, tag, oid ,codec = False ):
+    htmlstring = urllib2.urlopen(bbsurl).read();
+    htmlstring = unicode(htmlstring,'GBK','ignore').encode('UTF-8') ;
+    dom = BeautifulSoup(htmlstring);
+    resultdom = dom.find( tag, id = oid );
+    list_str = unicode( resultdom );
+    
+    return fixurl( list_str,bbsroot,codec );
+
+def parsebbsbytableborder( bbsurl, bbsroot, borderlen ,codec = False ):
+    htmlstring = urllib2.urlopen(bbsurl).read();
+    htmlstring = unicode(htmlstring,'GBK','ignore').encode('UTF-8') ;
+    dom = BeautifulSoup(htmlstring);
+    resultdom = dom.find( 'table', border = borderlen );
+    list_str = unicode( resultdom );
+    
+    return fixurl( list_str,bbsroot , codec);
+
+
+    
+    
+    
+def getbbs(request):
+    sjtubbs = 'http://bbs.sjtu.edu.cn/php/bbsindex.html';
+    sjturoot = 'http://bbs.sjtu.edu.cn/';
+    sjtuxpath = '/html/body/form/table[3]/tr/td/table[2]/tr/td[2]/table/tr[2]/td/table';
+    
+    smthbbs = 'http://bbs.tsinghua.edu.cn/mainpage.php';
+    smthroot = 'http://bbs.tsinghua.edu.cn';
+    smthpath = '/html/body/table[3]/tr/td/table[2]/tr[3]/td';
+    
+    lilibbs  = 'http://bbs.nju.edu.cn/bbstop10';
+    liliroot = 'http://bbs.nju.edu.cn/';
+    lilipath = '/html/center/table';
+    
+    fudanbbs = 'http://bbs.fudan.edu.cn/cgi-bin/bbs/bbstop10';
+    fudanroot = 'http://bbs.fudan.edu.cn/cgi-bin/bbs/';
+    fudanpath = '/html/center/table/tr[2]/td[2]/table';
+    
+    xjtubbs = 'http://bbs.xjtu.edu.cn/BMYELAVBXDPIOAJBDICRKENIKWXEIKSVQZJU_B/bbstop10';
+    xjturoot = 'http://bbs.xjtu.edu.cn/BMYELAVBXDPIOAJBDICRKENIKWXEIKSVQZJU_B/';
+    xjtupath = '/body/center/table';
+    
+    ustcbbs = 'http://bbs.ustc.edu.cn/cgi/bbstop10';
+    ustcbbsroot ='http://bbs.ustc.edu.cn/cgi/';
+    ustcpath = '/html/center/table';
+    
+    
+    
+    context = {
+        #'sjtutable':parsebbs(sjtubbs,sjturoot,sjtuxpath),
+        #'smthtable':parsebbsbyid(smthbbs,smthroot,'ul','toptenlist'),
+        #'lilitable':parsebbs(lilibbs,liliroot,lilipath),
+        'fudantalbe':parsebbs(fudanbbs,fudanroot,fudanpath,True),
+        #'xjtutable':parsebbsbytableborder(xjtubbs,xjturoot,'1'),
+        #'ustcbbstable':parsebbsbytableborder(ustcbbs,ustcbbsroot,'0'),
+    };
+    
+    return render_to_response('BBS_PARSE.html', context)
+
+        
+
+
+
+
