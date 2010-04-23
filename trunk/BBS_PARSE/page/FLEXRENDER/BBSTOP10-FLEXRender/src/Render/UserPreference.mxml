@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"  width="100%" height="100%"
+	 creationComplete="Init()">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.RadioButton;
+		import mx.controls.Alert;
+		import flash.external.*;
+		import  mx.events.ItemClickEvent;
+		
+		public var favorite:SharedObject;
+
+        public function jsWriteSelectedBbs():void {
+        	var jsInterface:String = "WriteMyTopOne";
+       		var favorite_bbs:String = bbs.selectedValue as String;
+            var jsCall:String = ExternalInterface.call(jsInterface, favorite_bbs );
+            favorite = SharedObject.getLocal("favorite_bbs");
+            favorite.data.top1 = favorite_bbs;
+            favorite.flush();
+               
+        }
+        
+        public function Init():void{
+        	favorite = SharedObject.getLocal("favorite_bbs");
+        	var favorite_bbs:String = favorite.data.top1 as String;
+        	
+        	for( var i:int = 0 ; i < bbs.numRadioButtons; i++ ){
+        		var rd:RadioButton = bbs.getRadioButtonAt(i);
+        		if( rd.value == favorite_bbs ) {
+        			rd.selected = true;
+        			return;
+        		}
+        	}
+        }
+
+
+			
+		]]>
+	</mx:Script>
+
+
+	<mx:Label x="285.5" y="16" text="置顶我的首选" width="187" height="30" 
+		textAlign="center" fontWeight="bold" fontFamily="Arial" fontSize="16" color="#095869"/>
+	<mx:RadioButtonGroup id="bbs" />
+	<mx:RadioButton x="100" y="54"  groupName="bbs" label="紫金飞鸿" fontSize="13" value="njupt"/>
+	<mx:RadioButton x="100" y="99"  groupName="bbs" label="水木清华" fontSize="13" value="smth"/>
+	<mx:RadioButton x="219.5" y="99"  groupName="bbs" label="同舟共济" fontSize="13" value="tongji"/>
+	<mx:RadioButton x="345.5" y="99"  groupName="bbs" label="小百合" fontSize="13" value="lily"/>
+	<mx:RadioButton x="477" y="99"  groupName="bbs" label="日月光华" fontSize="13" value="fudan"/>
+	<mx:RadioButton x="100" y="142"  groupName="bbs" label="水木社区" fontSize="13" value="smth2"/>
+	<mx:RadioButton x="100" y="190"  groupName="bbs" label="瀚海星云" fontSize="13" value="ustc"/>
+	<mx:RadioButton x="571" y="54"  groupName="bbs" fontSize="13" value="jlu" label="牡丹园"/>
+	<mx:RadioButton x="219.5" y="190"  groupName="bbs" label="逸仙时空" fontSize="13" value="zsu"/>
+	<mx:RadioButton x="345.5" y="190"  groupName="bbs" label="碧海青天站" fontSize="13" value="dlut"/>
+	<mx:RadioButton x="477" y="190"  groupName="bbs" label="云麓园" fontSize="13" value="csu"/>
+	<mx:RadioButton x="219.5" y="142"  groupName="bbs" label="我爱南开" fontSize="13" value="nankai"/>
+	<mx:RadioButton x="345.5" y="142"  groupName="bbs" label="珞珈山水" fontSize="13" value="whu"/>
+	<mx:RadioButton x="477" y="142"  groupName="bbs" label="鼓浪听涛" fontSize="13" value="xmu"/>
+	<mx:RadioButton x="219.5" y="54"  groupName="bbs" label="飘渺水云间" fontSize="13" value="zju"/>
+	<mx:RadioButton x="345.5" y="54"  groupName="bbs" label="饮水思源" fontSize="13" value="sjtu"/>
+	<mx:RadioButton x="477" y="54"  groupName="bbs" label="兵马俑" fontSize="13" value="xjtu"/>
+	
+	<mx:Button x="330" y="224" label="设置" click="jsWriteSelectedBbs() " width="79.5"/>
+	
+	
+	
+					
+	
+</mx:Canvas>

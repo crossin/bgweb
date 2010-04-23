@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	xmlns:controls="com.asfusion.controls.*" 
+	viewSourceURL="srcview/index.html">
+	
+	
+
+	
+	<mx:Tile>
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 1" />
+			<mx:Text text="Default settings" />			
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 1: DEFAULT SETTINGS  ::::::::::::::::: -->
+			<controls:Rating  /> 
+		</mx:VBox>
+		
+		
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 2" />
+			<mx:Text text="Default settings with initial value" width="100%" />
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 2: WITH VALUE  ::::::::::::::::: -->
+			<controls:Rating value="3.5" /> 
+		</mx:VBox>
+		
+		
+		
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 3" />
+			<mx:Text text="Default item count is 5. This example has itemCount property set to 10" width="100%" />
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 3: WITH ITEM COUNT  ::::::::::::::::: -->
+			<controls:Rating itemCount="10" /> 
+		</mx:VBox>
+		
+		
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 4" />
+			<mx:Text width="100%" text="Default settings without rollover. This can be used for 'Read-only' ratings" />			
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 4: WITHOUT ROLLOVER   ::::::::::::::::: -->
+			<controls:Rating liveRollOver="false" value="3" /> 
+		</mx:VBox>
+		
+		
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 5" />
+			<mx:Text text="The user changes the selected value when he/she clicks on a star. This example uses showSelectedValue = true so that the value is shown." width="100%" />
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 5: DEFAULT SETTINGS WITH VALUE   ::::::::::::::::: -->
+			<controls:Rating id="ratingExample5" showSelectedValue="true" /> 
+			
+			<mx:Text text="Currently selected value: {ratingExample5.selectedValue}" />
+		</mx:VBox>
+	
+	
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 6" />
+			<mx:Text width="100%" text="This example uses custom images instead of the default stars" />			
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 6: WITH IMAGES   ::::::::::::::::: -->
+			<controls:Rating styleName="example6" value="2.4" /> 
+		</mx:VBox>
+		
+		
+		
+		<mx:VBox styleName="box" width="210" height="100%">
+			<mx:Label text="Example 7" />
+			<mx:Text width="100%" text="This example uses custom images and showSelectedValue=true so that the user sees what he/she has selected" />			
+			
+			<!-- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+			<!-- EXAMPLE 7: WITH IMAGES AND SELECTED VALUE   ::::::::::::::::: -->
+			<controls:Rating styleName="example7" value="2.4" showSelectedValue="true" /> 
+		</mx:VBox>
+		
+	
+	</mx:Tile>
+</mx:Application>

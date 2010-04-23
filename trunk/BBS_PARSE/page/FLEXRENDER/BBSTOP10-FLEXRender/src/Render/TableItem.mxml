@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%"
+	xmlns:controls="com.asfusion.controls.*" >
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+		
+			public function renderBbsBlock( data:Array ):void{
+				if( data.length <= 0 ) {
+					Alert.show('无可用数据');
+					return;
+				}
+				var item:Object = data[0];
+				if( item.hasOwnProperty('chinesename') ) dgcname.visible = true;
+				dgpopular.dataProvider = data;
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%">
+		<mx:HBox  borderStyle="none" borderThickness="0">
+			<mx:Label text="RATING:" />
+			<controls:Rating  showSelectedValue="true"/> 
+		</mx:HBox>
+		<mx:DataGrid id="dgpopular" width="100%" height="100%" paddingLeft="3" rowCount="10">
+		
+        
+		<mx:columns>
+			<mx:DataGridColumn id="dgcname" headerText="来自" dataField="chinesename" 	width="100" visible="false"/>
+			<mx:DataGridColumn headerText="版面" dataField="board" 	width="120"/>
+			<mx:DataGridColumn headerText="标题"  	width="200">
+				  <mx:itemRenderer>
+                    <mx:Component>
+                            <mx:LinkButton label="{data.title}" click="navigate2page(event)">
+                            	<mx:Script>
+                    			<![CDATA[
+                    				import flash.utils.ByteArray;
+                    				public function navigate2page( e:Event ):void{
+                    					var titlelink:String = data.titlelink;
+                    					/* var convert:ByteArray = new ByteArray();
+                    					var encode:String = "gbk";
+                    					convert.writeMultiByte(titlelink,encode);
+                    					convert.position = 0;
+                    					var encodedlink:String = convert.readMultiByte(convert.length,encode);	 */									
+                    					navigateToURL( new URLRequest( titlelink ));
+                    				}
+                    			]]>
+                    		</mx:Script>
+                            </mx:LinkButton>
+                    </mx:Component>
+                  </mx:itemRenderer>
+			</mx:DataGridColumn>
+			<mx:DataGridColumn headerText="作者" dataField="author" width="100"/>	
+			<mx:DataGridColumn headerText="人气" dataField="postcount" width="100"/>	
+		</mx:columns>
+		
+	</mx:DataGrid>
+	</mx:VBox>
+	
+</mx:Canvas>

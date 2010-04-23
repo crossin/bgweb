@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+	 xmlns:ext="Reflect.*"
+   	 layout="absolute" width="864" height="554"
+	 backgroundImage="/media/blueglass.jpg" creationComplete="initBackButton()">
+	 
+	 <mx:Script>
+	 	<![CDATA[
+	 		import mx.controls.Button;
+	 		
+	 		[Bindable]
+	 		private var backButton:Button;
+	 		private var reflect:ReflectionManager;
+	 		
+	 		private function initBackButton():void {
+	 			backButton = new Button();
+	 			backButton.label 			= "Bring the panel back!";
+				backButton.x 				= 380;
+				backButton.y				= 250;
+				backButton.addEventListener(MouseEvent.CLICK, panelBack);
+				reflect = reflection;
+				
+	 		}
+	 		
+	 		public function panelBack(event:MouseEvent):void {
+				addChild(panel1);
+				reflection.target = panel1;
+				addChild(reflection)
+				
+				removeChild(backButton);
+			}
+	 	]]>
+	 </mx:Script>
+	<mx:Style source="/media/blue_plastic.css"/>
+	    
+	<ext:ReflectionManager id="reflection"  target="{panel1}"
+        width="{this.panel1.width}"
+        height="{(this.panel1.height / 100) * 50}"
+        fadeFrom="0.35"
+        fadeTo="0"
+        blur="0.3"/>
+		<ext:SuperPanel id="panel1" backButton="{backButton}"
+			x="86.5" y="113" width="510" height="330" 
+			showControls="true" enableResize="true"
+			layout="absolute" title="Panel">
+			<mx:TabNavigator paddingTop="0" borderThickness="0" left="8"  width="97%" height="97%" backgroundAlpha="0" >
+				<mx:Canvas borderStyle="inset" label="Form Elements" width="100%" height="100%">
+				<mx:Form>
+					  
+				<mx:FormItem label="TextArea:" x="20" y="40">
+					<mx:TextArea height="84" width="150">
+					<mx:text><![CDATA[The BluePlastic Theme uses the Superpanel and the Reflectionmanager from Wietse Veenstra. Thanks.]]></mx:text>
+					</mx:TextArea>
+				</mx:FormItem>
+				<mx:FormItem label="TextInput:"  x="20" y="10">
+					<mx:TextInput   width="150"/>
+				</mx:FormItem>
+				</mx:Form>
+				<mx:CheckBox label="Checkbox" x="269.05" y="112"/>
+				<mx:CheckBox label="Checkbox" x="269" y="86"/>
+				<mx:RadioButton label="Button dos" groupName="radiogroup1" x="364.65" y="112"/>
+				<mx:RadioButton label="Button uno" groupName="radiogroup1" x="364.65" y="86"/>
+				<mx:Button label="Submit" x="162" y="198"/>
+				<mx:Button x="242" y="198" label="Cancel"/>
+				<mx:PopUpButton x="269" y="17" label="PopUpButton"/>
+				<mx:ToggleButtonBar id="tBBar" selectedIndex="1"  x="71" y="152" >
+					<mx:dataProvider>
+						<mx:String>Button 1</mx:String>
+						<mx:String>Button 2</mx:String>
+						<mx:String>Button 3</mx:String>
+						<mx:String>Button 4</mx:String>
+					</mx:dataProvider>
+				</mx:ToggleButtonBar>
+				<mx:ComboBox x="269" y="47" textIndent="3">
+					<mx:dataProvider>
+						<mx:String>choice 1</mx:String>
+						<mx:String>choice 2</mx:String>
+						<mx:String>choice 3</mx:String>
+						<mx:String>choice 4</mx:String>
+					</mx:dataProvider>
+				</mx:ComboBox>
+				</mx:Canvas>
+				<mx:Canvas backgroundAlpha="0.1" label="Tree"   borderStyle="inset" >
+					
+			<mx:Tree  backgroundAlpha="0" borderThickness="0" right="0" left="4" top="4" bottom="0" showRoot="false" labelField="@label">
+					<mx:dataProvider>
+						<mx:XML xmlns="">
+							<nodes>
+								<node label="Lorem Ipsum">
+									<node label="Dolor sit amet"/>
+									<node label="Consectetuer adipiscing elit"/>
+								</node>
+								<node label="Quisque eget lorem">
+									<node label="Ac sapien rutrum vehicula"/>
+									<node label="Etiam euismod"/>
+									<node label="Vestibulum erat"/>
+								</node>
+								<node label="Aenean arcu">
+									<node label="Phasellus condimentum"/>
+									<node label="Augue ac orci"/>
+									<node label="Ut sapien felis"/>
+								</node>
+								<node label="Rhoncus non"/>
+								<node label="Gravida vestibulum"/>
+								<node label="Vehicula non massa"/>
+								<node label="Etiam eget lorem"/>
+								<node label="Congue massa aliquet semper"/>
+								<node label="Cras at arcu"/>
+								<node label="Sed magna porttitor nonummy"/>
+								<node label="Aliquam quis ipsum"/>
+								<node label="In blandit"/>
+								<node label="Venenatis justo"/>
+								<node label="Vestibulum varius"/>
+								<node label="Interdum libero"/>
+								<node label="Nullam lorem nisl"/>
+								<node label="Vulputate nec"/>
+							</nodes>
+						</mx:XML>
+					</mx:dataProvider>
+				</mx:Tree>
+			</mx:Canvas>	
+		
+				
+				<mx:Canvas  borderStyle="inset" label="Accordion" width="100%" height="100%" >
+					<mx:Accordion textAlign="center" width="100%" top="0" bottom="0" backgroundAlpha="0" borderThickness="0" >
+			<mx:Canvas backgroundAlpha="0" textAlign="left"  label="Accordion" width="100%" height="100%">
+				<mx:TextArea  styleName="nonEditText" left="0" right="0" top="1" bottom="1" >
+					<mx:text><![CDATA[Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Quisque eget lorem ac sapien rutrum vehicula. Etiam euismod vestibulum erat. Aenean arcu. Phasellus condimentum augue ac orci. Ut sapien felis, rhoncus non, gravida vestibulum, vehicula non, massa. Etiam eget lorem congue massa aliquet semper. Cras at arcu sed magna porttitor nonummy. Aliquam quis ipsum. In blandit venenatis justo. Vestibulum varius interdum libero. Nullam lorem nisl, vulputate nec, commodo vel, feugiat vel, erat. Suspendisse at lacus. Ut aliquet molestie mauris. 
+
+Fusce iaculis molestie tortor. Nulla ipsum nibh, tincidunt venenatis, pulvinar ut, vehicula eu, massa. Pellentesque blandit. Praesent metus augue, dapibus et, porttitor eu, porta tristique, orci. Proin est turpis, tristique dignissim, porttitor sit amet, sodales vitae, felis. Aenean venenatis, mauris ac ultrices varius, arcu purus accumsan justo, at sollicitudin risus libero id pede. Donec semper tellus in lacus. Nunc eget sapien at nisi blandit cursus. Nunc tristique libero. Duis consequat dignissim justo. Nam et risus. Donec quam. Integer scelerisque, felis nec mollis sagittis, erat tellus facilisis nulla, tempus adipiscing felis nulla quis justo. Cras pulvinar. Ut lacinia ligula ac felis. Nulla magna. Phasellus eu erat. Nullam euismod lobortis odio. Nunc elit nisl, rhoncus vitae, rhoncus tincidunt, molestie vel, massa.
+
+Donec posuere nonummy lacus. Praesent hendrerit, pede vel nonummy sodales, ipsum ante bibendum lacus, sed fringilla ipsum sapien eget velit. Duis vestibulum sollicitudin leo. Donec interdum tellus. Sed turpis. Nulla fermentum pharetra nulla. Fusce accumsan. Vivamus aliquet. Aenean id magna aliquam turpis molestie adipiscing. Aenean non ligula quis sem consequat porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam ornare elit. Quisque rutrum eros. Curabitur pharetra risus et mauris. Vivamus at nisl. In massa est, imperdiet vel, dignissim at, posuere vitae, lacus. Fusce tincidunt, metus eu iaculis pulvinar, lacus pede ullamcorper nisi, ut posuere velit ligula vel lorem. In accumsan dignissim felis. Praesent dui. Cras non felis non pede viverra dignissim.]]></mx:text>
+				</mx:TextArea>
+			</mx:Canvas>
+			<mx:Canvas label="Lorem" width="100%" height="100%">
+			</mx:Canvas>
+			<mx:Canvas label="Ipsum" width="100%" height="100%">
+			</mx:Canvas>
+		</mx:Accordion>
+
+				</mx:Canvas>
+				
+				
+				<mx:Canvas label="DataGrid" width="100%" height="100%" >
+					<mx:DataGrid x="0" y="0" width="100%" height="100%" paddingLeft="3">
+						<mx:dataProvider>
+                <mx:Array id="arr">
+                    <mx:Object Artist="Amos Lee" Album="Amos Lee" Song="Arms of a Woman" Genre="Folk" />
+                    <mx:Object Artist="Amos Lee" Album="Amos Lee" Song="Bottom of the Barrel" Genre="Folk/Jazz"/>
+                    <mx:Object Artist="Snow Patrol" Album="Final Straw" Song="Chocolate" Genre="Alternative"/>
+                    <mx:Object Artist="Snow Patrol" Album="Final Straw" Song="How to Be Dead" Genre="Alternative"/>
+                    <mx:Object Artist="Keane" Album="Hopes and Fears" Song="Somewhere Only We Know" Genre="Alternative"/>
+                </mx:Array>
+            </mx:dataProvider>
+			<mx:columns>
+				<mx:DataGridColumn headerText="Artist" dataField="Artist" width="100"/>
+				<mx:DataGridColumn headerText="Album" dataField="Album" width="120"/>
+				<mx:DataGridColumn headerText="Song" dataField="Song" width="200"/>
+				<mx:DataGridColumn headerText="Genre" dataField="Genre" width="100"/>
+				
+			</mx:columns>
+		
+					</mx:DataGrid>
+				</mx:Canvas>
+				
+			</mx:TabNavigator>
+			
+		</ext:SuperPanel>
+		
+	<mx:Label text="BluePlastic by fleksray.org" color="#66CCFF" fontWeight="bold" x="383" y="21"/>
+	<mx:LinkBar x="559" y="17" color="#66CCFF">
+		<mx:dataProvider>
+			<mx:String>Link Bar</mx:String>
+			<mx:String>Lorem Ipsum</mx:String>
+			<mx:String>Dolor</mx:String>
+			<mx:String>Sit Amet</mx:String>
+		</mx:dataProvider>
+	</mx:LinkBar>
+	
+</mx:Application>
+
+
