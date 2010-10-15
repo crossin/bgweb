@@ -1,5 +1,6 @@
+#summary make useful statics of current data.
 #labels Phase-Design
-make useful statics of current data
+
 
 = Introduction =
 Data mining of current accumulated data haven't started yet.
