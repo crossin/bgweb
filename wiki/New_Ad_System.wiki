@@ -1,3 +1,4 @@
+#summary Make the current promotion system more interesting & useful
 #labels Phase-Design
 #Make the current promotion system more interesting & useful
 
