@@ -1,6 +1,6 @@
-#summary One-sentence summary of this page.
+#summary maybe should considering for extracting content from specific pages.
 #labels Phase-Requirements
-maybe should considering for extracting content from specific pages
+
 = Introduction =
 some page contents should be reserved //because it will be deleted
 content abstract for better user experience.
