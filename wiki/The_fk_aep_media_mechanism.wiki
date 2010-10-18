@@ -1,0 +1,82 @@
+#labels Phase-QA
+#some painful thoughts on the aep media mechanism
+
+= Introduction =
+everytime I try to revise sth related with media stuff, I spend a lot of time read the manual first,
+write some code, and succeed. then after a while I foget all. today this thing happened again.
+so I will write the detailed explanation here in case I forget next time.
+
+--->
+<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}combined-ltr.css" />
+<script type="text/javascript" src="{{ MEDIA_URL }}combined-{{ LANGUAGE_CODE }}.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}combined-content.js"></script>
+---> after rendering 
+
+<link rel="stylesheet" type="text/css" href="/generated_media/media/1/content-xlayout.css" />
+<script type="text/javascript" src="/generated_media/media/1/combined-en.js"></script>
+<script type="text/javascript" src="/generated_media/media/1/combined-content.js"></script>
+
+so the LANGUAGE_CODE is set in the settings.py as en %%% the MEDIA_URL is /generated_media/media/1/
+
+actually combine the media is a good stuff should be done, but this media util actually makes one hardly understood
+--> specified combine media
+COMBINE_MEDIA = {
+    'combined-%(LANGUAGE_DIR)s.js': (
+        # See documentation why site_data can be useful:
+        # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
+        #'.site_data.js',
+        #'jquery.min.js', 
+    ),
+    'combined-%(LANGUAGE_DIR)s.css': (
+        #'global/look.css',
+    ),
+settings.add_app_media( 'combined-%(LANGUAGE_DIR)s.css' , 'content/layout.css')
+---> generated combined media
+combined-ltr.css
+combined-rtl.css
+combined-ltr.js
+combined-rtl.js
+
+one can never  understood %(LANGUAGE_DIR)s the fuck how it functions actually it generate two files for this combine, cool down, cool down, maybe when in i18 applications we need different .......
+yes maybe it's useful
+
+
+see figured it again.WTF
+
+
+= Details =
+
+# Combine media files
+COMBINE_MEDIA = {
+    # Create a combined JS file which is called "combined-en.js" for English,
+    # "combined-de.js" for German, and so on
+    'combined-%(LANGUAGE_CODE)s.js': (
+        # Integrate bla.js from "myapp/media" folder
+        # You don't write "media" because that folder is used automatically
+        'myapp/bla.js',
+        # Integrate morecode.js from "media" under project root folder
+        'global/morecode.js',
+    ),
+    # Create a combined CSS file which is called "combined-ltr.css" for
+    # left-to-right text direction
+    'combined-%(LANGUAGE_DIR)s.css': (
+        'myapp/style.css',
+        # Load layout for the correct text direction
+        'global/layout-%(LANGUAGE_DIR)s.css',
+    ),
+}
+
+continue to find what the stupid util do on 'helping' us.
+##### inner settings related with media #####
+MEDIA_URL = '/media/%d/'
+ADMIN_MEDIA_PREFIX = '%sadmin_media/'
+
+# Add start markers, so apps can insert JS/CSS at correct position
+def add_app_media(combine, *appmedia):
+    if on_production_server:
+        return
+    COMBINE_MEDIA.setdefault(combine, [])
+    if '!START!' not in COMBINE_MEDIA[combine]:
+        COMBINE_MEDIA[combine].insert(0, '!START!')
+    index = COMBINE_MEDIA[combine].index('!START!')
+    COMBINE_MEDIA[combine][index:index] = appmedia
