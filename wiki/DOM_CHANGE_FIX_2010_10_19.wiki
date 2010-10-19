@@ -12,7 +12,7 @@ this is some steps we do to fix the site change today
 #GET PATTERN LINE USING REPR
 #PRINCIPAL NO.1 YOU CAN FORMAT THE DOM WHEN YOU OBSERVE,BUT WHEN YOU HANLE IT TO MACHINE, PLEASE KEEP IT <B>ORGINAL</B>
 
-pattern = '<td valign="middle"><font color="#FFFFFF"><img src="iconT.gif"> <b>.*?</b></font></td>\n                                </tr>\n                \t\t</table>\n                \t</td>\n                  </tr>.*?</table>'
+pattern =
 htmlstring = urllib2.urlopen('http://bbs.sjtu.edu.cn/php/bbsindex.html').read();
 htmlstring = unicode(htmlstring, 'GBK', 'ignore').encode('UTF-8');
 blockstring = re.search(pattern,htmlstring,re.DOTALL).group();
@@ -21,7 +21,7 @@ print blockstring;
 ##PATCH ON FDU V2
 url = "http://www.lilacbbs.com/"
 #PRINCIPAL NO.2 YOU MAY NEED DOM STRUCTURE TO HELP YOU DETERMINE RE EXPRESSION"
-pattern = """<div id="portal_block_302_content" class="content">.*?</div>"""
+pattern = """"""
 htmlstring = urllib2.urlopen(url).read();
 htmlstring = unicode(htmlstring, 'GBK', 'ignore').encode('UTF-8');
 
