@@ -1,0 +1,8 @@
+#summary Proposals of Adding or Updating BBS sites of schools
+#labels Phase-QA
+= Introduction =
+
+All proposals of adding or updating bbs sites please go here.
+
+
+= Details =
