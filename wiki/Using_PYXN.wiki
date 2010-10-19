@@ -1,5 +1,5 @@
+#summary some random writes on using pyxn
 #labels Phase-QA
-#some random writes on using pyxn
 
 = Introduction =
 this is actually fucking stupid plugin which needs totally rewrites and understanding
