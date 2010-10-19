@@ -31,6 +31,7 @@ print blockstring;
 = Details =
 
 *the fix details goes here and large html content are simply neglected*
+`
 #original status
 <SPAN class=titletext style="FONT-SIZE: 14px; MARGIN-LEFT: 80px; COLOR: #ffffff">十大热门</SPAN></DIV><div id="portal_block_302_content" class="content"><div class="module cl xl">
 <ul><li>
@@ -88,12 +89,10 @@ print blockstring;
 .*?<div id="portal_block_316" class="block move-span">"""
 #4 after inspecting using firebug tried dom ----!!! it worked
 """<div id="portal_block_302_content" class="content">.*?</div>"""
-
+`
 #new problems broughted about
 1. scraped infomation are seemingly more instructed, info structure should be improved or restructure or abstracted
 -->stormed: store these infomation in serialized dict would be better choice, missed keys could be restored by default values.
 -->integrated with site framework redone. maybe in the next two versions.
 2. the parser engine should be improved to report site structure changes(only structure change) and site inavailabe for long time.
 !important.
-
-
