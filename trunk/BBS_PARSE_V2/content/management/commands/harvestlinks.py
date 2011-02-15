@@ -7,7 +7,7 @@ import os
 from ragendja.dbutils       import *;
 from content.models         import *;
 from pageharvest.settings   import *;
-from pageharvest.bbs_parser import BBSParser;
+from pageharvest.bbs_parser import *;
 
 import datetime;
 
@@ -22,7 +22,6 @@ class Command(BaseCommand):
 
     def handle(self,  **options):
         parser          =   BBSParser();
-        
         if options.get('harvest_count'):
             schoolcount     =   int(options.get('harvest_count'))#options.harvest_count;
             currentcount    = 0;

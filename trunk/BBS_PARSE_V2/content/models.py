@@ -1,16 +1,11 @@
 # -*- coding: utf-8 -*-
 from google.appengine.api import users
 from google.appengine.ext import db
-
-from django.db.models import signals
-from ragendja.dbutils import cleanup_relations
-
+from django.core.urlresolvers import reverse
+from ragendja.dbutils import *
 from content import  modelutil;
-
-#import google.appengine.ext.search as gSearch; 
-
-import re;
-
+from settings import *;
+import re,pickle;
 
 class Schoolbbs(db.Model):
     bbsname         = db.StringProperty(    default = "" );
@@ -18,14 +13,6 @@ class Schoolbbs(db.Model):
     chinesename     = db.StringProperty(    default = "" );
     rank            = db.IntegerProperty(   default = 0  );
     lastfresh       = db.DateTimeProperty(  );
-    
-    class Meta:
-        pass;
-
-"""
-PARSE_USE_XPATH = 1;
-PARSE_USE_REGEX = 2;
-"""
 
 STATUS_NORMAL = 1;
 STATUS_UNREACHABLE = 2;
@@ -37,24 +24,19 @@ class ParseConfig(db.Model):
     totalparsetime    = db.FloatProperty( default = 0.0 );
     lastfresh         = db.DateTimeProperty(  );
     status            = db.IntegerProperty( default = 1 );
-    
     root                = db.StringProperty(    default = "" );
     locate              = db.StringProperty(    default = "" );
     parsetype           = db.IntegerProperty(   default = 1  );
     xpath               = db.StringProperty(    default = "" );
-    re_block_t          = db.StringProperty(    default = ""  );
+    re_block_t          = db.StringProperty(    default = "" , multiline = True);
     re_board_t          = db.StringProperty(    default = "" );
     re_board1_t         = db.StringProperty(    default = "" );
     dom_row_pattern     = db.StringProperty(    default = "" , multiline = True);
     encoding            = db.StringProperty(    default = "" );
     comment             = db.StringProperty(    default = "" );
-    
     rank            = db.IntegerProperty(   default = 0  );
-    additional          = db.StringProperty(    default = "" );
-       
+    additional          = db.StringProperty(    default = "" ); 
     school              = db.ReferenceProperty( Schoolbbs, required=True);
-    class Meta:
-        pass;
 
     def getFaileRate(self):
         if( self.totalparse == 0 ): return 0;
@@ -83,10 +65,7 @@ class ParseConfig(db.Model):
 
 class MTags(db.Model):
     name            = db.StringProperty( default="" );
-    
 
-    
-    
 class Announcement( db.Model):
     content         = db.TextProperty( default="" );
     
@@ -100,7 +79,7 @@ class Bbslinks(db.Model):
     
     board           = db.StringProperty( default="" )
     title           = db.StringProperty( multiline=True , default="" )
-    titlelink       = db.StringProperty( default="" )
+    titlelink       = db.StringProperty( multiline=True , default="" )
     author          = db.StringProperty( default="" )
     source          = db.StringProperty( default=u"BBS" )
 
@@ -118,6 +97,23 @@ class Bbslinks(db.Model):
     class Meta:
         pass;
     
+    def get_mblog_str(self):
+        link_pattern =  ROOT_URL + reverse('content_framed_detail') + '?linkid=%s';
+        msg = "[%s] %s %s" %(self.school.chinesename, self.title, link_pattern %(self.id) );
+        if self.author != "": msg+= " BY "+self.author;
+        return msg;
+    def contain_tag(self, tag ):
+        return tag in self.tags;
+    
+    def get_mblog_item(self):
+        item = {}
+        link_pattern =  ROOT_URL + reverse('content_framed_detail') + '?linkid=%s';
+        item['link'] = link_pattern %(self.id);
+        item['pattern'] = "[%s] %s %s By %s";
+        item['schoolname'] = self.school.chinesename;
+        item['title'] = self.title;
+        item['author'] = self.author;
+        return item;
 
 
     """
@@ -191,18 +187,43 @@ class Comment(modelutil.SerializableModel):
         'Returns thread string for next child of this comment'
         return get_thread_string(self.link, self.thread + '.')
 
+class BGFriendStatics(db.Model):
+	abstract 		= db.TextProperty(required=True);
+	type 			= db.StringProperty( required=True  );
+	ip				= db.StringProperty( required=True  );
+	score			= db.IntegerProperty( default=0 );
 
-   
-signals.pre_delete.connect(cleanup_relations, sender=Schoolbbs)
+class BGFriendRank(db.Model):
+	abstract 		= db.ReferenceProperty(BGFriendStatics);
+	fillee			= db.StringProperty( required=True  );
+	bgfriend		= db.StringProperty( required=True  );
 
+class OptionSet(db.Model):
+	name=db.StringProperty()
+	value=db.TextProperty()
 
+	@classmethod
+	def getValue(cls,name,default=None):
+		try:
+			opt=OptionSet.get_by_key_name(name)
+			return pickle.loads(str(opt.value))
+		except:
+			return default
+
+	@classmethod
+	def setValue(cls,name,value):
+		opt=OptionSet.get_or_insert(name)
+		opt.name=name
+		opt.value=pickle.dumps(value)
+		opt.put()
+
+	@classmethod
+	def remove(cls,name):
+		opt= OptionSet.get_by_key_name(name)
+		if opt:
+			opt.delete()
     
-     
     
-    
-	
-
-	
 
 
 

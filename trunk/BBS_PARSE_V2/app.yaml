@@ -1,5 +1,5 @@
 ﻿application: bbstop10
-version: 2
+version: 3
 runtime: python
 api_version: 1
 
@@ -32,7 +32,7 @@ skip_files: |
   (docs\/.*)|
   (content\/management\/.*)|
   (content\/media\/.*)|
-  (media\/.*)|
+  (media--\/.*)|
   (Ad\/.*)|
   (gaegene\/.*)|
   (kay\/tests\/.*)|
@@ -63,3 +63,4 @@ handlers:
 - url: /.*
   script: common/appenginepatch/main.py
   secure: optional
+  
