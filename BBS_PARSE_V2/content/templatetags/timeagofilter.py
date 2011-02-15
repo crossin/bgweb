@@ -16,7 +16,7 @@ def timeago(timestamp = None):
     0 days 4 hours 3 minutes returns '4 hours', etc...
     """
     import datetime
-    
+    if timestamp == None: return "";
     timeDiff = datetime.datetime.now() - timestamp
     days = timeDiff.days
     hours = timeDiff.seconds/3600

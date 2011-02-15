@@ -884,3 +884,7 @@ form#admin br {
 	clear:left; /* setting clear on inputs didn't work consistently, so brs added for degrade */
 }
 
+.dropdown-container-text .dropdown {
+				position: static !important;
+}
+

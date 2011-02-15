@@ -18,15 +18,8 @@ DEBUG = False;
 LANGUAGE_CODE = 'en'
 DEFAULT_CHARSET = 'utf-8'
 COMBINE_MEDIA = {
-    'combined-%(LANGUAGE_DIR)s.js': (
-        # See documentation why site_data can be useful:
-        # http://code.google.com/p/app-engine-patch/wiki/MediaGenerator
-        #'.site_data.js',
-        #'jquery.min.js', 
-    ),
-    'combined-%(LANGUAGE_DIR)s.css': (
-        #'global/look.css',
-    ),
+    #'combined-%(LANGUAGE_DIR)s.js': (),#THIS COULD BE USED FOR MULTILIGUAL JS MEDIAS
+    #'combined-%(LANGUAGE_DIR)s.css': (),#%(LANGUAGE_DIR)s generate 2 files actually
     'combined-jquery-toolkit.js': (
         'global/scripts/jquery.js',
         'global/scripts/jquery.tools.min.js',
@@ -39,21 +32,17 @@ COMBINE_MEDIA = {
 }
 
 # Change your email settings
+ROOT_URL = "http://127.0.0.1:8000";
+
 if on_production_server:
     DEFAULT_FROM_EMAIL = 'zinking3@gmail.com'
     SERVER_EMAIL = DEFAULT_FROM_EMAIL
+    ROOT_URL = 'http://bbstop10.appspot.com';
+else:
+    ROOT_URL = "http://127.0.0.1:8000";
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '#truih*7f&38%kdjfail2'
-
-#ENABLE_PROFILER = True
-#ONLY_FORCED_PROFILE = True
-#PROFILE_PERCENTAGE = 25
-#SORT_PROFILE_RESULTS_BY = 'cumulative' # default is 'time'
-# Profile only datastore calls
-#PROFILE_PATTERN = 'ext.db..+\((?:get|get_by_key_name|fetch|count|put)\)'
-
-
 
 # Enable I18N and set default language to 'en'
 USE_I18N = False
@@ -79,19 +68,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'ragendja.middleware.ErrorMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    # Django authentication
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # Google authentication
-    'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
-    # Hybrid Django/Google authentication
-    #'ragendja.auth.middleware.HybridAuthenticationMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
-    'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
-    'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
+    #'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
+    #'django.contrib.redirects.middleware.RedirectFallbackMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    #'ragendja.middleware.ErrorMiddleware',
+    #'ragendja.sites.dynamicsite.DynamicSiteIDMiddleware',
+    'ragendja.auth.middleware.GoogleAuthenticationMiddleware',
+    #'pyxn.djangoxn.XiaoneiMiddleware',
+
 )
 
 # Google authentication
@@ -111,10 +97,8 @@ INSTALLED_APPS = (
     # your app-specific media files get combined, so jquery should normally
     # come first.
     'jquery',
-
     # Add blueprint CSS (http://blueprintcss.org/)
     #'blueprintcss',
-
     #'django.contrib.auth',
     'django.contrib.sessions',
     #'django.contrib.admin',
@@ -128,8 +112,8 @@ INSTALLED_APPS = (
     #'registration',
     'mediautils',
     'content',
+    'adsys',
     'pageharvest',
-    'gaebar',
 )
 
 # List apps which should be left out from app settings and urlsauto loading
@@ -160,23 +144,6 @@ DATABASE_OPTIONS = {
     #'remote_host': 'bla.com',
 }
 
-GAEBAR_LOCAL_URL = 'http://localhost:8000'
-
-GAEBAR_SECRET_KEY = '@#d$kdjifik*&32jkjf'
-
-GAEBAR_SERVERS = {
-    u'Deployment': u'bbstop10.appspot.com', 
-    u'Staging': u'http://bbstop10.appspot.com', 
-    u'Local Test': u'http://localhost:8000',
-}
-
-GAEBAR_MODELS = (
-     (
-          'content.models', 
-          (u'Schoolbbs', u'ParseConfig', u'Bbslinks', u'MTags', u'LinkTags', u'Comment'),
-     ),
-
-)
 
 
 from ragendja.settings_post import *

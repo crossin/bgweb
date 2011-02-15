@@ -18,23 +18,17 @@ from ragendja.dbutils import *;
 from ragendja.mrender import render_to_response as rtrg;
 
 from pageharvest.settings import *;
-from pageharvest.bbs_parser import BBSParser;
+from pageharvest.bbs_parser import *;
+from settings import *;
 
 from models import *;
 from decorators import *;
 from form import *;
 
+from adsys.decorators import random_record_xn_access;
 
+    
 
-
-
-
-
-
-
-PAGE_SIZE = 20;
-PAGES_TO_LIST = 10;
-USER_QUOTA = 100;
 def searchlinksbypost( request, tagname="", pagenumber=0, template='search-template.html', extra_context=None):
     if request.method == 'POST':
         tagname = request.POST['tagname'];
@@ -44,6 +38,10 @@ def searchlinksbypost( request, tagname="", pagenumber=0, template='search-templ
 
 def searchlinksbytag( request, tagname="", pagenumber=0, template='search-template.html', extra_context=None):     
     context = RequestContext(request);
+    if( tagname in SPECIAL_TAGS ):
+        context['has_error'] = True;
+        context['info'] = u'请在微博上FOLLOW -> CAMPUSNEWS 获取最新动态 ';
+        return rtr( template, context, context_instance=extra_context);
 
     if( tagname =="" ):
         #context['has_error'] = True;
@@ -75,42 +73,49 @@ def searchlinksbytag( request, tagname="", pagenumber=0, template='search-templa
         link.pschool = school;
     context['linklist'] = links;
     context['has_error'] = False;
-    return rtr( template, context, context_instance=extra_context)
+    context_instance=RequestContext(request)
+    context_instance.autoescape=False;
+    return rtr(template, context,context_instance);
 
 def viewbylinks( request, pagenumber=0, template='bbs-template.html', extra_context=None):
-             
     context = RequestContext(request);
-    
     object_query = Bbslinks.all();
     try:
         object_list = paginate(object_query,int(pagenumber),context,PAGE_SIZE,"-visitcount" );
     except Exception, e:
-        raise;
-    
+        raise Http404;
     schoolkeys  = [Bbslinks.school.get_value_for_datastore(Link) for Link in object_list]
     try:
         schools = db.get(schoolkeys)
     except:
-        raise;
-    
+        raise Http404;
     for link,school in zip(object_list,schools):
         link.pschool = school;
     context['linklist'] = object_list;
+    context_instance=RequestContext(request)
+    context_instance.autoescape=False;
+    return rtr(template, context,context_instance);
 
-    return rtr( template, context, context_instance=extra_context)
-
+#STRIP THE SPECICAL TAGS 
 def processlinktag( link ):
-    tagcount = len(link.tags);
+    tags = link.tags;
+    for tag in tags:
+        if ( tag in SPECIAL_TAGS ): tags.remove( tag );
+    
+    tagcount = len(tags);
     link.hasxntag = True;
     if ( tagcount < 2 ):
         link.ptags = [];
         link.hasxntag = False;
         return;
     elif ( tagcount == 2 ):
-        link.ptags = [ link.tags[1]];
+        link.ptags = [ tags[1]];
     else:#tag count >=3
         rindex = random.randrange(2,tagcount);
-        link.ptags = [ link.tags[1], link.tags[rindex] ];
+        link.ptags = [ tags[1], tags[rindex] ];
+        
+def injectKeyName( link ):
+    link.sid = link.key().id_or_name();
     
     
 def getBbsListBySchool( bbsname, modification=False):
@@ -122,85 +127,127 @@ def getBbsListBySchool( bbsname, modification=False):
     toptenlist = get_object_list( Bbslinks, 'school =', school );
     itemlist   = toptenlist.order( '-updatetime' ).fetch(10);
     if( modification ):#THIS FUNCTION IS REVISED FOR TAGGING IN XN PAGE
-        for link in itemlist:
-            processlinktag( link );
-
-    bbsinfo = {
-                'schoolname': (school.schoolname),
-                'chinesename':(school.chinesename),
-                'itemlist':   itemlist,  
+        for link in itemlist: processlinktag( link );
+    for link in itemlist: injectKeyName( link );
+    return {
+        'schoolname': (school.schoolname),
+        'chinesename':(school.chinesename),
+        'itemlist':   itemlist,  
     }
-    return bbsinfo;
-
+@random_record_xn_access
 def viewxnhome(request, pagenumber=0, template='content_by_school.html', extra_context=None):
     context = RequestContext(request); 
     bbsnamelist = [];
     pclist  = ParseConfig.all().filter( ' status = ', STATUS_NORMAL );
-    
     try:
         pclist = paginateschoolconfig(pclist,int(pagenumber),context,5);
     except Exception, e:
         raise;
-    
     for item in pclist:
         bbsnamelist.append(item.school.bbsname);
-        
     bbslist = [];
     for name in  bbsnamelist:
         bbslist.append(getBbsListBySchool(name,True));
-        
     context['list'] = bbslist;
-        
-    return rtr(template, context,extra_context);
+    context_instance=RequestContext(request);
+    context_instance.autoescape=False;
+    return rtr(template, context,context_instance);
     
 def viewbyschool(request, template='content_by_school.html', extra_context=None):
     context = RequestContext(request); 
     bbsnamelist = [];
     pclist = ParseConfig.all().filter( 'status = ', STATUS_NORMAL ).order( 'rank' );
-    
     for item in pclist:
         bbsnamelist.append(item.school.bbsname);
-     
-            
     bbslist = [];
     for name in  bbsnamelist:
         bbslist.append(getBbsListBySchool(name));
-
-   
     length = len( bbslist );
     context['col1'] = bbslist[0:length/2];
     context['col2'] = bbslist[length/2  : length ];
-    
     recommendlist = Bbslinks.all().filter( 'source =', 'recommend' ).order('-updatetime').fetch(10);
     context['recommend'] = recommendlist;
     qann  = Announcement.all();
     if( qann.count() == 0 ): context['announcement'] = "Currently No Announcement";
     else:context['announcement'] = qann.fetch(1)[0];
-    #context['announcement'] = ann;
     context_instance=RequestContext(request)
+    context_instance.autoescape=False;
+    return rtr(template, context,context_instance);
+    
+def view_parsing_status(request, template='school_status_list.html', extra_context=None):
+    context = RequestContext(request); 
+    bbsnamelist = [];
+    pclist = ParseConfig.all().filter( 'status = ', STATUS_NORMAL ).order( 'rank' );
+    for item in pclist:
+        bbsnamelist.append(item.school.bbsname);
+    bbslist = [];
+    for name in  bbsnamelist:
+        bbslist.append(getBbsListBySchool(name));
+    length = len( bbslist );
+    context['col1'] = bbslist[0:length/2];
+    context['col2'] = bbslist[length/2  : length ];
+    recommendlist = Bbslinks.all().filter( 'source =', 'recommend' ).order('-updatetime').fetch(10);
+    context['recommend'] = recommendlist;
+    qann  = Announcement.all();
+    if( qann.count() == 0 ): context['announcement'] = "Currently No Announcement";
+    else:context['announcement'] = qann.fetch(1)[0];
+    
+    schools = [];
+    sq = Schoolbbs.all();
+    for school in sq:
+        try:
+            pc = get_object( ParseConfig , 'school =', school );
+            pc.__dict__['schoolname'] = school.schoolname; pc.__dict__['chinesename'] = school.chinesename;
+            if ( pc.status != 1 ):
+                pc.__dict__['normal'] = False;pc.__dict__['statusinfo']="ERROR";
+            else: 
+                pc.__dict__['normal'] = True;pc.__dict__['statusinfo']="NORMAL";
+        except Exception,e:
+            logging.error('school %s & parse config not consistent, detailed %s'%( school.bbsname,e));
+            continue;
+        schools.append(pc);
+    context['schools'] = schools;context['count'] = len(schools);
+    context_instance=RequestContext(request);
     context_instance.autoescape=False;
     return rtr(template, context,context_instance);
     
 def viewframedcontent(request, template='framed_link_content.html', extra_context=None):
     context = RequestContext(request);
-   
     linkid = request.GET.get('linkid', '');#TODO:EXCEPTION HANDLING
-    try:
-        linkitem = db.get( linkid );
-    except Exception,e:
-        raise;
+
+    linkitem = get_object_or_404(Bbslinks,linkid);
     context['link'] = linkitem;
-    #print linkitem.titlelink;
+    linkitem.visitcount = linkitem.visitcount + 1;
+    linkitem.put();
+    available_tags = MTags.all();
+    context['all_tags'] = available_tags;
+    context['is_user'] = is_bt_user(request);
+    context_instance=RequestContext(request);
+    context_instance.autoescape=False;#POTENTIAL MARKL INJECT ATTACK
+    return rtrg(template, context,context_instance);
+
+def viewframedcontentV2(request, template='framed_link_content.html', extra_context=None):
+    context = RequestContext(request);
+    linkname = request.GET.get('l', '');
+
+    #linkitem = get_object_or_404(Bbslinks,linkid);
+    try:
+        linkitem = Bbslinks.get_by_key_name( linkname );
+    except Exception,e:
+        try:
+            linkitem = Bbslinks.get_by_id( linkname );
+        except Exception,e:
+            raise Http404;
+        raise Http404;
+    context['link'] = linkitem;
     linkitem.visitcount = linkitem.visitcount + 1;
     linkitem.put();
     
     available_tags = MTags.all();
     context['all_tags'] = available_tags;
     context['is_user'] = is_bt_user(request);
-    
     context_instance=RequestContext(request);
     context_instance.autoescape=False;
-
     return rtrg(template, context,context_instance);
 
 def viewaccount( request, template='account_interface.html', extra_context=None):
@@ -208,7 +255,9 @@ def viewaccount( request, template='account_interface.html', extra_context=None)
     q = UserAccount.all();
     context['hasquota'] = q.count() < USER_QUOTA;
     context['acount_left'] = USER_QUOTA - q.count();
-    return rtr(template, context,extra_context);
+    context_instance=RequestContext(request);
+    context_instance.autoescape=False;
+    return rtr(template, context,context_instance);
 
 
 # OPERATION VIEWS THROUGH AJAX CALLS
@@ -319,6 +368,11 @@ def addtag(request, template='tagging.json', extra_context=None):
 def addlink(request, template='result.json', extra_context=None):
     return ajax_operation( LinkForm, request, template, extra_context );
 
+def toggle_ad_promotion(request, template='result.json', extra_context=None):
+    status = OptionSet.getValue('adpromote',True);
+    OptionSet.setValue('adpromote',not status );
+    context = {};context['result'] = 1; 
+    return rtr(template, context,extra_context);
 
 def addaccount(request, template='result.json', extra_context=None):
     return ajax_operation( AccountForm, request, template, extra_context );
@@ -333,8 +387,10 @@ def manangement(request, template='admin_interface.html', extra_context=None):
     tags = MTags.all().fetch(1000);
     context['tags'] = tags;
     context['isadmin'] = users.is_current_user_admin();
-    
-    return rtr(template, context,extra_context);
+    context_instance=RequestContext(request);
+    context_instance.autoescape=False;
+    return rtr(template, context,context_instance);
+
 
 
 parser = BBSParser();
@@ -348,6 +404,7 @@ def gae_cron_job_parse( request , template='cron_result.html',extra_context=None
     context['not_updated_count'] = len( not_updated_list );
     finished_name_list = [];
     duration = 0;
+    
     for bbs_config in not_updated_list:
         #t1 = time.time();
         if( bbs_config.totalparse == 0 ): expected_parse_time = bbs_config.totalparsetime;
@@ -361,6 +418,70 @@ def gae_cron_job_parse( request , template='cron_result.html',extra_context=None
     context['updated_count']    = len( finished_name_list );
     context['finished_names']   = finished_name_list;
     context['duration']         = duration;
+    context_instance=RequestContext(request);
+    return render_to_response(template, context,context_instance);
+    
+    
+@admin_user_only
+def admin_db_op( request,  template='default.html', extra_context=None):
+    context = RequestContext(request);
+    if ( 'op' in request.GET and 'nm' in request.GET  ):
+        op = request.GET['op'];
+        bn = request.GET['nm'];
+        
+        if op == 'cron':
+            try:
+                sb = get_object(Schoolbbs,  'bbsname =',  bn );
+                pc = get_object(ParseConfig, 'school = ', sb);
+            except Exception,e:
+                msg = 'error ocuured when cron school %s, %s'%(bn,e);
+                context['msg'] = msg;
+                return rtr( template, context, context_instance=extra_context);
+            parser.parsebbs( pc.toDict(), pc );
+            msg =  'Admin cron config %s from web request finished'%(bn);
+            context['msg'] = msg;
+            logging.info( msg );
+    else: raise Http404;
+    return rtr( template, context, context_instance=extra_context)
+
+def gae_cron_job_sendblog( request , template='cron_mblog_result.html',extra_context=None):
+    context=RequestContext(request);
+    #now         = datetime.now()
+    delta       = timedelta( hours = -4 );
+    criteria    = datetime.datetime.now() + delta;
+
+    hourlylinks = get_object_list( Bbslinks, 'createtime > ', criteria ).order('-createtime').order('-visitcount');
+    recommend_count = 0;
+    sina_list = [];n163_list = [];twitter_list=[];
+    
+    bhandle = Microblog();
+    for links in hourlylinks:
+        if( not bhandle.skip_sina and not links.contain_tag( SINA_MBLOG ) ): 
+            sina_list.append( links );
+            links.tags.append( SINA_MBLOG );
+            recommend_count += 1;
+        if( not bhandle.skip_n163 and not links.contain_tag( N163_MBLOG ) ): 
+            n163_list.append( links );
+            links.tags.append( N163_MBLOG );
+            recommend_count += 1;
+        if( not bhandle.skip_twitter and not links.contain_tag( TWITTER_MBLOG ) ): 
+            twitter_list.append( links );
+            links.tags.append( TWITTER_MBLOG );
+            recommend_count += 1;
+        links.put();
+        if( recommend_count > bhandle.quota ):break;
+    
+    
+    for links in sina_list:
+        bhandle.post_sina_msg( links.get_mblog_str() );
+    for links in n163_list:
+        bhandle.post_n163_msg( links.get_mblog_str() );
+    for links in twitter_list:
+        bhandle.post_twitter_msg( links.get_mblog_item() );
+  
+    context['sina_count']    = len( sina_list );
+    context['n163_count']    = len( n163_list );
+    context['twitter_count']    = len( twitter_list );
     context_instance=RequestContext(request);
     return render_to_response(template, context,context_instance);
 
@@ -377,7 +498,8 @@ def gae_setup_initial_data( request , template='cron_result.html',extra_context=
                     config = db_create( ParseConfig,  school = school, **bc );
                 
     return HttpResponse('All School data setup successfully');
-
+	
+##########################################################################################################
 #Util method defined to help with pagination links
 def paginate( query, page_number , context, pagesize = PAGE_SIZE, orderby="-updatetime" ):
     global  PAGES_TO_LIST;
@@ -420,7 +542,6 @@ def paginateschoolconfig( query, page_number , context, pagesize = PAGE_SIZE ):
     total_items = query.count();
     total_pages = total_items / pagesize;
 
-    
     if( page_number < 0 or page_number > total_pages ):
         context['info'] = 'Invalid Page Number ';
         raise Exception('Invalid Page Number');
@@ -464,4 +585,52 @@ def ajax_operation(FORM_CLS, request, template='tagging.json', extra_context=Non
             context['info'] = form.getinfo();
     #return rtr(template, context,extra_context);
     return HttpResponse( simplejson.dumps(context,ensure_ascii = False) ); 
+##########################################################################################################	
+def bg_addstaic_data(request, template='tagging.json', extra_context=None):
+	context = {};
+	if request.method == 'POST' and 'abstract' in request.POST:
+		static = db_create( BGFriendStatics, abstract = request.POST['abstract'] ,
+			score = int( request.POST['score'] ),
+			type = request.POST['type'], ip = request.META['REMOTE_ADDR']);
+		context['result'] = True;
+		context['id'] = unicode( static.key() );
+	else:
+		context['result'] = False;
+	return HttpResponse( simplejson.dumps(context,ensure_ascii = False) ); 
+	
+def bg_addstaic_rank(request, template='tagging.json', extra_context=None):
+	context = {};
+	if request.method == 'POST' and 'id' in request.POST:
+		try:
+		    abstract_item = db.get(  request.POST['id']  );
+		except Exception,e:
+			context['result'] = False;
+			context['msg']= str(e);
+			return HttpResponse( simplejson.dumps(context,ensure_ascii = False) );
+			
+		static = db_create( BGFriendRank, abstract = abstract_item ,
+			 fillee = request.POST['fillee'], bgfriend=request.POST['bgfriend'] );
+		context['result'] = True;
+		
+	else:
+		context['result'] = False;
+	return HttpResponse( simplejson.dumps(context,ensure_ascii = False) ); 
+
+def static_result(request, template='bgresult.html', extra_context=None):
+	context=RequestContext(request);
+	if 'op' in request.GET :
+		if request.GET['op']=='rank':
+			context['list'] = get_object_list( BGFriendRank );
+			context['op'] 	= True;
+		elif request.GET['op']=='static':
+			context['list'] = get_object_list( BGFriendStatics );
+			context['op'] 	= False;
+	else:
+		context['list'] = get_object_list( BGFriendStatics );
+		context['op'] 	= False;
+
+	return render_to_response(template, context,extra_context);
+	
+
+	
     
