@@ -1,0 +1,22 @@
+cron:
+- description: refresh content TASK1
+  url: /content/management/cron/
+  schedule: every 30 minutes    
+  
+- description: refresh content TASK2
+  url: /content/management/cron/
+  schedule: every 31 minutes
+  
+- description: refresh content TASK3
+  url: /content/management/cron/
+  schedule: every 32 minutes
+  
+- description: send MicroBlogs TASK1
+  url: /content/management/mblog/
+  schedule: every 55 minutes
+  
+- description: compose lucky visitors TASK1
+  url: /ad/comp/
+  schedule: every 8 hours
+
+
